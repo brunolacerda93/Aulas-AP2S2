@@ -33,7 +33,7 @@ void version_01() {
         printf(" %s\n", newString[i]);
 }
 
-void version_02(char porra[][10]) {
+void version_02(char newString[][10]) {
     char string[] = "Bjorn is cool";
     char *array[10];
     char *p = strtok(string, " ");
@@ -46,7 +46,7 @@ void version_02(char porra[][10]) {
 
     for (i=0; i<3; i++) {
         printf("%s\n", array[i]);
-        strcpy(porra[i], array[i]);
+        strcpy(newString[i], array[i]);
     }
 }
 

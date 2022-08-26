@@ -162,9 +162,35 @@ void ex_02() {
 void ex_03() {
     printf("EXERCICIO 03");
     printf("\n - Faca um programa que leia 10 nomes completos do teclado, e ao final apresente uma listagem dos nomes no formato:");
-    printf("\n - Sobrenome, Primeiro_Nome\n");
+    printf("\n - Sobrenome, Primeiro_Nome\n\n");
 
-    printf("\n");
+    char nomes[10][30];
+    char *nome[10];
+    char *sobreNome[10];
+    char *p;
+
+    printf("Digite 10 nomes!\n\n");
+    for (int i=0; i<10; i++) {
+        printf("Digite o %2d nome: ", i+1);
+        fflush(stdin); fgets(nomes[i], 30, stdin);
+        for (int j=0; j<30; j++) {
+            if (nomes[i][j] == '\n')
+                nomes[i][j] = '\0';
+        }
+    }
+
+    for (int i=0; i<10; i++) {
+        p = strtok(nomes[i], " ");
+        nome[i] = p;
+        p = strtok(NULL, "\0");
+        sobreNome[i] = p;
+    }
+
+    for (int i=0; i<10; i++) {
+        printf("\nPessoa %2d: %s, %s", i+1, sobreNome[i], nome[i]);
+    }
+
+    printf("\n\n");
 }
 
 void menu(char opc) {
