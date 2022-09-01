@@ -11,9 +11,9 @@
     }
 
 
-    // troca o endereco de duas variáveis de inteiros
+    // troca o endereço de duas variáveis de inteiros
 
-    void swapAddress (int *n1, int *n2) {
+    void swap(int *n1, int *n2) {
         int temp;
         temp = *n1;
         *n1 = *n2;

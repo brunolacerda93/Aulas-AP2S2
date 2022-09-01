@@ -4,7 +4,8 @@
 #include "tools.h"
 
 
-// corpo das funcoes
+// Corpo das funções
+
 
     // substitui o caractere passado como parâmetro por '\0'
 
@@ -14,11 +15,13 @@
         }
     }
 
+
     // converte do formato 24h para segundos
 
     int hourToSec(int h, int m, int s) {
         return h*3600 + m*60 + s;
     }
+
 
     // converte segundos para o formato 24h
 
@@ -35,7 +38,8 @@
         printf("%02d:%02d:%02d", h, m, s);
     }
 
-    // EXERCICIO 01
+
+    // EXERCÍCIO 01
 
     void ex_01() {
         printf("EXERCICIO 01");
@@ -68,7 +72,8 @@
         printf("\n\n");
     }
 
-    // EXERCICIO 02
+
+    // EXERCÍCIO 02
 
     void ex_02() {
         printf("EXERCICIO 02");
@@ -130,7 +135,8 @@
         printf("\n\n");
     }
 
-    // EXERCICIO 03
+
+    // EXERCÍCIO 03
 
     void ex_03() {
         printf("EXERCICIO 03");
@@ -164,6 +170,7 @@
 
         printf("\n\n");
     }
+
 
     // menu de decisao
 
