@@ -1,8 +1,5 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include "tools.h"
-
+#include "sorting.h"
 
 // Corpo das funções
 
@@ -10,20 +7,19 @@
     // Bubble Sort
 
     void bubbleSort(int array[], int n) {
-        int aux, flag;
+        int flag;
 
         for (int i = n-1; i>0; i--) {
-            flag = 0;
-            
+            flag = 1;
+
             for (int j = 0; j<i; j++) {
                 if (array[j] > array[j+1]) {
                     swap(&array[j], &array[j+1]);
-                    flag = 1;
+                    flag = 0;
                 }
             }
             
-            if (flag == 0)
-                break;
+            if (flag) break;
         }
     }
 
@@ -31,18 +27,16 @@
     // Insertion Sort
 
     void insertionSort(int array[], int n) {
-        int j, x;
+        int j, aux;
 
         for (int i=1; i<n; i++) {
-            x = array[i];
-            j = i-1;
+            aux = array[i];
             
-            while (j >= 0 && array[j] > x) {
+            for (j = i-1; j >= 0 && array[j] > aux; j--) {
                 array[j+1] = array[j];
-                j--;
             }
             
-            array[j+1] = x;
+            array[j+1] = aux;
         }
     }
 
@@ -117,40 +111,81 @@
     }
 
 
-    // Quick Sort
+    // Quick Sort (Lomuto)
 
-    void quickSort(int array[], int ini, int fim) {
-        int i, j, pivot;
-        
-        if (ini < fim) {
-            pivot = ini;
-            i = ini;
-            j = fim;
-            
-            while (i < j) {
-                while (array[i] <= array[pivot] && i < fim)
-                    i++;                               // move o índice i até o primeiro elemento maior do que o pivô
-                
-                while (array[j] > array[pivot])
-                    j--;                               // move o índice j até o último elemento menor do que o pivô
-                
-                if (i < j)                             // deste modo os elementos menores do que o pivô estarão logo à sua direita
-                    swap(&array[i], &array[j]);        // enquanto que os maiores serão dispostos para a sua direita
+    void lomutoQuickSort(int arr[], int ini, int fim) {
+        if (ini >= fim) return;
+
+        int pivot = arr[fim];
+        int swp;
+
+        // set a pointer to divide array into two parts
+        // one part is smaller than pivot and another larger
+
+        int pointer = ini;
+        for (int i = ini; i < fim; i++) {
+            if (arr[i] < pivot) {
+                if (pointer != i) {
+                    swp = arr[i];               // swap a[i] with a[pointer]
+                    arr[i] = arr[pointer];      // a[pointer] behind larger than pivot
+                    arr[pointer] = swp;
+                }
+                pointer++;
             }
-            
-            swap(&array[pivot], &array[j]);            // coloca o pivô no seu lugar
-            
-            quickSort(array, ini, j-1);                // chama a função para a parte à esquerda
-            quickSort(array, j+1, fim);                // chama a função para a parte à direita
         }
+
+        //swap back pivot to proper position
+        swp = arr[fim];
+        arr[fim] = arr[pointer];
+        arr[pointer] = swp;
+
+        lomutoQuickSort(arr, ini, pointer - 1);
+        lomutoQuickSort(arr, pointer + 1, fim);
+    }
+
+
+    // Quick Sort (Hoare) -> Otimizado para evitar o pior caso
+
+    void hoareQuickSort(int arr[], int ini, int fim) {
+        int i = ini, j = fim, aux, m, x;
+
+        m = (ini + fim) / 2;
+        x = arr[m]; //pivot
+
+        // Hoare’s Partition 
+        while (i <= j)
+        {
+            if (arr[i] < x) i++;        // até encontrar um valor maior ou igual o pivot
+            else if (arr[j] > x) j--;   // até encontrar um valor menor ou igual o pivot
+            else {
+                // troque os valores
+                aux = arr[i];
+                arr[i++] = arr[j];  
+                arr[j--] = aux;
+            }
+        }
+
+        if (ini < j)
+            hoareQuickSort(arr, ini, j);
+        if (fim > i)
+            hoareQuickSort(arr, i , fim);
+    }
+
+
+    // Cria Array
+    
+    int *createArray(int size) {
+        return (int*) malloc(size * sizeof(int));
     }
 
 
     // Preenche Array
 
     void fillArray(int array[], int size) {
+        time_t ts;
+        srand((unsigned) time(&ts));
         for (int i=0; i<size; i++) {
-            array[i] = rand() % 1000000;
+            array[i] = (rand() % RAND_MAX) * ((rand() % 100) + 1);
         }
     }
 
@@ -159,55 +194,70 @@
 
     void showArray(int array[], int size) {
         for (int i=0; i<size; i++) {
-            printf("[%6d] ", array[i]);
+            printf("[%7d] ", array[i]);
             if ((i+1)%10 == 0)
                 printf("\n");
         }
     }
 
-//-------------------------------------------------------------------------------------------------------------//
 
-    // Corpo do programa
+    // Gera Novo Array
 
-    int main() {
-        unsigned int n = 10000000;
-        int *array;
+    int *resetArray(int array[], int size) {
+        free(array);
+        array = createArray(size);
+        fillArray(array, size);
+        return array;
+    }
+
+
+    // Menu Principal
+
+    static void menu(const int size) {
         char opc;
+        clock_t t;  // variável para armazenar o tempo de execução
 
-        array = (int*) malloc(n * sizeof(int));
-
-        fillArray(array, n);
+        int *array = createArray(size);
+        fillArray(array, size);
 
         do { // hast
 
-            system("cls");
+            //system("cls");
+            clearScreen();
 
+            printf("\narray[0] = %7d\n", array[0]);
             printf("\n 1 - Bubble Sort");
             printf("\n 2 - Insertion Sort");
             printf("\n 3 - Selection Sort");
             printf("\n 4 - Merge Sort");
-            printf("\n 5 - Quick Sort");
-            printf("\n 6 - Show Array");
+            printf("\n 5 - Lomuto Quick Sort");
+            printf("\n 6 - Hoare  Quick Sort");
+            printf("\n 7 - Show Array");
+            printf("\n 8 - Reset Array");
             printf("\n 0 - Exit");
             printf("\n\n Choose: ");
             scanf("%c", &opc); cleanBuffer();
 
+            t = clock();    // inicia a contagem do tempo
+
             switch (opc) {
-                case '1':    bubbleSort(array, n);     break;
-                case '2': insertionSort(array, n);     break;
-                case '3': selectionSort(array, n);     break;
-                case '4':     mergeSort(array, 0, n);  break;
-                case '5':     quickSort(array, 0, n);  break;
-                case '6':     showArray(array, n);     break;
-                case '0':                              break;
-                default: printf("INVALID!\n\n");       break;
+                case '1':      bubbleSort(array, size);       break;
+                case '2':   insertionSort(array, size);       break;
+                case '3':   selectionSort(array, size);       break;
+                case '4':       mergeSort(array, 0, size);    break;
+                case '5': lomutoQuickSort(array, 0, size);    break;
+                case '6':  hoareQuickSort(array, 0, size);    break;
+                case '7':      showArray(array, size);        break;
+                case '8': array = resetArray(array, size);    break;
+                case '0': free(array); pause(); exit(0);
+                default: printf("INVALID!\n\n");              break;
             }
 
-            system("pause");
+            t = clock() - t;    // finaliza a contagem do tempo
+            double time_taken = ((double)t)/CLOCKS_PER_SEC; // em segundos
+            
+            printf("\nTime taken: %.2lf seconds\n", time_taken);
+            pause();
 
         } while(opc != '0');
-
-        free(array);
-
-        return 0;
     }
