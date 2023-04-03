@@ -12,9 +12,10 @@
 
 //-------------------------------------------------------------------------------------------------------------//
 
-    // Definindo o "tipo" string
+    // Definindo "tipos"
 
     typedef char* string;
+    typedef void* var;
 
 //-------------------------------------------------------------------------------------------------------------//
     
@@ -106,8 +107,21 @@
         func(array, size, num);
         t = clock() - t;
         time_taken = ((double)t)/CLOCKS_PER_SEC;
-        printf("\n Time taken: %.4lf seconds", time_taken);
+        printf("\n Time taken: %.3lf seconds", time_taken);
         printf("\n=============================\n");
+    }
+
+
+    // Captura entrada de um Inteiro
+
+    int userInput() {
+        int n;
+
+        printf("\nEnter a number: ");
+        scanf("%d", &n);
+        cleanBuffer();
+
+        return n;
     }
 
 #endif
