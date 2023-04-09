@@ -139,7 +139,7 @@ Cliente* Clone(Cliente* cliente) {
 }
 
 void EditaCliente(Cliente* cliente) {
-
+    UNIMPLEMENTED;
 }
 
 int SizeString(char opc) {
