@@ -94,7 +94,7 @@
         printf("\nCPF      : "); PrintCPF(client->CPF);
         printf("\nEndereco : %s", client->Endereco);
         printf("\nCategoria: %s", client->Categoria);
-        printf("\n======================================================\n");
+        printf("\n====================================================\n");
     }
 
 
@@ -113,7 +113,7 @@
 
     // Retorna uma cópia profunda de um Cliente
 
-    Cliente* Clone(Cliente* cliente) {
+    Cliente* ClonaCliente(Cliente* cliente) {
         Cliente* temp = CriaClienteArgs(cliente->CPF, cliente->Nome, cliente->Endereco, cliente->Categoria);
         temp->proximo = cliente->proximo;
         return temp;

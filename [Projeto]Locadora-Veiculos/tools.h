@@ -95,10 +95,9 @@
 
     // Captura entrada de um Inteiro
 
-    int userInput() {
+    int IntInput() {
         int n;
 
-        printf("\nEnter a number: ");
         scanf("%d", &n);
         cleanBuffer();
 
