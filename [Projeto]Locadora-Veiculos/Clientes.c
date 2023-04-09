@@ -292,11 +292,11 @@
         Cliente* anterior = NULL;
         Cliente* atual    = lista->cliente;
 
-        while (!atual && strcmp(atual->CPF, cpf)) {
+        while (atual && strcmp(atual->CPF, cpf)) {
             anterior = atual;
             atual = atual->proximo;
         }
-
+        
         if ((!anterior && strcmp(atual->CPF, cpf)) || !atual) {
             printf("\nCliente not Encontrado... \n");
             return;

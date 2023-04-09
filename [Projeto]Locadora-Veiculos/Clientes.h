@@ -53,10 +53,10 @@
 
     // CRUD
         Cliente* NovoCliente         (ListaClientes*);
+        void     InsereCliente       (ListaClientes*);
+        void     InsereClienteNaLista(ListaClientes*, Cliente*);
         void     ExibeClientePorCPF  (ListaClientes*);
         void     ExibeTodosClientes  (ListaClientes*);
-        void     InsereClienteNaLista(ListaClientes*, Cliente*);
-        void     InsereCliente       (ListaClientes*);
         void     AtualizaCliente     (ListaClientes*);
         void     RemoveCliente       (ListaClientes*);
 
