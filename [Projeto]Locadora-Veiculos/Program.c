@@ -1,6 +1,7 @@
 #include "tools.h"
 #include "Clientes.c"
 #include "Veiculos.c"
+#include "Locacoes.c"
 
 void PreencheClientes(ListaClientes* lista) {
     InsereClienteNaLista(lista, CriaClienteArgs("45612378966", "Stulla Sigurdasson",
@@ -25,7 +26,10 @@ int main(int argc, char const *argv[]) {
     PreencheVeiculos(listaVeiculos);
     
     //MenuClientes(listaClientes);
-    MenuVeiculos(listaVeiculos);
+    //MenuVeiculos(listaVeiculos);
+
+    Locacao* locacao = CriaLocacaoArgs("12345678911", "ABC9369", CriaData("02", "03", "2020"), CriaData("03", "04", "2021"), 6357.82);
+    printf("\nlocacao.chave: %s", locacao->Chave);
 
     return 0;
 }
