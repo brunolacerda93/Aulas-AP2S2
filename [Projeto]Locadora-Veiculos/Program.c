@@ -13,9 +13,17 @@ int main(int argc, char const *argv[]) {
     cpf[strcspn(cpf, "\n")] = 0;
 
     AtualizaCliente(lista, cpf);
+    pause();
 
     clearScreen();
     ExibeCliente(lista->cliente);
+
+    printf("\nDigite o CPF (apenas numeros): ");
+    fgets(cpf, CPF_LEN, stdin);
+    cpf[strcspn(cpf, "\n")] = 0;
+
+    RemoveCliente(lista, cpf);
+    printf("\n%d", lista->tamanho);
     
     pause();
     return 0;
