@@ -49,9 +49,23 @@ ListaClientes* CriaListaClientesArgs(Cliente* cliente) {
     return aux;
 }
 
+void PrintCPF(char cpf[]) {
+    size_t i = 0;
+
+    while (cpf[i] != '\0') {
+        printf("%c", cpf[i]);
+
+        switch(i++) {
+            case 2: printf("."); break;
+            case 5: printf("."); break;
+            case 8: printf("/"); break;
+        }
+    }
+}
+
 void ExibeCliente(Cliente* client) {
     printf("\nNome     : %s", client->Nome);
-    printf("\nCPF      : %s", client->CPF);
+    printf("\nCPF      : "); PrintCPF(client->CPF);
     printf("\nEndereco : %s", client->Endereco);
     printf("\nCategoria: %s", client->Categoria);
     printf("\n======================================================\n");
@@ -88,7 +102,7 @@ Cliente* NovoCliente(ListaClientes* lista) {
     fgets(endereco, ENDERECO_LEN, stdin);
     endereco[strcspn(endereco, "\n")] = 0;
 
-    printf("\nDigite a Categoria da Habilitacao (A, B, C, D): ");
+    printf("\nDigite a Categoria da Habilitacao (A B C D): ");
     fgets(categoria, CATEGORIA_LEN, stdin);
     categoria[strcspn(categoria, "\n")] = 0;
 
@@ -160,28 +174,29 @@ void AtualizaCliente(ListaClientes* lista, char cpf[]) {
         return;
     }
 
-    ExibeCliente(aux);
-
-    printf("\nQual informacao deseja alterar?\n");
-    printf("\n 1 - Nome");
-    printf("\n 2 - Endereco");
-    printf("\n 3 - Categoria");
-    printf("\nEscolha: ");
     char opc;
-    scanf("%c", &opc); cleanBuffer();
+    do { // hast
+        clearScreen();
+        ExibeCliente(aux);
 
-    char str[SizeString(opc)];
-    printf("\nDigite o novo valor: ");
-    fgets(str, SizeString(opc), stdin);
-    str[(strcspn(str, "\n"))] = 0;
+        printf("\nQual informacao deseja alterar?\n");
+        printf("\n 1 - Nome");
+        printf("\n 2 - Endereco");
+        printf("\n 3 - Categoria");
+        printf("\n 0 - Retornar");
+        printf("\n\nEscolha: ");
+        opc = getchar(); cleanBuffer();
 
-    if (opc == '1') {
-        strcpy(aux->Nome, str);
-    }
-    else if (opc == '2') {
-        strcpy(aux->Endereco, str);
-    }
-    else if (opc == '3') {
-        strcpy(aux->Categoria, str);
-    }
+        char str[SizeString(opc)];
+        printf("\nDigite o novo valor: ");
+
+        fgets(str, SizeString(opc), stdin);
+        str[(strcspn(str, "\n"))] = 0;
+
+        switch (opc) {
+            case '1': strcpy(aux->Nome, str);       break;
+            case '2': strcpy(aux->Endereco, str);   break;
+            case '3': strcpy(aux->Categoria, str);  break;
+        }
+    } while (opc != '0');
 }

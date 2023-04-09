@@ -2,11 +2,9 @@
 #include "Clientes.c"
 
 int main(int argc, char const *argv[]) {
-
     ListaClientes* lista = CriaListaClientes();
 
     InsereCliente(lista);
-
     ExibeCliente(lista->cliente);
 
     char cpf[CPF_LEN];
@@ -16,6 +14,7 @@ int main(int argc, char const *argv[]) {
 
     AtualizaCliente(lista, cpf);
 
+    clearScreen();
     ExibeCliente(lista->cliente);
     
     pause();
