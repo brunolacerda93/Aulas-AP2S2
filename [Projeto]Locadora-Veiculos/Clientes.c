@@ -139,15 +139,33 @@
 
     // Procura um Cliente com o CPF passado como argumento e chama ExibeCliente()
 
-    void ExibeClientePorCPF(ListaClientes* lista, char cpf[]) {
+    void ExibeClientePorCPF(ListaClientes* lista) {
+        printf("\nDigite o CPF (apenas numeros): ");
+
+        char cpf[CPF_LEN];
+        fgets(cpf, CPF_LEN, stdin);
+        cpf[strcspn(cpf, "\n")] = 0;
+
         Cliente* aux = ClientePorCPF(lista, cpf);
 
         if (!aux) {
-            printf("\nCliente not Encontrado... ");
+            printf("\nCliente not Encontrado... \n");
             return;
         }
         
         ExibeCliente(aux);
+    }
+
+
+    // Exibe Toda uma Lista de Clientes
+
+    void ExibeTodosClientes(ListaClientes* lista) {
+        Cliente* cliente = lista->cliente;
+        while (cliente) {
+            ExibeCliente(cliente);
+            printf("\n");
+            cliente = cliente->proximo;
+        }
     }
 
     
@@ -218,11 +236,17 @@
 
     // Atualiza as informações de um Cliente com o CPF passado como argumento
 
-    void AtualizaCliente(ListaClientes* lista, char cpf[]) {
+    void AtualizaCliente(ListaClientes* lista) {
+        printf("\nDigite o CPF (apenas numeros): ");
+
+        char cpf[CPF_LEN];
+        fgets(cpf, CPF_LEN, stdin);
+        cpf[strcspn(cpf, "\n")] = 0;
+
         Cliente* aux = ClientePorCPF(lista, cpf);
 
         if (!aux) {
-            printf("\nCliente not Encontrado... ");
+            printf("\nCliente not Encontrado... \n");
             return;
         }
 
@@ -258,7 +282,13 @@
 
     // Remove um Cliente com o CPF passado como argumento
 
-    void RemoveCliente(ListaClientes* lista, char cpf[]) {
+    void RemoveCliente(ListaClientes* lista) {
+        printf("\nDigite o CPF (apenas numeros): ");
+
+        char cpf[CPF_LEN];
+        fgets(cpf, CPF_LEN, stdin);
+        cpf[strcspn(cpf, "\n")] = 0;
+
         Cliente* anterior = NULL;
         Cliente* atual    = lista->cliente;
 
@@ -268,10 +298,11 @@
         }
 
         if ((!anterior && strcmp(atual->CPF, cpf)) || !atual) {
-            printf("\nCliente not Encontrado... ");
+            printf("\nCliente not Encontrado... \n");
             return;
         }
 
+        ExibeCliente(atual);
         printf("\nTem certeza? [s/S]: ");
         char opc = getchar(); cleanBuffer();
 
@@ -287,5 +318,43 @@
             anterior->proximo = atual->proximo;
             free(atual);
         }
+
         lista->tamanho--;
+        printf("\nRemovido!\n");
+    }
+
+//-------------------------------------------------------------------------------------------------------------//
+
+    // Submenu de Clientes
+
+    void MenuClientes(ListaClientes* lista) {
+        char opc;
+
+        do { // hast
+            clearScreen();
+            
+            printf("====================\n");
+            printf("      CLIENTES\n\n");
+            printf("  1 - Cadastrar\n");
+            printf("  2 - Exibir Um\n");
+            printf("  3 - Exibir Todos\n");
+            printf("  4 - Atualizar\n");
+            printf("  5 - Remover\n");
+            printf("  0 - Retornar\n");
+            printf("\nEscolha: ");
+            opc = getchar(); cleanBuffer();
+
+            switch (opc) {
+                case '1':      InsereCliente(lista);  break;
+                case '2': ExibeClientePorCPF(lista);  break;
+                case '3': ExibeTodosClientes(lista);  break;
+                case '4':    AtualizaCliente(lista);  break;
+                case '5':      RemoveCliente(lista);  break;
+                case '0':                             break;
+                default : printf("\n INVALIDO!!!\n"); break;
+            }
+
+            pause();
+
+        } while (opc != '0');
     }

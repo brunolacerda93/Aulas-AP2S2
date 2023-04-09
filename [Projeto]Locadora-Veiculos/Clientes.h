@@ -27,7 +27,7 @@
         char   Categoria [CATEGORIA_LEN];
         struct Cliente* proximo;
     } Cliente;
-    
+
 
     typedef struct {
         Cliente* cliente;
@@ -45,18 +45,22 @@
         ListaClientes* CriaListaClientesArgs(Cliente*);
 
     // Métodos Úteis
-        void      PrintCPF     (char[]);
-        void      ExibeCliente (Cliente*);
-        Cliente*  ClientePorCPF(ListaClientes*, char[]);
-        Cliente*  Clone        (Cliente*);
-        int       SizeString   (char);
+        void     PrintCPF     (char[]);
+        void     ExibeCliente (Cliente*);
+        Cliente* ClientePorCPF(ListaClientes*, char[]);
+        Cliente* Clone        (Cliente*);
+        int      SizeString   (char);
 
     // CRUD
-        void     ExibeClientePorCPF  (ListaClientes*, char[]);
         Cliente* NovoCliente         (ListaClientes*);
+        void     ExibeClientePorCPF  (ListaClientes*);
+        void     ExibeTodosClientes  (ListaClientes*);
         void     InsereClienteNaLista(ListaClientes*, Cliente*);
         void     InsereCliente       (ListaClientes*);
-        void     AtualizaCliente     (ListaClientes*, char[]);
-        void     RemoveCliente       (ListaClientes*, char[]);
+        void     AtualizaCliente     (ListaClientes*);
+        void     RemoveCliente       (ListaClientes*);
+
+    // SubMenu
+        void MenuClientes(ListaClientes*);
 
 #endif
