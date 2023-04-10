@@ -2,6 +2,7 @@
 #include "Clientes.c"
 #include "Veiculos.c"
 #include "Locacoes.c"
+#include "Relatorios.c"
 
 void PreencheClientes(ListaClientes* lista) {
     InsereClienteNaLista(lista, CriaClienteArgs("45612378966", "Stulla Sigurdasson",
@@ -18,12 +19,18 @@ void PreencheVeiculos(ListaVeiculos* lista) {
     InsereVeiculoNaLista(lista, CriaVeiculoArgs("CDF9369", "Hyundai", "Azera", 2013, 892.61));
 }
 
+void PreencheLocacoes(ListaLocacoes* lista) {
+    UNIMPLEMENTED;
+}
+
 int main(int argc, char const *argv[]) {
     ListaClientes* listaClientes = CriaListaClientes();
     ListaVeiculos* listaVeiculos = CriaListaVeiculos();
+    ListaLocacoes* listaLocacoes = CriaListaLocacoes();
 
     PreencheClientes(listaClientes);
     PreencheVeiculos(listaVeiculos);
+    //PreencheLocacoes(listaLocacoes);
     
     //MenuClientes(listaClientes);
     //MenuVeiculos(listaVeiculos);

@@ -6,6 +6,7 @@
     // Bibliotecas
 
     #include "tools.h"
+    #include "Data.c"
 
 //-------------------------------------------------------------------------------------------------------------//
 
@@ -19,12 +20,6 @@
 
     // Estrutura dos tipos
 
-    typedef struct {
-        char Dia[5];
-        char Mes[5];
-        char Ano[10];
-    } Data;
-
     typedef struct Locacao {
         char   CPF  [CPF_LEN];
         char   Placa[PLACA_LEN];
@@ -35,20 +30,28 @@
         struct Locacao* proximo;
     } Locacao;
 
+    typedef struct {
+        Locacao* locacao;
+        size_t   tamanho;
+    } ListaLocacoes;
+
 //-------------------------------------------------------------------------------------------------------------//
 
     // Lista de Funções e Métodos
 
     // Construtores
-        Data* CriaData(char[], char[], char[]);
-        Locacao* CriaLocacaoArgs(char[], char[], Data*, Data*, double);
+        Locacao*       CriaLocacaoArgs  (char[], char[], Data*, Data*, double);
+        ListaLocacoes* CriaListaLocacoes();
+        ListaLocacoes* CriaListaLocacoesArgs(Locacao*);
 
     // Métodos Úteis
-        void GeraChave(Locacao*, string);
-        void ExibeData(Data*);
+        void     GeraChave      (Locacao*, string);
+        void     ExibeLocacao   (Locacao*);
+        Locacao* LocacaoPorChave(ListaLocacoes*, char[]);
 
     // CRUD
-
+        void ExibeLocacaoPorChave(ListaLocacoes*);
+        void ExibeTodasLocacoes(ListaLocacoes*);
 
     // SubMenu
 

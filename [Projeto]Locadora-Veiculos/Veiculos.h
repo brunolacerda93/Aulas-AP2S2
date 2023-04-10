@@ -45,7 +45,6 @@
         ListaVeiculos* CriaListaVeiculosArgs(Veiculo*);
 
     // Métodos Úteis
-        void     PrintPlaca      (char[]);
         void     ExibeVeiculo    (Veiculo*);
         Veiculo* VeiculoPorPlaca (ListaVeiculos*, char[]);
         Veiculo* ClonaVeiculo    (Veiculo*);

@@ -70,30 +70,13 @@
     // Métodos úteis
 
 
-    // Formata o CPF para exibição
-
-    void PrintCPF(char cpf[]) {
-        size_t i = 0;
-
-        while (cpf[i] != '\0') {
-            printf("%c", cpf[i]);
-
-            switch(i++) {
-                case 2: printf("."); break;
-                case 5: printf("."); break;
-                case 8: printf("/"); break;
-            }
-        }
-    }
-
-
     // Formata e exibe um Cliente
 
     void ExibeCliente(Cliente* client) {
-        printf("\nNome     : %s", client->Nome);
-        printf("\nCPF      : "); PrintCPF(client->CPF);
-        printf("\nEndereco : %s", client->Endereco);
-        printf("\nCategoria: %s", client->Categoria);
+        printf("\nNome      : %s", client->Nome);
+        printf("\nCPF       : "); PrintCPF(client->CPF);
+        printf("\nEndereco  : %s", client->Endereco);
+        printf("\nCategoria : %s", client->Categoria);
         printf("\n====================================================\n");
     }
 
@@ -103,7 +86,7 @@
     Cliente* ClientePorCPF(ListaClientes* lista, char cpf[]) {
         Cliente* aux = lista->cliente;
         while (aux) {
-            if(!strcmp(aux->CPF, cpf))
+            if (!strcmp(aux->CPF, cpf))
                 return aux;
             aux = aux->proximo;
         }

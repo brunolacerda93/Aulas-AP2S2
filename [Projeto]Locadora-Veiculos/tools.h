@@ -104,4 +104,37 @@
         return n;
     }
 
+
+    // Formata o CPF para exibição
+
+    void PrintCPF(char cpf[]) {
+        size_t i = 0;
+
+        while (cpf[i] != '\0') {
+            printf("%c", cpf[i]);
+
+            switch(i++) {
+                case 2: printf("."); break;
+                case 5: printf("."); break;
+                case 8: printf("/"); break;
+            }
+        }
+    }
+
+
+    // Formata a Placa do Veiculo para exibição
+
+    void PrintPlaca(char placa[]) {
+        size_t i = 0;
+
+        while (placa[i] != '\0') {
+            printf("%c", placa[i]);
+
+            if (i == 2)
+                printf("-");
+            
+            i++;
+        }
+    }
+
 #endif

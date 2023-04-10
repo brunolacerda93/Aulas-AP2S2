@@ -1,5 +1,5 @@
-#ifndef Relatorios_H
-#define Relatorios_H
+#ifndef Data_H
+#define Data_H
 
 //-------------------------------------------------------------------------------------------------------------//
 
@@ -11,13 +11,34 @@
 
     // Definição dos tamanhos
 
+    #define DIA_LEN 5
+    #define MES_LEN 5
+    #define ANO_LEN 10
+
 //-------------------------------------------------------------------------------------------------------------//
 
     // Estrutura dos tipos
 
+    typedef struct {
+        char Dia[DIA_LEN];
+        char Mes[MES_LEN];
+        char Ano[ANO_LEN];
+    } Data;
+
 //-------------------------------------------------------------------------------------------------------------//
 
     // Lista de Funções e Métodos
+
+    // Construtores
+        Data* CriaData(char[], char[], char[]);
+
+    // Métodos Úteis
+        void ExibeData(Data*);
+
+    // CRUD
+
+
+    // SubMenu
 
 
 #endif

@@ -71,30 +71,14 @@
     // Métodos Úteis
 
 
-    // Formata a Placa do Veiculo para exibição
-
-    void PrintPlaca(char placa[]) {
-        size_t i = 0;
-
-        while (placa[i] != '\0') {
-            printf("%c", placa[i]);
-
-            if (i == 2)
-                printf("-");
-            
-            i++;
-        }
-    }
-
-
     // Formata e Exibe um Veiculo
 
     void ExibeVeiculo(Veiculo* veiculo) {
-        printf("\nPlaca      : "); PrintPlaca(veiculo->Placa);
-        printf("\nMontadora  : %s",  veiculo->Montadora);
-        printf("\nModelo     : %s",  veiculo->Modelo);
-        printf("\nAno        : %4d", veiculo->Ano);
-        printf("\nDiaria (R$): %.2lf", veiculo->ValorDiaria);
+        printf("\nPlaca       : "); PrintPlaca(veiculo->Placa);
+        printf("\nMontadora   : %s",  veiculo->Montadora);
+        printf("\nModelo      : %s",  veiculo->Modelo);
+        printf("\nAno         : %4d", veiculo->Ano);
+        printf("\nDiaria (R$) : %.2lf", veiculo->ValorDiaria);
         printf("\n====================================================\n");
     }
 
@@ -104,7 +88,7 @@
     Veiculo* VeiculoPorPlaca(ListaVeiculos* lista, char placa[]) {
         Veiculo* aux = lista->veiculo;
         while (aux) {
-            if(!strcmp(aux->Placa, placa))
+            if (!strcmp(aux->Placa, placa))
                 return aux;
             aux = aux->proximo;
         }

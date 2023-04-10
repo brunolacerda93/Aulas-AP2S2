@@ -45,7 +45,6 @@
         ListaClientes* CriaListaClientesArgs(Cliente*);
 
     // Métodos Úteis
-        void     PrintCPF     (char[]);
         void     ExibeCliente (Cliente*);
         Cliente* ClientePorCPF(ListaClientes*, char[]);
         Cliente* Clone        (Cliente*);

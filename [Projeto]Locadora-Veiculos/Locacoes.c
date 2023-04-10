@@ -5,22 +5,6 @@
     // "CONSTRUTORES"
 
 
-    // Construtor da struct Data
-
-    Data* CriaData(char dia[], char mes[], char ano[]) {
-        Data* aux = (Data *) malloc(sizeof(Data));
-
-        if (!aux)
-            return NULL;
-
-        strcpy(aux->Dia, dia);
-        strcpy(aux->Mes, mes);
-        strcpy(aux->Ano, ano);
-
-        return aux;
-    }
-
-
     // Construtor da struct Locacao com Argumentos
 
     Locacao* CriaLocacaoArgs(char cpf[], char placa[], Data* dataLocacao, Data* dataDevolucao, double valor) {
@@ -40,16 +24,39 @@
         return aux;
     }
 
+
+    // Construtor da struct ListaLocacoes
+
+    ListaLocacoes* CriaListaLocacoes() {
+        ListaLocacoes* aux = (ListaLocacoes *) malloc(sizeof(ListaLocacoes));
+
+        if (!aux)
+            return NULL;
+
+        aux->locacao = NULL;
+        aux->tamanho = 0;
+        
+        return aux;
+    }
+
+
+    // Construtor da struct ListaLocacoes com Argumentos
+
+    ListaLocacoes* CriaListaLocacoesArgs(Locacao* locacao) {
+        ListaLocacoes* aux = (ListaLocacoes *) malloc(sizeof(ListaLocacoes));
+
+        if (!aux)
+            return NULL;
+
+        aux->locacao = locacao;
+        aux->tamanho = 1;
+        
+        return aux;
+    }
+
 //-------------------------------------------------------------------------------------------------------------//
 
     // Métodos Úteis
-
-
-    // Exibe uma Data no formato (DD/mm/YYYY)
-
-    void ExibeData(Data* data) {
-        printf("%s/%s/%s\n", data->Dia, data->Mes, data->Ano);
-    }
 
 
     // Concatena informações de uma locacao para gerar uma chave
@@ -64,3 +71,62 @@
         strcat(result, locacao->DataDevolucao->Mes);
         strcat(result, locacao->DataDevolucao->Ano);
     }
+
+
+    // Formata e Exibe uma Locacao
+
+    void ExibeLocacao(Locacao* locacao) {
+        printf("\nCPF              : "); PrintCPF(locacao->CPF);
+        printf("\nPlaca            : "); PrintPlaca(locacao->Placa);
+        printf("\nData Locacao     : "); ExibeData(locacao->DataLocacao);
+        printf("\nData Devolucao   : "); ExibeData(locacao->DataDevolucao);
+        printf("\nValor Total (R$) : %.2lf", locacao->ValorTotal);
+        printf("\n====================================================\n");
+    }
+
+
+    // Retorna a Locacao com a Chave passada como argumento
+
+    Locacao* LocacaoPorChave(ListaLocacoes* lista, char chave[]) {
+        Locacao* aux = lista->locacao;
+        while(aux) {
+            if (!strcmp(aux->Chave, chave))
+                return aux;
+            aux = aux->proximo;
+        }
+        return NULL;
+    }
+
+
+    // Retorna uma cópia profunda de uma Locacao
+
+    Locacao* ClonaLocacao(Locacao* locacao) {
+        UNIMPLEMENTED;
+    }
+
+//-------------------------------------------------------------------------------------------------------------//
+
+    // CRUD
+
+
+    // Procura uma Locacao com a Chave passada como argumento e chama ExibeLocacao()
+
+    void ExibeLocacaoPorChave(ListaLocacoes* lista) {
+        printf("\nDigite a Chave: ");
+        UNIMPLEMENTED;
+    }
+
+
+    // Exibe Toda uma Lista de Locacoes
+
+    void ExibeTodasLocacoes(ListaLocacoes* lista) {
+        Locacao* locacao = lista->locacao;
+        while (locacao) {
+            ExibeLocacao(locacao);
+            printf("\n");
+            locacao = locacao->proximo;
+        }
+    }
+
+
+    // Retorna uma nova Locacao inserida pelo usuário
