@@ -177,7 +177,7 @@
         char endereco  [ENDERECO_LEN];
         char categoria [CATEGORIA_LEN];
 
-        clearScreen();
+        cleanScreen();
         
         printf("\nDigite o CPF (apenas numeros): ");
         fgets(cpf, CPF_LEN, stdin);
@@ -252,7 +252,7 @@
 
         char opc;
         do { // hast
-            clearScreen();
+            cleanScreen();
             ExibeCliente(aux);
 
             printf("\nQual informacao deseja alterar?\n");
@@ -261,7 +261,7 @@
             printf("\n 3 - Categoria");
             printf("\n 0 - Retornar");
             printf("\n\nEscolha: ");
-            opc = getchar(); cleanBuffer();
+            opc = getchar(); clearBuffer();
 
             if (opc == '0') break;
 
@@ -304,7 +304,7 @@
 
         ExibeCliente(atual);
         printf("\nTem certeza? [s/S]: ");
-        char opc = getchar(); cleanBuffer();
+        char opc = getchar(); clearBuffer();
 
         if (opc != 's' && opc != 'S')
             return;
@@ -331,7 +331,7 @@
         char opc;
 
         do { // hast
-            clearScreen();
+            cleanScreen();
             
             printf("====================\n");
             printf("      CLIENTES\n\n");
@@ -342,7 +342,7 @@
             printf("  5 - Remover\n");
             printf("  0 - Retornar\n");
             printf("\nEscolha: ");
-            opc = getchar(); cleanBuffer();
+            opc = getchar(); clearBuffer();
 
             switch (opc) {
                 case '1':      InsereCliente(lista);  break;

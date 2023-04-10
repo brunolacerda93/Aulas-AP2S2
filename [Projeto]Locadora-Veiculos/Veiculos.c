@@ -166,7 +166,7 @@
         int    ano;
         double diaria;
 
-        clearScreen();
+        cleanScreen();
 
         printf("\nDigite a Placa (AAA0000): ");
         fgets(placa, PLACA_LEN, stdin);
@@ -187,7 +187,7 @@
         ano = IntInput();
 
         printf("\nDigite o valor da diaria (R$88.88): ");
-        scanf("%lf", &diaria); cleanBuffer();
+        scanf("%lf", &diaria); clearBuffer();
 
         return CriaVeiculoArgs(placa, montadora, modelo, ano, diaria);
     }
@@ -243,7 +243,7 @@
 
         char opc;
         do { // hast
-            clearScreen();
+            cleanScreen();
             ExibeVeiculo(aux);
 
             printf("\nQual informacao deseja alterar?\n");
@@ -251,7 +251,7 @@
             printf("\n 2 - Diaria (R$)");
             printf("\n 0 - Retornar");
             printf("\n\nEscolha: ");
-            opc = getchar(); cleanBuffer();
+            opc = getchar(); clearBuffer();
 
             if (opc == '0') break;
 
@@ -262,7 +262,7 @@
                 case '2': {
                     double n;
                     scanf("%lf", &n);
-                    cleanBuffer();
+                    clearBuffer();
                     aux->ValorDiaria = n;
                 } break;
             }
@@ -295,7 +295,7 @@
 
         ExibeVeiculo(atual);
         printf("\nTem certeza? [s/S]: ");
-        char opc = getchar(); cleanBuffer();
+        char opc = getchar(); clearBuffer();
 
         if (opc != 's' && opc != 'S')
             return;
@@ -322,7 +322,7 @@
         char opc;
 
         do { // hast
-            clearScreen();
+            cleanScreen();
             
             printf("====================\n");
             printf("      VEICULOS\n\n");
@@ -333,7 +333,7 @@
             printf("  5 - Remover\n");
             printf("  0 - Retornar\n");
             printf("\nEscolha: ");
-            opc = getchar(); cleanBuffer();
+            opc = getchar(); clearBuffer();
 
             switch (opc) {
                 case '1':        InsereVeiculo(lista);  break;

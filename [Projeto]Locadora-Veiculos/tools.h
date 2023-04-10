@@ -40,7 +40,7 @@
 
     // limpa o buffer de entrada
     
-    void cleanBuffer() {
+    void clearBuffer() {
         while(getchar() != '\n');
     }
 
@@ -81,14 +81,14 @@
     // Pause
     
     void pause() {
-        printf("\nPressione qualquer tecla para continuar...");
+        printf("\nPressione qualquer tecla para continuar... ");
         getchar();
     }
     
 
     // Clear screen
 
-    void clearScreen() {
+    void cleanScreen() {
         printf("\e[1;1H\e[2J");
     }
 
@@ -99,7 +99,7 @@
         int n;
 
         scanf("%d", &n);
-        cleanBuffer();
+        clearBuffer();
 
         return n;
     }
