@@ -20,7 +20,8 @@ void PreencheVeiculos(ListaVeiculos* lista) {
 }
 
 void PreencheLocacoes(ListaLocacoes* lista) {
-    UNIMPLEMENTED;
+    InsereLocacaoNaLista(lista, CriaLocacaoArgs("12345678911", "ABC9369", CriaData("02", "03", "2020"),
+                                                CriaData("03", "04", "2021"), 6357.82));
 }
 
 int main(int argc, char const *argv[]) {
@@ -30,13 +31,13 @@ int main(int argc, char const *argv[]) {
 
     PreencheClientes(listaClientes);
     PreencheVeiculos(listaVeiculos);
-    //PreencheLocacoes(listaLocacoes);
+    PreencheLocacoes(listaLocacoes);
     
     //MenuClientes(listaClientes);
     //MenuVeiculos(listaVeiculos);
+    MenuLocacoes(listaLocacoes);
 
-    Locacao* locacao = CriaLocacaoArgs("12345678911", "ABC9369", CriaData("02", "03", "2020"), CriaData("03", "04", "2021"), 6357.82);
-    printf("\nlocacao.chave: %s", locacao->Chave);
+    printf("\nlocacao.chave: %s", listaLocacoes->locacao->Chave);
 
     return 0;
 }

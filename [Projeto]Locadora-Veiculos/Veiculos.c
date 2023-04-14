@@ -177,7 +177,7 @@
     }
 
 
-    // Insere um Veiculo da última posição da lista
+    // Insere um Veiculo na última posição da lista
 
     void InsereVeiculoNaLista(ListaVeiculos* lista, Veiculo* veiculo) {
         if (!veiculo)
