@@ -47,6 +47,8 @@
     // Métodos Úteis
         void           GeraChave             (Locacao*, string);
         void           ExibeLocacao          (Locacao*);
+        void           ExibeListaLocacoes    (ListaLocacoes*);
+        void           TelaLocacaoIndex      (ListaLocacoes*);
         Locacao*       LocacaoPorChave       (ListaLocacoes*, char[]);
         ListaLocacoes* ListaLocacaoPorCPF    (ListaLocacoes*, char[]);
         ListaLocacoes* ListaLocacaoPorPlaca  (ListaLocacoes*, char[]);
@@ -55,10 +57,11 @@
 
     // CRUD
         void ExibeLocacaoPorChave(ListaLocacoes*);
-        void ExibeTodasLocacoes(ListaLocacoes*);
         void InsereLocacaoNaLista(ListaLocacoes*, Locacao*);
+        void InsereLocacao(ListaClientes*, ListaVeiculos*, ListaLocacoes*);
+        Locacao* NovaLocacao(ListaClientes*, ListaVeiculos*, ListaLocacoes*);
 
     // SubMenu
-
+        void MenuLocacoes(ListaClientes*, ListaVeiculos*, ListaLocacoes*);
 
 #endif

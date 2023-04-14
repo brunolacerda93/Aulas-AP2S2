@@ -221,7 +221,7 @@
 
     // Tela Locacao
 
-    void TelaLocacao(ListaLocacoes* lista) {
+    void TelaLocacaoIndex(ListaLocacoes* lista) {
         char opc;
 
         do { // hast
@@ -231,7 +231,7 @@
             printf("\n Placa [p/P]");
             printf("\n Data  [d/D]");
             printf("\n 0 - Retorna");
-            printf("\n-- ");
+            printf("\n--> ");
 
             char opc = getchar(); clearBuffer();
 
@@ -255,19 +255,6 @@
     }
 
 
-    // Exibe Toda uma Lista de Locacoes
-
-    void ExibeTodasLocacoes(ListaLocacoes* lista) {
-        Locacao* locacao = lista->locacao;
-        while (locacao) {
-            ExibeLocacao(locacao);
-            printf("\n");
-            locacao = locacao->proximo;
-        }
-    }
-
-
-    // ARRUMAR!!!
     // Retorna uma nova Locacao inserida pelo usuário
 
     Locacao* NovaLocacao(ListaClientes* listaClientes, ListaVeiculos* listaVeiculos, ListaLocacoes* listaLocacoes) {
@@ -288,7 +275,7 @@
             if (!strcmp(cpf, "0")) return NULL;
 
             if (!ClientePorCPF(listaClientes, cpf)) {
-                printf("\nERROR 404: CPF not Encontrado!!!\n"); pause();
+                printf("\nhttp ERROR 404: CPF not Encontrado!!!\n"); pause();
                 continue;
             }
 
@@ -299,27 +286,15 @@
             if (!strcmp(placa, "0")) return NULL;
 
             if (!VeiculoPorPlaca(listaVeiculos, placa)) {
-                printf("\nERROR 404: Placa not Encontrada!!!\n\n"); pause();
+                printf("\nhttp ERROR 404: Placa not Encontrada!!!\n\n"); pause();
                 continue;
             }
 
-            do { // hast
-                printf("\nDigite a Data da Locacao: ");
-                dataLocacao = NovaData();
+            printf("\nData da Locacao: ");
+            dataLocacao = CriaDataValida();
 
-                if (!dataLocacao)
-                    printf("\nData Invalida!!!\n");
-                
-            } while(!dataLocacao);
-
-            do { // hast
-                printf("\nDigite a Data da Devolucao: ");
-                dataDevolucao = NovaData();
-
-                if (!dataDevolucao)
-                    printf("\nData Invalida!!!\n");
-
-            } while(!dataDevolucao);
+            printf("\nData da Devolucao: ");
+            dataDevolucao = CriaDataValida();
 
             printf("\nDigite o valor da Diaria: ");
             scanf("%lf", &valor); clearBuffer();
@@ -386,8 +361,8 @@
 
             switch (opc) {
                 case '1': InsereLocacao(listaClientes, listaVeiculos, listaLocacoes); pause(); break;
-                case '2': TelaLocacao(listaLocacoes); pause(); break;
-                case '3': ExibeTodasLocacoes(listaLocacoes); pause(); break;
+                case '2': TelaLocacaoIndex(listaLocacoes); pause(); break;
+                case '3': ExibeListaLocacoes(listaLocacoes); pause(); break;
                 case '4': break;
                 case '5': break;
                 case '0': break;

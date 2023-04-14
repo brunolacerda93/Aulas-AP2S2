@@ -114,3 +114,21 @@
         return 0;
     }
 
+    
+    // Loop data
+
+    Data* CriaDataValida() {
+        Data* data;
+
+        do { // hast
+            printf("\nDigite a Data: ");
+            data = NovaData();
+
+            if (!data)
+                printf("\nData Invalida!!!\n");
+            
+        } while(!data);
+
+        return data;
+    }
+
