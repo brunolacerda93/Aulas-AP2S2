@@ -269,6 +269,56 @@
 
     // Retorna uma nova Locacao inserida pelo usuário
 
+    Locacao* NovaLocacao(ListaClientes* listaClientes, ListaVeiculos* listaVeiculos, ListaLocacoes* listaLocacoes) {
+        char   cpf[CPF_LEN];
+        char   placa[PLACA_LEN];
+        Data*  dataLocacao;
+        Data*  dataDevolucao;
+        double valor;
+
+        int flag = 0;
+        do { // hast
+            cleanScreen();
+            printf("\nDigite 0 para cancelar!");
+            
+            printf("\nDigite o CPF (apenas numeros): ");
+            fgets(cpf, CPF_LEN, stdin);
+            cpf[strcspn(cpf, "\n")] = 0;
+
+            if (!strcmp(cpf, "0")) return NULL;
+
+            if (!ClientePorCPF(listaClientes, cpf)) {
+                printf("\nERROR 404: CPF not Encontrado!!!\n"); pause();
+                continue;
+            }
+
+            printf("\nDigite a Placa (AAA0000): ");
+            fgets(placa, PLACA_LEN, stdin);
+            placa[strcspn(placa, "\n")] = 0;
+
+            if (!strcmp(placa, "0")) return NULL;
+
+            if (!VeiculoPorPlaca(listaVeiculos, placa)) {
+                printf("\nERROR 404: Placa not Encontrada!!!\n\n"); pause();
+                continue;
+            }
+
+            printf("\nDigite a Data da Locacao: ");
+            dataLocacao = NovaData();
+
+            printf("\nDigite a Data da Devolucao: ");
+            dataDevolucao = NovaData();
+
+            printf("\nDigite o valor da Diaria: ");
+            scanf("%lf", &valor); clearBuffer();
+
+            flag = 1;
+
+        } while(!flag);
+        
+        return CriaLocacaoArgs(cpf, placa, dataLocacao, dataDevolucao, valor);
+    }
+
 
     // Insere uma Locacao na última posição da lista
 
@@ -291,11 +341,21 @@
         lista->tamanho++;
     }
 
+
+    // Administra a inserção na Lista
+
+    void InsereLocacao(ListaClientes* listaClientes, ListaVeiculos* listaVeiculos, ListaLocacoes* listaLocacoes) {
+        if (!listaLocacoes || !listaClientes || !listaVeiculos)
+            return;
+
+        InsereLocacaoNaLista(listaLocacoes, NovaLocacao(listaClientes, listaVeiculos, listaLocacoes));
+    }
+
 //-------------------------------------------------------------------------------------------------------------//
 
     // Submenu de Locacoes
 
-    void MenuLocacoes(ListaLocacoes* lista) {
+    void MenuLocacoes(ListaClientes* listaClientes, ListaVeiculos* listaVeiculos, ListaLocacoes* listaLocacoes) {
         char opc;
 
         do {
@@ -313,9 +373,9 @@
             opc = getchar(); clearBuffer();
 
             switch (opc) {
-                case '1': break;
-                case '2': TelaLocacao(lista); pause(); break;
-                case '3': ExibeTodasLocacoes(lista); pause(); break;
+                case '1': InsereLocacao(listaClientes, listaVeiculos, listaLocacoes); pause(); break;
+                case '2': TelaLocacao(listaLocacoes); pause(); break;
+                case '3': ExibeTodasLocacoes(listaLocacoes); pause(); break;
                 case '4': break;
                 case '5': break;
                 case '0': break;

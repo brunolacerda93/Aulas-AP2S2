@@ -31,3 +31,26 @@
         printf("%s/%s/%s", data->Dia, data->Mes, data->Ano);
     }
 
+
+    // Retorna uma nova Data inserida pelo usuário
+
+    Data* NovaData() {
+        char dia[DIA_LEN];
+        char mes[MES_LEN];
+        char ano[ANO_LEN];
+
+        printf("\nDia: ");
+        fgets(dia, DIA_LEN, stdin);
+        dia[strcspn(dia, "\n")] = 0;
+
+        printf("Mes: ");
+        fgets(mes, MES_LEN, stdin);
+        mes[strcspn(mes, "\n")] = 0;
+
+        printf("Ano: ");
+        fgets(ano, ANO_LEN, stdin);
+        ano[strcspn(ano, "\n")] = 0;
+
+        return CriaData(dia, mes, ano);
+    }
+

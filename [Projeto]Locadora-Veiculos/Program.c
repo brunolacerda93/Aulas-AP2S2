@@ -43,7 +43,7 @@ void Menu(ListaClientes* listaClientes, ListaVeiculos* listaVeiculos, ListaLocac
         switch (opc) {
             case '1': MenuClientes(listaClientes); break;
             case '2': MenuVeiculos(listaVeiculos); break;
-            case '3': MenuLocacoes(listaLocacoes); break;
+            case '3': MenuLocacoes(listaClientes, listaVeiculos, listaLocacoes); break;
             case '4': break;
             case '0': pause(); break;
             default : printf("\n INVALIDO!!!\n"); pause(); break;
