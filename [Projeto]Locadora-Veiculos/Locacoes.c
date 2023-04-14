@@ -89,7 +89,6 @@
 
     void ExibeListaLocacoes(ListaLocacoes* lista) {
         Locacao* aux = lista->locacao;
-        printf("%s", aux->CPF);
         while (aux) {
             printf("\n");
             ExibeLocacao(aux);
@@ -182,7 +181,7 @@
             ListaLocacoes* filtrada = ListaLocacaoPorCPF(lista, cpf);
 
             if (!filtrada->locacao) {
-                printf("\nhttp ERROR: 404 - CPF NOT Encontrado!!!  "); pause();
+                printf("\nhttp ERROR: 404 - CPF NOT Encontrado!!!\n"); pause();
                 return;
             }
 
@@ -199,7 +198,7 @@
             ListaLocacoes* filtrada = ListaLocacaoPorPlaca(lista, placa);
 
             if (!filtrada->locacao) {
-                printf("\nhttp ERROR: 404 - Placa NOT Encontrada!!!  "); pause();
+                printf("\nhttp ERROR: 404 - Placa NOT Encontrada!!!\n"); pause();
                 return;
             }
 
@@ -215,6 +214,8 @@
         else {
             printf("\n INVALIDO!!!\n\n");
         }
+        
+        pause();
     }
 
 
@@ -235,8 +236,7 @@
             char opc = getchar(); clearBuffer();
 
             TelaLocacaoPorIndice(lista, opc);
-            if (opc == '0') break;
-            pause();
+            if (opc == '0') return;
 
         } while (opc != '0');
     }
@@ -299,8 +299,8 @@
         do {
             cleanScreen();
             
-            printf("====================\n");
-            printf("      VEICULOS\n\n");
+            printf("===============================\n");
+            printf("      LOCACOES\n\n");
             printf("  1 - Cadastrar\n");
             printf("  2 - Exibir por Indexador\n");
             printf("  3 - Exibir Todos\n");
@@ -312,15 +312,13 @@
 
             switch (opc) {
                 case '1': break;
-                case '2': TelaLocacao(lista); break;
-                case '3': ExibeTodasLocacoes(lista); break;
+                case '2': TelaLocacao(lista); pause(); break;
+                case '3': ExibeTodasLocacoes(lista); pause(); break;
                 case '4': break;
                 case '5': break;
-                case '0':                               break;
-                default : printf("\n INVALIDO!!!\n");   break;
+                case '0': break;
+                default : printf("\n INVALIDO!!!\n"); pause(); break;
             }
-
-            pause();
 
         } while (opc != '0');
     }

@@ -248,10 +248,11 @@
 
             if (opc == '0') break;
 
-            char str[SizeString(opc)];
-            printf("\nDigite o novo valor: ");
+            const int size = SizeString(opc);
+            char str[size];
 
-            fgets(str, SizeString(opc), stdin);
+            printf("\nDigite o novo valor: ");
+            fgets(str, size, stdin);
             str[(strcspn(str, "\n"))] = 0;
 
             switch (opc) {
@@ -316,7 +317,7 @@
         do { // hast
             cleanScreen();
             
-            printf("====================\n");
+            printf("===============================\n");
             printf("      CLIENTES\n\n");
             printf("  1 - Cadastrar\n");
             printf("  2 - Exibir Um\n");
@@ -328,16 +329,14 @@
             opc = getchar(); clearBuffer();
 
             switch (opc) {
-                case '1':      InsereCliente(lista);  break;
-                case '2': ExibeClientePorCPF(lista);  break;
-                case '3': ExibeTodosClientes(lista);  break;
-                case '4':    AtualizaCliente(lista);  break;
-                case '5':      RemoveCliente(lista);  break;
-                case '0':                             break;
-                default : printf("\n INVALIDO!!!\n"); break;
+                case '1':       InsereCliente(lista); pause(); break;
+                case '2':  ExibeClientePorCPF(lista); pause(); break;
+                case '3':  ExibeTodosClientes(lista); pause(); break;
+                case '4':     AtualizaCliente(lista);          break;
+                case '5':       RemoveCliente(lista); pause(); break;
+                case '0':                                      break;
+                default : printf("\n INVALIDO!!!\n"); pause(); break;
             }
-
-            pause();
 
         } while (opc != '0');
     }

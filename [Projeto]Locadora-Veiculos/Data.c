@@ -28,6 +28,6 @@
     // Exibe uma Data no formato (DD/mm/YYYY)
 
     void ExibeData(Data* data) {
-        printf("%s/%s/%s\n", data->Dia, data->Mes, data->Ano);
+        printf("%s/%s/%s", data->Dia, data->Mes, data->Ano);
     }
 

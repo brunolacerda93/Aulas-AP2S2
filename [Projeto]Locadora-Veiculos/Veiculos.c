@@ -308,7 +308,7 @@
         do { // hast
             cleanScreen();
             
-            printf("====================\n");
+            printf("===============================\n");
             printf("      VEICULOS\n\n");
             printf("  1 - Cadastrar\n");
             printf("  2 - Exibir Um\n");
@@ -320,16 +320,14 @@
             opc = getchar(); clearBuffer();
 
             switch (opc) {
-                case '1':        InsereVeiculo(lista);  break;
-                case '2': ExibeVeiculoPorPlaca(lista);  break;
-                case '3':   ExibeTodosVeiculos(lista);  break;
-                case '4':      AtualizaVeiculo(lista);  break;
-                case '5':        RemoveVeiculo(lista);  break;
-                case '0':                               break;
-                default : printf("\n INVALIDO!!!\n");   break;
+                case '1':        InsereVeiculo(lista); pause(); break;
+                case '2': ExibeVeiculoPorPlaca(lista); pause(); break;
+                case '3':   ExibeTodosVeiculos(lista); pause(); break;
+                case '4':      AtualizaVeiculo(lista);          break;
+                case '5':        RemoveVeiculo(lista); pause(); break;
+                case '0':                                       break;
+                default :  printf("\n INVALIDO!!!\n"); pause(); break;
             }
-
-            pause();
 
         } while (opc != '0');
     }
