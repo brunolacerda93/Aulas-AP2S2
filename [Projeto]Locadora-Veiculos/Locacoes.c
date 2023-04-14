@@ -267,6 +267,7 @@
     }
 
 
+    // ARRUMAR!!!
     // Retorna uma nova Locacao inserida pelo usuário
 
     Locacao* NovaLocacao(ListaClientes* listaClientes, ListaVeiculos* listaVeiculos, ListaLocacoes* listaLocacoes) {
@@ -302,23 +303,23 @@
                 continue;
             }
 
-            printf("\nDigite a Data da Locacao: ");
-            dataLocacao = NovaData();
+            do { // hast
+                printf("\nDigite a Data da Locacao: ");
+                dataLocacao = NovaData();
 
-            if (!dataLocacao) {
-                printf("\nData Invalida!!!\n\n");
-                pause();
-                continue;
-            }
+                if (!dataLocacao)
+                    printf("\nData Invalida!!!\n");
+                
+            } while(!dataLocacao);
 
-            printf("\nDigite a Data da Devolucao: ");
-            dataDevolucao = NovaData();
+            do { // hast
+                printf("\nDigite a Data da Devolucao: ");
+                dataDevolucao = NovaData();
 
-            if (!dataDevolucao) {
-                printf("\nData Invalida!!!\n\n");
-                pause();
-                continue;
-            }
+                if (!dataDevolucao)
+                    printf("\nData Invalida!!!\n");
+
+            } while(!dataDevolucao);
 
             printf("\nDigite o valor da Diaria: ");
             scanf("%lf", &valor); clearBuffer();
