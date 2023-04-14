@@ -276,7 +276,6 @@
         Data*  dataDevolucao;
         double valor;
 
-        int flag = 0;
         do { // hast
             cleanScreen();
             printf("\nDigite 0 para cancelar!");
@@ -306,15 +305,27 @@
             printf("\nDigite a Data da Locacao: ");
             dataLocacao = NovaData();
 
+            if (!dataLocacao) {
+                printf("\nData Invalida!!!\n\n");
+                pause();
+                continue;
+            }
+
             printf("\nDigite a Data da Devolucao: ");
             dataDevolucao = NovaData();
+
+            if (!dataDevolucao) {
+                printf("\nData Invalida!!!\n\n");
+                pause();
+                continue;
+            }
 
             printf("\nDigite o valor da Diaria: ");
             scanf("%lf", &valor); clearBuffer();
 
-            flag = 1;
+            break;
 
-        } while(!flag);
+        } while(1);
         
         return CriaLocacaoArgs(cpf, placa, dataLocacao, dataDevolucao, valor);
     }

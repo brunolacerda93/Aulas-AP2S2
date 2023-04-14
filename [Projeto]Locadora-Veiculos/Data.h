@@ -34,6 +34,10 @@
 
     // Métodos Úteis
         void ExibeData(Data*);
+        int  ValidaDia(int);
+        int  ValidaMes(int, int);
+        int  ValidaAno(int, int, int);
+        int   Bissexto(int);
 
     // CRUD
 
