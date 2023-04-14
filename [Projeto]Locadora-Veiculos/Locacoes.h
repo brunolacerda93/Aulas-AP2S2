@@ -45,12 +45,13 @@
         ListaLocacoes* CriaListaLocacoesArgs(Locacao*);
 
     // Métodos Úteis
-        void           GeraChave            (Locacao*, string);
-        void           ExibeLocacao         (Locacao*);
-        Locacao*       LocacaoPorChave      (ListaLocacoes*, char[]);
-        ListaLocacoes* ListaLocacaoPorCPF   (ListaLocacoes*, char[]);
-        ListaLocacoes* ListaLocacaoPorPlaca (ListaLocacoes*, char[]);
-        ListaLocacoes* ListaLocacaoPorData  (ListaLocacoes*, char[]);
+        void           GeraChave             (Locacao*, string);
+        void           ExibeLocacao          (Locacao*);
+        Locacao*       LocacaoPorChave       (ListaLocacoes*, char[]);
+        ListaLocacoes* ListaLocacaoPorCPF    (ListaLocacoes*, char[]);
+        ListaLocacoes* ListaLocacaoPorPlaca  (ListaLocacoes*, char[]);
+        ListaLocacoes* ListaLocacaoPorData   (ListaLocacoes*, char[]);
+        ListaLocacoes* ListaLocacoesPorIndice(ListaLocacoes*, char);
 
     // CRUD
         void ExibeLocacaoPorChave(ListaLocacoes*);

@@ -88,6 +88,8 @@
     // Exibe uma Lista de Locacoes
 
     void ExibeListaLocacoes(ListaLocacoes* lista) {
+        if (!lista) return;
+
         Locacao* aux = lista->locacao;
         while (aux) {
             printf("\n");
@@ -168,9 +170,9 @@
     }
 
 
-    // Exibe na Tela as Locacoes requisitadas dado um índice
+    // Retorna uma ListaLocacoes com as Locacoes requisitadas dado um índice
 
-    void TelaLocacaoPorIndice(ListaLocacoes* lista, char opc) {
+    ListaLocacoes* ListaLocacoesPorIndice(ListaLocacoes* lista, char opc) {
         if (opc == 'c' || opc == 'C') {
             char cpf[CPF_LEN];
 
@@ -181,11 +183,11 @@
             ListaLocacoes* filtrada = ListaLocacaoPorCPF(lista, cpf);
 
             if (!filtrada->locacao) {
-                printf("\nhttp ERROR: 404 - CPF NOT Encontrado!!!\n"); pause();
-                return;
+                printf("\nhttp ERROR: 404 - CPF NOT Encontrado!!!\n");
+                return NULL;
             }
 
-            ExibeListaLocacoes(filtrada);
+            return filtrada;
         }
 
         else if (opc == 'p' || opc == 'P') {
@@ -198,24 +200,22 @@
             ListaLocacoes* filtrada = ListaLocacaoPorPlaca(lista, placa);
 
             if (!filtrada->locacao) {
-                printf("\nhttp ERROR: 404 - Placa NOT Encontrada!!!\n"); pause();
-                return;
+                printf("\nhttp ERROR: 404 - Placa NOT Encontrada!!!\n");
+                return NULL;
             }
 
-            ExibeListaLocacoes(filtrada);
+            return filtrada;
         }
 
         else if (opc == 'd' || opc == 'D') {
-            return;
+            return NULL;
         }
 
-        else if (opc == '0') return;
+        else if (opc == '0') return NULL;
 
-        else {
-            printf("\n INVALIDO!!!\n\n");
-        }
+        else printf("\n INVALIDO!!!\n\n");
         
-        pause();
+        return NULL;
     }
 
 
@@ -235,8 +235,9 @@
 
             char opc = getchar(); clearBuffer();
 
-            TelaLocacaoPorIndice(lista, opc);
+            ExibeListaLocacoes(ListaLocacoesPorIndice(lista, opc));
             if (opc == '0') return;
+            pause();
 
         } while (opc != '0');
     }
@@ -290,6 +291,7 @@
         lista->tamanho++;
     }
 
+//-------------------------------------------------------------------------------------------------------------//
 
     // Submenu de Locacoes
 
@@ -303,7 +305,7 @@
             printf("      LOCACOES\n\n");
             printf("  1 - Cadastrar\n");
             printf("  2 - Exibir por Indexador\n");
-            printf("  3 - Exibir Todos\n");
+            printf("  3 - Exibir Todas\n");
             printf("  4 - Atualizar\n");
             printf("  5 - Remover\n");
             printf("  0 - Retornar\n");
