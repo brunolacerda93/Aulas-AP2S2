@@ -316,7 +316,7 @@
 
     // Tela Locacao para Exibir uma lista de Locações filtrada
 
-    void TelaLocacaoIndex(ListaLocacoes* lista, int isUpdate) {
+    void TelaLocacaoIndex(ListaLocacoes* lista, int isUpdateDelete) {
         char opc;
 
         do { // hast
@@ -334,8 +334,12 @@
             ListaLocacoes* filtrada = ListaLocacoesPorIndice(lista, opc);
             ExibeListaLocacoes(filtrada);
 
-            if (isUpdate && filtrada) {
+            if (isUpdateDelete == 1 && filtrada) {
                 AtualizaLocacao(lista);
+                return;
+            }
+            else if (isUpdateDelete == 2 && filtrada) {
+                RemoveLocacao(lista);
                 return;
             }
 
@@ -475,6 +479,56 @@
         } while(opc != '0');
     }
 
+
+    // Remove uma Locação da Lista
+
+    void RemoveLocacao(ListaLocacoes* lista) {
+        int loc;
+
+        do { // hast
+            printf("\nDigite o indice da locacao que deseja remover: ");
+            scanf("%d", &loc); clearBuffer();
+
+            if (loc <= 0)
+                return;
+
+            if (loc > lista->tamanho)
+                printf("\nINVALIDO!!!\n");
+            
+        } while (loc > lista->tamanho);
+        
+        DicionarioLocacoes* dicionario = MapListaParaDicionario(lista);
+        Locacao* locacao = LocacaoPorIndice(dicionario, lista, loc);
+
+        ExibeLocacao(locacao);
+        printf("\nTem certeza? [s/S]: ");
+        char opc = getchar(); clearBuffer();
+
+        if (opc != 's' && opc != 'S')
+            return;
+        
+        Locacao* anterior = NULL;
+        Locacao* atual    = lista->locacao;
+
+        while (atual && strcmp(atual->Chave, locacao->Chave)) {
+            anterior = atual;
+            atual = atual->proximo;
+        }
+
+        if (!anterior) {
+            Locacao* temp = lista->locacao;
+            lista->locacao = lista->locacao->proximo;
+            free(temp);
+        }
+        else {
+            anterior->proximo = atual->proximo;
+            free(atual);
+        }
+
+        lista->tamanho--;
+        printf("\nRemovido!\n");
+    }
+
 //-------------------------------------------------------------------------------------------------------------//
 
     // Submenu de Locacoes
@@ -497,13 +551,13 @@
             opc = getchar(); clearBuffer();
 
             switch (opc) {
-                case '1': InsereLocacao(listaClientes, listaVeiculos, listaLocacoes); pause(); break;
-                case '2': TelaLocacaoIndex(listaLocacoes, 0); break;
-                case '3': ExibeListaLocacoes(listaLocacoes); pause(); break;
-                case '4': TelaLocacaoIndex(listaLocacoes, 1); break;
-                case '5': break;
-                case '0': break;
-                default : printf("\n INVALIDO!!!\n"); pause(); break;
+                case '1':      InsereLocacao(listaClientes, listaVeiculos, listaLocacoes); pause(); break;
+                case '2':   TelaLocacaoIndex(listaLocacoes, 0);          break;
+                case '3': ExibeListaLocacoes(listaLocacoes);    pause(); break;
+                case '4':   TelaLocacaoIndex(listaLocacoes, 1); pause(); break;
+                case '5':   TelaLocacaoIndex(listaLocacoes, 2); pause(); break;
+                case '0':                                                break;
+                default : printf("\n INVALIDO!!!\n"); pause();           break;
             }
 
         } while (opc != '0');

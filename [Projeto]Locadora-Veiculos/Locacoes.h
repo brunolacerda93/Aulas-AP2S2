@@ -71,10 +71,11 @@
         DicionarioLocacoes* MapListaParaDicionario (ListaLocacoes*);
 
     // CRUD
+        void     AtualizaLocacao      (ListaLocacoes*);
+        void     RemoveLocacao        (ListaLocacoes*);
         void     TelaLocacaoIndex     (ListaLocacoes*, int);
         void     InsereLocacaoNaLista (ListaLocacoes*, Locacao*);
         void     InsereLocacao        (ListaClientes*, ListaVeiculos*, ListaLocacoes*);
-        void     AtualizaLocacao      (ListaLocacoes*);
         Locacao* NovaLocacao          (ListaClientes*, ListaVeiculos*, ListaLocacoes*);
 
     // SubMenu
