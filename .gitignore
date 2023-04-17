@@ -52,3 +52,5 @@ Mkfile.old
 dkms.conf
 .vscode/c_cpp_properties.json
 .vscode/c_cpp_properties.json
+.vscode/c_cpp_properties.json
+.vscode/tasks.json

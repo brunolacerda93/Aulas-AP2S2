@@ -325,6 +325,7 @@
             aux = aux->proximo;
         
         aux->proximo = locacao;
+        aux->proximo->proximo = NULL;
         lista->tamanho++;
     }
 
