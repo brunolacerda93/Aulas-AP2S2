@@ -132,3 +132,35 @@
         return data;
     }
 
+    
+    // Converte Data para struct tm
+
+    DateTime* DataParaDT(Data* data) {
+        DateTime* date = (DateTime *) malloc(sizeof(DateTime));
+
+        int dia = atoi(data->Dia);
+        int mes = atoi(data->Mes);
+        int ano = atoi(data->Ano);
+
+        date->tm_sec  = 0;
+        date->tm_min  = 0;
+        date->tm_hour = 0;
+        date->tm_mday = dia;
+        date->tm_mon  = mes;
+        date->tm_year = ano-1900;
+
+        if (Bissexto(ano))
+            date->tm_isdst = 1;
+        else
+            date->tm_isdst = 0;
+
+        return date;
+    }
+    
+    // Retorna a quantidade de dias entre duas datas
+
+    int DiferencaEmDias(Data* dataFinal, Data* dataInicial) {
+        double segundos = difftime(mktime(DataParaDT(dataFinal)), mktime(DataParaDT(dataInicial)));
+        return (int) (segundos/SECONDS_DAY);
+    }
+

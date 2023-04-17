@@ -5,6 +5,7 @@
 
     // Bibliotecas
 
+    #include <time.h>
     #include "tools.h"
 
 //-------------------------------------------------------------------------------------------------------------//
@@ -14,6 +15,7 @@
     #define DIA_LEN 5
     #define MES_LEN 5
     #define ANO_LEN 10
+    #define SECONDS_DAY 86400
 
 //-------------------------------------------------------------------------------------------------------------//
 
@@ -25,6 +27,8 @@
         char Ano[ANO_LEN];
     } Data;
 
+    typedef struct tm DateTime;
+
 //-------------------------------------------------------------------------------------------------------------//
 
     // Lista de Funções e Métodos
@@ -33,12 +37,14 @@
         Data* CriaData(char[], char[], char[]);
 
     // Métodos Úteis
-        Data* NovaData();
-        Data* CriaDataValida();
-        void  ExibeData(Data*);
-        int   ValidaDia(int);
-        int   ValidaMes(int, int);
-        int   ValidaAno(int, int, int);
-        int   Bissexto (int);
+        int       ValidaDia(int);
+        int       ValidaMes(int, int);
+        int       ValidaAno(int, int, int);
+        int       Bissexto (int);
+        int       DiferencaEmDias(Data*, Data*);
+        void      ExibeData(Data*);
+        Data*     NovaData();
+        Data*     CriaDataValida();
+        DateTime* DataParaDT(Data*);
 
 #endif
