@@ -121,7 +121,7 @@
         while (aux) {
             if (!strcmp(aux->CPF, cpf)) {
                 //ExibeLocacao(aux);
-                InsereLocacaoNaLista(filtrada, aux);
+                InsereLocacaoNaLista(filtrada, ClonaLocacao(aux));
             }
             aux = aux->proximo;
         }
@@ -138,7 +138,7 @@
         while (aux) {
             if (!strcmp(aux->Placa, placa)) {
                 //ExibeLocacao(aux);
-                InsereLocacaoNaLista(filtrada, aux);
+                InsereLocacaoNaLista(filtrada, ClonaLocacao(aux));
             }
             aux = aux->proximo;
         }
@@ -166,7 +166,9 @@
     // Retorna uma cópia profunda de uma Locacao
 
     Locacao* ClonaLocacao(Locacao* locacao) {
-        UNIMPLEMENTED;
+        Locacao* temp = CriaLocacaoArgs(locacao->CPF, locacao->Placa, locacao->DataLocacao, locacao->DataDevolucao, locacao->ValorTotal);
+        temp->proximo = NULL;
+        return temp;
     }
 
 
@@ -236,6 +238,7 @@
             char opc = getchar(); clearBuffer();
 
             ExibeListaLocacoes(ListaLocacoesPorIndice(lista, opc));
+            
             if (opc == '0') return;
             pause();
 
@@ -325,7 +328,6 @@
             aux = aux->proximo;
         
         aux->proximo = locacao;
-        aux->proximo->proximo = NULL;
         lista->tamanho++;
     }
 
@@ -362,7 +364,7 @@
 
             switch (opc) {
                 case '1': InsereLocacao(listaClientes, listaVeiculos, listaLocacoes); pause(); break;
-                case '2': TelaLocacaoIndex(listaLocacoes); pause(); break;
+                case '2': TelaLocacaoIndex(listaLocacoes); break;
                 case '3': ExibeListaLocacoes(listaLocacoes); pause(); break;
                 case '4': break;
                 case '5': break;

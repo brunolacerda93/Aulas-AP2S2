@@ -35,6 +35,11 @@
         size_t   tamanho;
     } ListaLocacoes;
 
+    typedef struct {
+        int  indice;
+        char chave[CHAVE_LEN];
+    } DicionarioLocacoes;
+
 //-------------------------------------------------------------------------------------------------------------//
 
     // Lista de Funções e Métodos
@@ -49,6 +54,7 @@
         void           ExibeLocacao          (Locacao*);
         void           ExibeListaLocacoes    (ListaLocacoes*);
         void           TelaLocacaoIndex      (ListaLocacoes*);
+        Locacao*       ClonaLocacao          (Locacao*);
         Locacao*       LocacaoPorChave       (ListaLocacoes*, char[]);
         ListaLocacoes* ListaLocacaoPorCPF    (ListaLocacoes*, char[]);
         ListaLocacoes* ListaLocacaoPorPlaca  (ListaLocacoes*, char[]);
