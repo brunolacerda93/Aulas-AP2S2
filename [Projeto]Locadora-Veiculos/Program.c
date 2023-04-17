@@ -22,6 +22,8 @@ void PreencheVeiculos(ListaVeiculos* lista) {
 void PreencheLocacoes(ListaLocacoes* lista) {
     InsereLocacaoNaLista(lista, CriaLocacaoArgs("12345678911", "ABC9369", CriaData("02", "03", "2020"),
                                                 CriaData("03", "04", "2021"), 6357.82));
+    InsereLocacaoNaLista(lista, CriaLocacaoArgs("12345678911", "ABC1234", CriaData("03", "04", "2021"),
+                                                CriaData("04", "05", "2022"), 7539.48));
 }
 
 void Menu(ListaClientes* listaClientes, ListaVeiculos* listaVeiculos, ListaLocacoes* listaLocacoes) {

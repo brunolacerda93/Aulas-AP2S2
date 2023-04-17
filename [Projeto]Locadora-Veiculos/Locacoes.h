@@ -50,29 +50,32 @@
     // Lista de Funções e Métodos
 
     // Construtores
-        Locacao*       CriaLocacaoArgs  (char[], char[], Data*, Data*, double);
-        ListaLocacoes* CriaListaLocacoes();
-        ListaLocacoes* CriaListaLocacoesArgs(Locacao*);
+        Termo*              CriaTermoArgs    (Locacao*, int);
+        Locacao*            CriaLocacaoArgs  (char[], char[], Data*, Data*, double);
+        ListaLocacoes*      CriaListaLocacoes();
+        ListaLocacoes*      CriaListaLocacoesArgs(Locacao*);
+        DicionarioLocacoes* CriaDicionarioLocacoes();
 
     // Métodos Úteis
-        void           GeraChave             (Locacao*, string);
-        void           ExibeLocacao          (Locacao*);
-        void           ExibeListaLocacoes    (ListaLocacoes*);
-        void           TelaLocacaoIndex      (ListaLocacoes*, int);
-        Locacao*       ClonaLocacao          (Locacao*);
-        Locacao*       LocacaoPorChave       (ListaLocacoes*, char[]);
-        ListaLocacoes* ListaLocacaoPorCPF    (ListaLocacoes*, char[]);
-        ListaLocacoes* ListaLocacaoPorPlaca  (ListaLocacoes*, char[]);
-        ListaLocacoes* ListaLocacaoPorData   (ListaLocacoes*, char[]);
-        ListaLocacoes* ListaLocacoesPorIndice(ListaLocacoes*, char);
-        DicionarioLocacoes* MapListaParaDicionario(ListaLocacoes*);
+        void                GeraChave              (Locacao*, string);
+        void                ExibeLocacao           (Locacao*);
+        void                ExibeListaLocacoes     (ListaLocacoes*);
+        void                InsereNoDicionario     (DicionarioLocacoes*, Locacao*, int);
+        Locacao*            ClonaLocacao           (Locacao*);
+        Locacao*            LocacaoPorChave        (ListaLocacoes*, char[]);
+        Locacao*            LocacaoPorIndice       (DicionarioLocacoes*, ListaLocacoes*, int);
+        ListaLocacoes*      ListaLocacaoPorCPF     (ListaLocacoes*, char[]);
+        ListaLocacoes*      ListaLocacaoPorPlaca   (ListaLocacoes*, char[]);
+        ListaLocacoes*      ListaLocacaoPorData    (ListaLocacoes*, char[]);
+        ListaLocacoes*      ListaLocacoesPorIndice (ListaLocacoes*, char);
+        DicionarioLocacoes* MapListaParaDicionario (ListaLocacoes*);
 
     // CRUD
-        void ExibeLocacaoPorChave(ListaLocacoes*);
-        void InsereLocacaoNaLista(ListaLocacoes*, Locacao*);
-        void InsereLocacao(ListaClientes*, ListaVeiculos*, ListaLocacoes*);
-        void AtualizaLocacao(ListaLocacoes*);
-        Locacao* NovaLocacao(ListaClientes*, ListaVeiculos*, ListaLocacoes*);
+        void     TelaLocacaoIndex     (ListaLocacoes*, int);
+        void     InsereLocacaoNaLista (ListaLocacoes*, Locacao*);
+        void     InsereLocacao        (ListaClientes*, ListaVeiculos*, ListaLocacoes*);
+        void     AtualizaLocacao      (ListaLocacoes*);
+        Locacao* NovaLocacao          (ListaClientes*, ListaVeiculos*, ListaLocacoes*);
 
     // SubMenu
         void MenuLocacoes(ListaClientes*, ListaVeiculos*, ListaLocacoes*);

@@ -135,8 +135,9 @@
     Locacao* LocacaoPorChave(ListaLocacoes* lista, char chave[]) {
         Locacao* aux = lista->locacao;
         while(aux) {
-            if (!strcmp(aux->Chave, chave))
+            if (!strcmp(aux->Chave, chave)) {
                 return aux;
+            }
             aux = aux->proximo;
         }
         return NULL;
@@ -149,17 +150,16 @@
         if (indice <= 0)
             return NULL;
         
-        Locacao* locacao = NULL;
         Termo* aux = dicionario->termo;
 
         while (aux) {
             if (aux->indice == indice)
-                locacao = LocacaoPorChave(lista, aux->chave);
+                return LocacaoPorChave(lista, aux->chave);
             
             aux = aux->proximo;
         }
 
-        return locacao;
+        return NULL;
     }
 
 
@@ -272,7 +272,49 @@
     }
 
 
-    // Tela Locacao
+    // Insere no Dicionário
+
+    void InsereNoDicionario(DicionarioLocacoes* dicionario, Locacao* locacao, int indice) {
+        if (!locacao)
+            return;
+
+        Termo* termo = CriaTermoArgs(locacao, indice);
+        
+        if (!dicionario->termo) {
+            dicionario->termo = termo;
+            return;
+        }
+
+        Termo* aux = dicionario->termo;
+
+        while (aux->proximo)
+            aux = aux->proximo;
+
+        aux->proximo = termo;
+    }
+
+
+    // Mapeador para criação do Dicionário de Locações
+
+    DicionarioLocacoes* MapListaParaDicionario(ListaLocacoes* lista) {
+        DicionarioLocacoes* dicionario = CriaDicionarioLocacoes();
+        Locacao* aux = lista->locacao;
+        int i = 1;
+        
+        while (aux) {
+            InsereNoDicionario(dicionario, aux, i++);
+            aux = aux->proximo;
+        }
+
+        return dicionario;
+    }
+
+//-------------------------------------------------------------------------------------------------------------//
+
+    // CRUD
+
+
+    // Tela Locacao para Exibir uma lista de Locações filtrada
 
     void TelaLocacaoIndex(ListaLocacoes* lista, int isUpdate) {
         char opc;
@@ -300,56 +342,6 @@
             pause();
 
         } while (opc != '0');
-    }
-
-
-    // Insere no Dicionário
-
-    void InsereNoDicionario(DicionarioLocacoes* dicionario, Locacao* locacao, int indice) {
-        if (!locacao)
-            return;
-
-        Termo* termo = CriaTermoArgs(locacao, indice);
-        
-        if (!dicionario->termo) {
-            dicionario->termo = termo;
-            return;
-        }
-
-        Termo* aux = dicionario->termo;
-
-        while (aux)
-            aux = aux->proximo;
-
-        aux->proximo = termo;
-    }
-
-
-    // Mapeador para criação do Dicionário de Locações
-
-    DicionarioLocacoes* MapListaParaDicionario(ListaLocacoes* lista) {
-        DicionarioLocacoes* dicionario = CriaDicionarioLocacoes();
-        Locacao* aux = lista->locacao;
-        int i = 1;
-        
-        while (aux) {
-            InsereNoDicionario(dicionario, aux, i++);
-            aux = aux->proximo;
-        }
-
-        return dicionario;
-    }
-
-//-------------------------------------------------------------------------------------------------------------//
-
-    // CRUD
-
-
-    // Procura uma Locacao com a Chave passada como argumento e chama ExibeLocacao()
-
-    void ExibeLocacaoPorChave(ListaLocacoes* lista) {
-        printf("\nDigite a Chave: ");
-        UNIMPLEMENTED;
     }
 
 
