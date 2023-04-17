@@ -248,6 +248,12 @@
 
             if (opc == '0') break;
 
+            if (opc < '1' || opc > '3') {
+                printf("\nINVALIDO!!!\n");
+                pause();
+                continue;
+            }
+
             const int size = SizeString(opc);
             char str[size];
 

@@ -35,9 +35,14 @@
         size_t   tamanho;
     } ListaLocacoes;
 
-    typedef struct {
+    typedef struct Termo {
         int  indice;
         char chave[CHAVE_LEN];
+        struct Termo* proximo;
+    } Termo;
+
+    typedef struct {
+        Termo* termo;
     } DicionarioLocacoes;
 
 //-------------------------------------------------------------------------------------------------------------//
@@ -53,18 +58,20 @@
         void           GeraChave             (Locacao*, string);
         void           ExibeLocacao          (Locacao*);
         void           ExibeListaLocacoes    (ListaLocacoes*);
-        void           TelaLocacaoIndex      (ListaLocacoes*);
+        void           TelaLocacaoIndex      (ListaLocacoes*, int);
         Locacao*       ClonaLocacao          (Locacao*);
         Locacao*       LocacaoPorChave       (ListaLocacoes*, char[]);
         ListaLocacoes* ListaLocacaoPorCPF    (ListaLocacoes*, char[]);
         ListaLocacoes* ListaLocacaoPorPlaca  (ListaLocacoes*, char[]);
         ListaLocacoes* ListaLocacaoPorData   (ListaLocacoes*, char[]);
         ListaLocacoes* ListaLocacoesPorIndice(ListaLocacoes*, char);
+        DicionarioLocacoes* MapListaParaDicionario(ListaLocacoes*);
 
     // CRUD
         void ExibeLocacaoPorChave(ListaLocacoes*);
         void InsereLocacaoNaLista(ListaLocacoes*, Locacao*);
         void InsereLocacao(ListaClientes*, ListaVeiculos*, ListaLocacoes*);
+        void AtualizaLocacao(ListaLocacoes*);
         Locacao* NovaLocacao(ListaClientes*, ListaVeiculos*, ListaLocacoes*);
 
     // SubMenu

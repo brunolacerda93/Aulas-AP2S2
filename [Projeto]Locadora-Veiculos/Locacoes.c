@@ -54,6 +54,36 @@
         return aux;
     }
 
+    
+    // Construtor da struct Termo (do Dicionário)
+
+    Termo* CriaTermoArgs(Locacao* locacao, int indice) {
+        Termo* aux = (Termo *) malloc(sizeof(Termo));
+
+        if (!aux)
+            return NULL;
+        
+        aux->indice = indice;
+        strcpy(aux->chave, locacao->Chave);
+        aux->proximo = NULL;
+
+        return aux;
+    }
+
+
+    // Construtor da struct DicionarioLocacoes
+
+    DicionarioLocacoes* CriaDicionarioLocacoes() {
+        DicionarioLocacoes* aux = (DicionarioLocacoes *) malloc(sizeof(DicionarioLocacoes));
+
+        if (!aux)
+            return NULL;
+        
+        aux->termo = NULL;
+
+        return aux;
+    }
+
 //-------------------------------------------------------------------------------------------------------------//
 
     // Métodos Úteis
@@ -91,8 +121,9 @@
         if (!lista) return;
 
         Locacao* aux = lista->locacao;
+        int i = 1;
         while (aux) {
-            printf("\n");
+            printf("\n     LOCACAO %02d", i++);
             ExibeLocacao(aux);
             aux = aux->proximo;
         }
@@ -109,6 +140,26 @@
             aux = aux->proximo;
         }
         return NULL;
+    }
+
+
+    // Encontra uma Locação em um dicionário
+
+    Locacao* LocacaoPorIndice(DicionarioLocacoes* dicionario, ListaLocacoes* lista, int indice) {
+        if (indice <= 0)
+            return NULL;
+        
+        Locacao* locacao = NULL;
+        Termo* aux = dicionario->termo;
+
+        while (aux) {
+            if (aux->indice == indice)
+                locacao = LocacaoPorChave(lista, aux->chave);
+            
+            aux = aux->proximo;
+        }
+
+        return locacao;
     }
 
 
@@ -223,7 +274,7 @@
 
     // Tela Locacao
 
-    void TelaLocacaoIndex(ListaLocacoes* lista) {
+    void TelaLocacaoIndex(ListaLocacoes* lista, int isUpdate) {
         char opc;
 
         do { // hast
@@ -236,13 +287,57 @@
             printf("\n--> ");
 
             char opc = getchar(); clearBuffer();
-
-            ExibeListaLocacoes(ListaLocacoesPorIndice(lista, opc));
-            
             if (opc == '0') return;
+
+            ListaLocacoes* filtrada = ListaLocacoesPorIndice(lista, opc);
+            ExibeListaLocacoes(filtrada);
+
+            if (isUpdate && filtrada) {
+                AtualizaLocacao(lista);
+                return;
+            }
+
             pause();
 
         } while (opc != '0');
+    }
+
+
+    // Insere no Dicionário
+
+    void InsereNoDicionario(DicionarioLocacoes* dicionario, Locacao* locacao, int indice) {
+        if (!locacao)
+            return;
+
+        Termo* termo = CriaTermoArgs(locacao, indice);
+        
+        if (!dicionario->termo) {
+            dicionario->termo = termo;
+            return;
+        }
+
+        Termo* aux = dicionario->termo;
+
+        while (aux)
+            aux = aux->proximo;
+
+        aux->proximo = termo;
+    }
+
+
+    // Mapeador para criação do Dicionário de Locações
+
+    DicionarioLocacoes* MapListaParaDicionario(ListaLocacoes* lista) {
+        DicionarioLocacoes* dicionario = CriaDicionarioLocacoes();
+        Locacao* aux = lista->locacao;
+        int i = 1;
+        
+        while (aux) {
+            InsereNoDicionario(dicionario, aux, i++);
+            aux = aux->proximo;
+        }
+
+        return dicionario;
     }
 
 //-------------------------------------------------------------------------------------------------------------//
@@ -341,6 +436,53 @@
         InsereLocacaoNaLista(listaLocacoes, NovaLocacao(listaClientes, listaVeiculos, listaLocacoes));
     }
 
+
+    // Atualiza as informações de uma Locação
+
+    void AtualizaLocacao(ListaLocacoes* lista) {
+        int loc;
+
+        do { // hast
+            printf("\nDigite o indice da locacao que deseja alterar: ");
+            scanf("%d", &loc); clearBuffer();
+
+            if (loc <= 0)
+                return;
+
+            if (loc > lista->tamanho)
+                printf("\nINVALIDO!!!\n");
+            
+        } while (loc > lista->tamanho);
+        
+        DicionarioLocacoes* dicionario = MapListaParaDicionario(lista);
+        Locacao* locacao = LocacaoPorIndice(dicionario, lista, loc);
+
+        char opc;
+        do { // hast
+            cleanScreen();
+            ExibeLocacao(locacao);
+
+            printf("\nQual informacao deseja alterar?\n");
+            printf("\n 1 - Valor Diaria");
+            printf("\n 0 - Retornar");
+            printf("\n\nEscolha: ");
+            opc = getchar(); clearBuffer();
+
+            if (opc == '0') break;
+
+            if (opc != '1') {
+                printf("\nINVALIDO!!!\n");
+                pause();
+                continue;
+            }
+
+            printf("\nDigite o novo valor: ");
+            double valor; scanf("%lf", &valor); clearBuffer();
+            locacao->ValorTotal = valor;
+
+        } while(opc != '0');
+    }
+
 //-------------------------------------------------------------------------------------------------------------//
 
     // Submenu de Locacoes
@@ -364,9 +506,9 @@
 
             switch (opc) {
                 case '1': InsereLocacao(listaClientes, listaVeiculos, listaLocacoes); pause(); break;
-                case '2': TelaLocacaoIndex(listaLocacoes); break;
+                case '2': TelaLocacaoIndex(listaLocacoes, 0); break;
                 case '3': ExibeListaLocacoes(listaLocacoes); pause(); break;
-                case '4': break;
+                case '4': TelaLocacaoIndex(listaLocacoes, 1); break;
                 case '5': break;
                 case '0': break;
                 default : printf("\n INVALIDO!!!\n"); pause(); break;

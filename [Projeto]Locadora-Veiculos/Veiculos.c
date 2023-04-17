@@ -239,6 +239,12 @@
 
             if (opc == '0') break;
 
+            if (opc < '1' || opc > '2') {
+                printf("\nINVALIDO!!!\n");
+                pause();
+                continue;
+            }
+
             printf("\nDigite o novo valor: ");
 
             switch(opc) {

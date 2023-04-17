@@ -93,7 +93,7 @@
     // Verifica se o ano é válido
 
     int ValidaAno(int dia, int mes, int ano) {
-        if (ano < 1900 || ano > 2100)
+        if (ano < 1900 || ano > 3000)
             return 0;
 
         if (dia == 29 && mes == 2 && !Bissexto(ano))
