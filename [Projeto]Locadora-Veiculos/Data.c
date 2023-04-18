@@ -19,9 +19,11 @@
         aux->tm_sec  = 0;
         aux->tm_min  = 0;
         aux->tm_hour = 0;
+        aux->tm_wday = 0;
         aux->tm_mday = atoi(dia);
         aux->tm_mon  = _mes;
         aux->tm_year = _ano;
+        aux->tm_yday = 0;
 
         if (Bissexto(_ano))
             aux->tm_isdst = 1;

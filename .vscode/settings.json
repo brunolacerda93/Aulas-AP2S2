@@ -32,6 +32,9 @@
     "stdio.h": "c",
     "string.h": "c",
     "stdlib.h": "c",
-    "data.h": "c"
+    "data.h": "c",
+    "clientes.h": "c",
+    "time.h": "c",
+    "tools.h": "c"
   }
 }
