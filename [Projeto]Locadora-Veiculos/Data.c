@@ -165,8 +165,21 @@
     
     // Retorna a quantidade de dias entre duas datas
 
-    int DiferencaEmDias(DateTime* dataFinal, DateTime* dataInicial) {
-        double segundos = difftime(mktime(dataFinal), mktime(dataInicial));
+    int DiferencaEmDias(DateTime* dataFim, DateTime* dataIni) {
+        double segundos = difftime(mktime(dataFim), mktime(dataIni));
         return (int) (segundos/SECONDS_DAY);
+    }
+
+
+    // Range de Datas dentro de um Range
+
+    int DataRangeInRange(DateTime* inputDataFim, DateTime* inputDataIni, DateTime* rangeDataFim, DateTime* rangeDataIni) {
+        double difIni = difftime(mktime(inputDataIni), mktime(rangeDataIni));
+        double difFim = difftime(mktime(inputDataFim), mktime(rangeDataFim));
+
+        if (difIni >= 0 && difFim <= 0)
+            return 1;
+
+        return 0;
     }
 

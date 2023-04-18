@@ -36,6 +36,7 @@
         int       ValidaAno(int, int, int);
         int       Bissexto (int);
         int       DiferencaEmDias(DateTime*, DateTime*);
+        int       DataRangeInRange(DateTime*, DateTime*, DateTime*, DateTime*);
         void      ExibeData(DateTime*);
         string    FormataData(DateTime*);
         DateTime* NovaData();

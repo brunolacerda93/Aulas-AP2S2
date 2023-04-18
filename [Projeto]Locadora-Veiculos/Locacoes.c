@@ -169,10 +169,9 @@
         Locacao* aux = lista->locacao;
 
         while (aux) {
-            if (!strcmp(aux->CPF, cpf)) {
-                //ExibeLocacao(aux);
+            if (!strcmp(aux->CPF, cpf))
                 InsereLocacaoNaLista(filtrada, ClonaLocacao(aux));
-            }
+
             aux = aux->proximo;
         }
         return filtrada;
@@ -186,10 +185,9 @@
         Locacao* aux = lista->locacao;
 
         while (aux) {
-            if (!strcmp(aux->Placa, placa)) {
-                //ExibeLocacao(aux);
+            if (!strcmp(aux->Placa, placa))
                 InsereLocacaoNaLista(filtrada, ClonaLocacao(aux));
-            }
+
             aux = aux->proximo;
         }
         return filtrada;
@@ -198,15 +196,14 @@
 
     // Retorna uma ListaLocacoes com a Data passada como argumento
 
-    ListaLocacoes* ListaLocacaoPorData(ListaLocacoes* lista, char cpf[]) {
+    ListaLocacoes* ListaLocacaoPorData(ListaLocacoes* lista, DateTime* dataFinal, DateTime* dataInicial) {
         ListaLocacoes* filtrada = CriaListaLocacoes();
         Locacao* aux = lista->locacao;
 
         while (aux) {
-            if (!strcmp(aux->CPF, cpf)) {
-                ExibeLocacao(aux);
-                InsereLocacaoNaLista(filtrada, aux);
-            }
+            if (DataRangeInRange(aux->DataDevolucao, aux->DataLocacao, dataFinal, dataInicial))
+                InsereLocacaoNaLista(filtrada, ClonaLocacao(aux));
+
             aux = aux->proximo;
         }
         return filtrada;
@@ -260,7 +257,20 @@
         }
 
         else if (opc == 'd' || opc == 'D') {
-            return NULL;
+            printf("\nData Inicial:");
+            DateTime* dataInicial = CriaDataValida();
+
+            printf("\nData Final:");
+            DateTime* dataFinal = CriaDataValida();
+
+            ListaLocacoes* filtrada = ListaLocacaoPorData(lista, dataFinal, dataInicial);
+
+            if(!filtrada->locacao) {
+                printf("\nhttp ERROR: 404 - Locacao NOT Encontrada!!!\n");
+                return NULL;
+            }
+
+            return filtrada;
         }
 
         else if (opc == '0') return NULL;
@@ -321,6 +331,7 @@
         do { // hast
             cleanScreen();
 
+            printf("\nSelecione o Indexador:");
             printf("\n CPF   [c/C]");
             printf("\n Placa [p/P]");
             printf("\n Data  [d/D]");

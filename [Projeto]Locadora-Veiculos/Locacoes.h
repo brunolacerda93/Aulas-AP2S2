@@ -66,7 +66,7 @@
         Locacao*            LocacaoPorIndice       (DicionarioLocacoes*, ListaLocacoes*, int);
         ListaLocacoes*      ListaLocacaoPorCPF     (ListaLocacoes*, char[]);
         ListaLocacoes*      ListaLocacaoPorPlaca   (ListaLocacoes*, char[]);
-        ListaLocacoes*      ListaLocacaoPorData    (ListaLocacoes*, char[]);
+        ListaLocacoes*      ListaLocacaoPorData    (ListaLocacoes*, DateTime*, DateTime*);
         ListaLocacoes*      ListaLocacoesPorIndice (ListaLocacoes*, char);
         DicionarioLocacoes* MapListaParaDicionario (ListaLocacoes*);
 
