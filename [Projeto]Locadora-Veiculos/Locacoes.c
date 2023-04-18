@@ -7,7 +7,7 @@
 
     // Construtor da struct Locacao com Argumentos
 
-    Locacao* CriaLocacaoArgs(char cpf[], char placa[], Data* dataLocacao, Data* dataDevolucao, double valor) {
+    Locacao* CriaLocacaoArgs(char cpf[], char placa[], DateTime* dataLocacao, DateTime* dataDevolucao, double valor) {
         Locacao* aux = (Locacao *) malloc(sizeof(Locacao));
 
         if (!aux)
@@ -94,12 +94,8 @@
     void GeraChave(Locacao* locacao, string result) {
         strcpy(result, locacao->CPF);
         strcat(result, locacao->Placa);
-        strcat(result, locacao->DataLocacao->Dia);
-        strcat(result, locacao->DataLocacao->Mes);
-        strcat(result, locacao->DataLocacao->Ano);
-        strcat(result, locacao->DataDevolucao->Dia);
-        strcat(result, locacao->DataDevolucao->Mes);
-        strcat(result, locacao->DataDevolucao->Ano);
+        strcat(result, FormataData(locacao->DataLocacao));
+        strcat(result, FormataData(locacao->DataDevolucao));
     }
 
 
@@ -352,11 +348,11 @@
     // Retorna uma nova Locacao inserida pelo usuário
 
     Locacao* NovaLocacao(ListaClientes* listaClientes, ListaVeiculos* listaVeiculos, ListaLocacoes* listaLocacoes) {
-        char   cpf[CPF_LEN];
-        char   placa[PLACA_LEN];
-        Data*  dataLocacao;
-        Data*  dataDevolucao;
-        double valor;
+        char       cpf[CPF_LEN];
+        char       placa[PLACA_LEN];
+        DateTime*  dataLocacao;
+        DateTime*  dataDevolucao;
+        double     valor;
 
         do { // hast
             cleanScreen();

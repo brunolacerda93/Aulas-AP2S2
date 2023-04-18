@@ -7,15 +7,25 @@
 
     // Construtor da struct Data
 
-    Data* CriaData(char dia[], char mes[], char ano[]) {
-        Data* aux = (Data *) malloc(sizeof(Data));
+    DateTime* CriaDateTime(char dia[], char mes[], char ano[]) {
+        DateTime* aux = (DateTime *) malloc(sizeof(DateTime));
 
         if (!aux)
             return NULL;
 
-        strcpy(aux->Dia, dia);
-        strcpy(aux->Mes, mes);
-        strcpy(aux->Ano, ano);
+        int _ano = atoi(ano)-1900;
+
+        aux->tm_sec  = 0;
+        aux->tm_min  = 0;
+        aux->tm_hour = 0;
+        aux->tm_mday = atoi(dia);
+        aux->tm_mon  = atoi(mes);
+        aux->tm_year = _ano;
+
+        if (Bissexto(_ano))
+            aux->tm_isdst = 1;
+        else
+            aux->tm_isdst = 0;
 
         return aux;
     }
@@ -25,16 +35,33 @@
     // Métodos Úteis
 
 
-    // Exibe uma Data no formato (DD/mm/YYYY)
+    // Exibe um DateTime formatado
 
-    void ExibeData(Data* data) {
-        printf("%s/%s/%s", data->Dia, data->Mes, data->Ano);
+    void ExibeData(DateTime* data) {
+        char novaData[100];
+
+        strftime(novaData, 100, "%a %d %b %Y", data);
+        novaData[strcspn(novaData, "\n")] = 0;
+
+        printf("%s", novaData);
+    }
+
+
+    // Formata o rolê já formatado
+
+    string FormataData(DateTime* data) {
+        string novaData = (string) malloc(100);
+
+        strftime(novaData, 100, "%a%d%b%Y", data);
+        novaData[strcspn(novaData, "\n")] = 0;
+
+        return novaData;
     }
 
 
     // Retorna uma nova Data inserida pelo usuário
 
-    Data* NovaData() {
+    DateTime* NovaData() {
         char dia[DIA_LEN];
         char mes[MES_LEN];
         char ano[ANO_LEN];
@@ -60,7 +87,7 @@
         if (!ValidaAno(atoi(dia), atoi(mes), atoi(ano)))
             return NULL;
 
-        return CriaData(dia, mes, ano);
+        return CriaDateTime(dia, mes, ano);
     }
 
 
@@ -117,8 +144,8 @@
     
     // Loop data
 
-    Data* CriaDataValida() {
-        Data* data;
+    DateTime* CriaDataValida() {
+        DateTime* data;
 
         do { // hast
             printf("\nDigite a Data: ");
@@ -133,34 +160,10 @@
     }
 
     
-    // Converte Data para struct tm
-
-    DateTime* DataParaDT(Data* data) {
-        DateTime* date = (DateTime *) malloc(sizeof(DateTime));
-
-        int dia = atoi(data->Dia);
-        int mes = atoi(data->Mes);
-        int ano = atoi(data->Ano);
-
-        date->tm_sec  = 0;
-        date->tm_min  = 0;
-        date->tm_hour = 0;
-        date->tm_mday = dia;
-        date->tm_mon  = mes;
-        date->tm_year = ano-1900;
-
-        if (Bissexto(ano))
-            date->tm_isdst = 1;
-        else
-            date->tm_isdst = 0;
-
-        return date;
-    }
-    
     // Retorna a quantidade de dias entre duas datas
 
-    int DiferencaEmDias(Data* dataFinal, Data* dataInicial) {
-        double segundos = difftime(mktime(DataParaDT(dataFinal)), mktime(DataParaDT(dataInicial)));
+    int DiferencaEmDias(DateTime* dataFinal, DateTime* dataInicial) {
+        double segundos = difftime(mktime(dataFinal), mktime(dataInicial));
         return (int) (segundos/SECONDS_DAY);
     }
 

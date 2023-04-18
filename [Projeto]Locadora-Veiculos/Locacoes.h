@@ -14,7 +14,7 @@
 
     #define CPF_LEN   15
     #define PLACA_LEN 10
-    #define CHAVE_LEN 70
+    #define CHAVE_LEN 500
 
 //-------------------------------------------------------------------------------------------------------------//
 
@@ -23,8 +23,8 @@
     typedef struct Locacao {
         char   CPF  [CPF_LEN];
         char   Placa[PLACA_LEN];
-        Data*  DataLocacao;
-        Data*  DataDevolucao;
+        DateTime*  DataLocacao;
+        DateTime*  DataDevolucao;
         double ValorTotal;
         char   Chave[CHAVE_LEN];
         struct Locacao* proximo;
@@ -51,7 +51,7 @@
 
     // Construtores
         Termo*              CriaTermoArgs    (Locacao*, int);
-        Locacao*            CriaLocacaoArgs  (char[], char[], Data*, Data*, double);
+        Locacao*            CriaLocacaoArgs  (char[], char[], DateTime*, DateTime*, double);
         ListaLocacoes*      CriaListaLocacoes();
         ListaLocacoes*      CriaListaLocacoesArgs(Locacao*);
         DicionarioLocacoes* CriaDicionarioLocacoes();

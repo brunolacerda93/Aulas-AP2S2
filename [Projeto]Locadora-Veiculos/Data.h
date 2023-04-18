@@ -21,12 +21,6 @@
 
     // Estrutura dos tipos
 
-    typedef struct {
-        char Dia[DIA_LEN];
-        char Mes[MES_LEN];
-        char Ano[ANO_LEN];
-    } Data;
-
     typedef struct tm DateTime;
 
 //-------------------------------------------------------------------------------------------------------------//
@@ -34,17 +28,18 @@
     // Lista de Funções e Métodos
 
     // Construtores
-        Data* CriaData(char[], char[], char[]);
+        DateTime* CriaDateTime(char[], char[], char[]);
 
     // Métodos Úteis
         int       ValidaDia(int);
         int       ValidaMes(int, int);
         int       ValidaAno(int, int, int);
         int       Bissexto (int);
-        int       DiferencaEmDias(Data*, Data*);
-        void      ExibeData(Data*);
-        Data*     NovaData();
-        Data*     CriaDataValida();
-        DateTime* DataParaDT(Data*);
+        int       DiferencaEmDias(DateTime*, DateTime*);
+        void      ExibeData(DateTime*);
+        string    FormataData(DateTime*);
+        DateTime* NovaData();
+        DateTime* CriaDataValida();
+        DateTime* DataParaDT(DateTime*);
 
 #endif
