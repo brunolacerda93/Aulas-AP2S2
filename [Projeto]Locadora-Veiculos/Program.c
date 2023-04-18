@@ -20,10 +20,15 @@ void PreencheVeiculos(ListaVeiculos* lista) {
 }
 
 void PreencheLocacoes(ListaLocacoes* lista) {
-    InsereLocacaoNaLista(lista, CriaLocacaoArgs("12345678911", "ABC9369", CriaDateTime("20", "09", "2020"),
-                                                CriaDateTime("03", "04", "2021"), 6357.82));
-    InsereLocacaoNaLista(lista, CriaLocacaoArgs("12345678911", "ABC1234", CriaDateTime("23", "10", "2021"),
-                                                CriaDateTime("04", "05", "2022"), 7539.48));
+    DateTime* data1 = CriaDateTime("05", "09", "2020");
+    DateTime* data2 = CriaDateTime("13", "10", "2020");
+    InsereLocacaoNaLista(lista, CriaLocacaoArgs("12345678911", "ABC9369", data1, data2,
+                                                63.83*DiferencaEmDias(data2, data1)));
+    
+    data1 = CriaDateTime("23", "05", "2022");
+    data2 = CriaDateTime("14", "07", "2022");
+    InsereLocacaoNaLista(lista, CriaLocacaoArgs("12345678911", "ABC1234", data1, data2,
+                                                75.48*DiferencaEmDias(data2, data1)));
 }
 
 void Menu(ListaClientes* listaClientes, ListaVeiculos* listaVeiculos, ListaLocacoes* listaLocacoes) {
