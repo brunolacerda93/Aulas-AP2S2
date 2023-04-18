@@ -548,7 +548,7 @@
     void MenuLocacoes(ListaClientes* listaClientes, ListaVeiculos* listaVeiculos, ListaLocacoes* listaLocacoes) {
         char opc;
 
-        do {
+        do { // hast
             cleanScreen();
             
             printf("===============================\n");

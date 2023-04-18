@@ -6,18 +6,14 @@
     // Bibliotecas
 
     #include "tools.h"
-
-//-------------------------------------------------------------------------------------------------------------//
-
-    // Definição dos tamanhos
-
-//-------------------------------------------------------------------------------------------------------------//
-
-    // Estrutura dos tipos
+    #include "Locacoes.c"
 
 //-------------------------------------------------------------------------------------------------------------//
 
     // Lista de Funções e Métodos
 
+    void ExibeLocacoesPorPlaca (ListaLocacoes*);
+    void ExibeLocacoesPorData  (ListaLocacoes*);
+    void MenuRelatorios        (ListaLocacoes*);
 
 #endif

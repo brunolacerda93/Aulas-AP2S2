@@ -1,7 +1,6 @@
 #include "tools.h"
 #include "Clientes.c"
 #include "Veiculos.c"
-#include "Locacoes.c"
 #include "Relatorios.c"
 
 void PreencheClientes(ListaClientes* lista) {
@@ -48,12 +47,12 @@ void Menu(ListaClientes* listaClientes, ListaVeiculos* listaVeiculos, ListaLocac
         opc = getchar(); clearBuffer();
         
         switch (opc) {
-            case '1': MenuClientes(listaClientes); break;
-            case '2': MenuVeiculos(listaVeiculos); break;
+            case '1': MenuClientes(listaClientes);                               break;
+            case '2': MenuVeiculos(listaVeiculos);                               break;
             case '3': MenuLocacoes(listaClientes, listaVeiculos, listaLocacoes); break;
-            case '4': break;
-            case '0': pause(); break;
-            default : printf("\n INVALIDO!!!\n"); pause(); break;
+            case '4': MenuRelatorios(listaLocacoes);                             break;
+            case '0': pause();                                                   break;
+            default : printf("\n INVALIDO!!!\n"); pause();                       break;
         }
 
     } while(opc != '0');
