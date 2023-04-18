@@ -14,12 +14,13 @@
             return NULL;
 
         int _ano = atoi(ano)-1900;
+        int _mes = atoi(mes)-1;
 
         aux->tm_sec  = 0;
         aux->tm_min  = 0;
         aux->tm_hour = 0;
         aux->tm_mday = atoi(dia);
-        aux->tm_mon  = atoi(mes);
+        aux->tm_mon  = _mes;
         aux->tm_year = _ano;
 
         if (Bissexto(_ano))

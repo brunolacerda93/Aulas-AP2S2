@@ -21,6 +21,9 @@
         GeraChave(aux, aux->Chave);
 
         aux->proximo = NULL;
+
+        if (!aux->DataLocacao || !aux->DataDevolucao) return NULL;
+
         return aux;
     }
 
@@ -389,11 +392,13 @@
             printf("\nDigite o valor da Diaria: ");
             scanf("%lf", &valor); clearBuffer();
 
+            if (!dataLocacao || !dataDevolucao) continue;
+
             break;
 
         } while(1);
         
-        return CriaLocacaoArgs(cpf, placa, dataLocacao, dataDevolucao, valor);
+        return CriaLocacaoArgs(cpf, placa, dataLocacao, dataDevolucao, valor*DiferencaEmDias(dataDevolucao, dataLocacao));
     }
 
 
@@ -470,7 +475,7 @@
 
             printf("\nDigite o novo valor: ");
             double valor; scanf("%lf", &valor); clearBuffer();
-            locacao->ValorTotal = valor;
+            locacao->ValorTotal = valor*DiferencaEmDias(locacao->DataDevolucao, locacao->DataLocacao);
 
         } while(opc != '0');
     }
