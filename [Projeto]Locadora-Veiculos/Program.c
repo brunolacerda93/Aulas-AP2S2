@@ -1,33 +1,30 @@
-#include "tools.h"
-#include "Clientes.c"
-#include "Veiculos.c"
 #include "Relatorios.c"
 
 void PreencheClientes(ListaClientes* lista) {
     InsereClienteNaLista(lista, CriaClienteArgs("45612378966", "Stulla Sigurdasson",
                                                 "Rua Reykjavik Jokull, 93", "A B"));
     InsereClienteNaLista(lista, CriaClienteArgs("12345678911", "Frida Halfdasdottir",
-                                                "Rua Aegir Egmund, 64", "C"));
+                                                "Rua Aegir Egmund, 64", "A"));
     InsereClienteNaLista(lista, CriaClienteArgs("36925814722", "Njall Gustavsson",
-                                                "Alameda Sogafjordur, 86", "A"));
+                                                "Alameda Sogafjordur, 86", "A D"));
 }
 
 void PreencheVeiculos(ListaVeiculos* lista) {
-    InsereVeiculoNaLista(lista, CriaVeiculoArgs("ABC1234", "Toyota",  "Prius", 2020, 237.69));
-    InsereVeiculoNaLista(lista, CriaVeiculoArgs("BCD9369", "Honda",   "Civic", 2016, 254.37));
-    InsereVeiculoNaLista(lista, CriaVeiculoArgs("CDF9369", "Hyundai", "Azera", 2013, 892.61));
+    InsereVeiculoNaLista(lista, CriaVeiculoArgs("ABC1234", "Toyota",  "Prius", 2020, 68.49));
+    InsereVeiculoNaLista(lista, CriaVeiculoArgs("ABC9369", "Honda",   "Civic", 2016, 73.58));
+    InsereVeiculoNaLista(lista, CriaVeiculoArgs("CDF9369", "Hyundai", "Azera", 2013, 89.61));
 }
 
 void PreencheLocacoes(ListaLocacoes* lista) {
     DateTime* data1 = CriaDateTime("05", "09", "2020");
     DateTime* data2 = CriaDateTime("13", "10", "2020");
     InsereLocacaoNaLista(lista, CriaLocacaoArgs("12345678911", "ABC9369", data1, data2,
-                                                63.83*DiferencaEmDias(data2, data1)));
+                                                73.58*DiferencaEmDias(data2, data1)));
     
     data1 = CriaDateTime("23", "05", "2022");
     data2 = CriaDateTime("14", "07", "2022");
     InsereLocacaoNaLista(lista, CriaLocacaoArgs("12345678911", "ABC1234", data1, data2,
-                                                75.48*DiferencaEmDias(data2, data1)));
+                                                68.49*DiferencaEmDias(data2, data1)));
 }
 
 void Menu(ListaClientes* listaClientes, ListaVeiculos* listaVeiculos, ListaLocacoes* listaLocacoes) {

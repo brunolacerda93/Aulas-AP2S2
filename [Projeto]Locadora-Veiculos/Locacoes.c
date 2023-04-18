@@ -389,7 +389,9 @@
 
             if (!strcmp(placa, "0")) return NULL;
 
-            if (!VeiculoPorPlaca(listaVeiculos, placa)) {
+            Veiculo* veiculo = VeiculoPorPlaca(listaVeiculos, placa);
+
+            if (!veiculo) {
                 printf("\nhttp ERROR 404: Placa not Encontrada!!!\n\n"); pause();
                 continue;
             }
@@ -400,10 +402,9 @@
             printf("\nData da Devolucao: ");
             dataDevolucao = CriaDataValida();
 
-            printf("\nDigite o valor da Diaria: ");
-            scanf("%lf", &valor); clearBuffer();
-
             if (!dataLocacao || !dataDevolucao) continue;
+
+            valor = veiculo->ValorDiaria;
 
             break;
 
