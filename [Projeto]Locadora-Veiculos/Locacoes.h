@@ -52,35 +52,35 @@
     // Lista de Funções e Métodos
 
     // Construtores
-        Termo*              CriaTermoArgs    (Locacao*, int);
-        Locacao*            CriaLocacaoArgs  (char[], char[], DateTime*, DateTime*, double);
+        Termo*              CriaTermoArgs    (const Locacao*, const int);
+        Locacao*            CriaLocacaoArgs  (const string, const string, const DateTime*, const DateTime*, const double);
         ListaLocacoes*      CriaListaLocacoes();
-        ListaLocacoes*      CriaListaLocacoesArgs(Locacao*);
+        ListaLocacoes*      CriaListaLocacoesArgs(const Locacao*);
         DicionarioLocacoes* CriaDicionarioLocacoes();
 
     // Métodos Úteis
-        void                GeraChave              (Locacao*, string);
-        void                ExibeLocacao           (Locacao*);
-        void                ExibeListaLocacoes     (ListaLocacoes*);
-        void                InsereNoDicionario     (DicionarioLocacoes*, Locacao*, int);
-        Locacao*            ClonaLocacao           (Locacao*);
-        Locacao*            LocacaoPorChave        (ListaLocacoes*, char[]);
-        Locacao*            LocacaoPorIndice       (DicionarioLocacoes*, ListaLocacoes*, int);
-        ListaLocacoes*      ListaLocacaoPorCPF     (ListaLocacoes*, char[]);
-        ListaLocacoes*      ListaLocacaoPorPlaca   (ListaLocacoes*, char[]);
-        ListaLocacoes*      ListaLocacaoPorData    (ListaLocacoes*, DateTime*, DateTime*);
-        ListaLocacoes*      ListaLocacoesPorIndice (ListaLocacoes*, char);
-        DicionarioLocacoes* MapListaParaDicionario (ListaLocacoes*);
+        void                GeraChave              (const Locacao*, string);
+        void                ExibeLocacao           (const Locacao*);
+        void                ExibeListaLocacoes     (const ListaLocacoes*);
+        void                InsereNoDicionario     (DicionarioLocacoes*, const Locacao*, const int);
+        Locacao*            ClonaLocacao           (const Locacao*);
+        Locacao*            LocacaoPorChave        (const ListaLocacoes*, const string);
+        Locacao*            LocacaoPorIndice       (const DicionarioLocacoes*, const ListaLocacoes*, const int);
+        ListaLocacoes*      ListaLocacaoPorCPF     (const ListaLocacoes*, const string);
+        ListaLocacoes*      ListaLocacaoPorPlaca   (const ListaLocacoes*, const string);
+        ListaLocacoes*      ListaLocacaoPorData    (const ListaLocacoes*, const DateTime*, const DateTime*);
+        ListaLocacoes*      ListaLocacoesPorIndice (const ListaLocacoes*, const char);
+        DicionarioLocacoes* MapListaParaDicionario (const ListaLocacoes*);
 
     // CRUD
         void     AtualizaLocacao      (ListaLocacoes*);
         void     RemoveLocacao        (ListaLocacoes*);
-        void     TelaLocacaoIndex     (ListaLocacoes*, int);
-        void     InsereLocacaoNaLista (ListaLocacoes*, Locacao*);
-        void     InsereLocacao        (ListaClientes*, ListaVeiculos*, ListaLocacoes*);
-        Locacao* NovaLocacao          (ListaClientes*, ListaVeiculos*, ListaLocacoes*);
+        void     TelaLocacaoIndex     (ListaLocacoes*, const int);
+        void     InsereLocacaoNaLista (ListaLocacoes*, const Locacao*);
+        void     InsereLocacao        (const ListaClientes*, const ListaVeiculos*, ListaLocacoes*);
+        Locacao* NovaLocacao          (const ListaClientes*, const ListaVeiculos*, const ListaLocacoes*);
 
     // SubMenu
-        void MenuLocacoes(ListaClientes*, ListaVeiculos*, ListaLocacoes*);
+        void MenuLocacoes(const ListaClientes*, const ListaVeiculos*, ListaLocacoes*);
 
 #endif

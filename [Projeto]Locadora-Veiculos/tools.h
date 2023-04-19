@@ -55,25 +55,25 @@
     }
 
 
-    // Retorna 0 se a hora é válida
-    // Retorna 1 se a hora é inválida
-    // Formato 24h
+    // Retorna 1 se a hora é válida
 
-    int validateTime(int hour, int min, int sec) {
-        if (hour >= 0 && hour < 24) {
-            if (min >= 0 && min < 60) {
-                if (sec >= 0 && sec < 60)
-                    return 0;
-            }
-        }
-        printf("\nDIGITE UMA HORA VALIDA!\n\n");
+    int validateTime(const int hour, const int min, const int sec) {
+        if (hour < 0 && hour > 24)
+            return 0;
+        
+        if (min < 0 && min > 59)
+            return 0;
+        
+        if (sec < 0 && sec > 59)
+            return 0;
+        
         return 1;
     }
 
 
     // Retorna o maior de dois inteiros
 
-    int maxInt(int a, int b) {
+    int maxInt(const int a, const int b) {
         return a >= b ? a : b;
     }
 
@@ -107,7 +107,7 @@
 
     // Formata o CPF para exibição
 
-    void PrintCPF(char cpf[]) {
+    void PrintCPF(const string cpf) {
         size_t i = 0;
 
         while (cpf[i] != '\0') {
@@ -124,7 +124,7 @@
 
     // Formata a Placa do Veiculo para exibição
 
-    void PrintPlaca(char placa[]) {
+    void PrintPlaca(const string placa) {
         size_t i = 0;
 
         while (placa[i] != '\0') {

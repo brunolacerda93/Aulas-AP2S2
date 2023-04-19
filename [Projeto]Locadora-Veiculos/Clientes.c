@@ -20,7 +20,11 @@
 
     // Construtor da struct Cliente com Argumentos
 
-    Cliente* CriaClienteArgs(char cpf[], char nome[], char endereco[], char categoria[]) {
+    Cliente* CriaClienteArgs(const string cpf,
+                             const string nome,
+                             const string endereco,
+                             const string categoria) {
+
         Cliente* aux = (Cliente *) malloc(sizeof(Cliente));
 
         if (!aux)
@@ -53,7 +57,7 @@
 
     // Construtor da struct ListaClientes com Argumentos
 
-    ListaClientes* CriaListaClientesArgs(Cliente* cliente) {
+    ListaClientes* CriaListaClientesArgs(const Cliente* cliente) {
         ListaClientes* aux = (ListaClientes *) malloc(sizeof(ListaClientes));
 
         if (!aux)
@@ -72,7 +76,7 @@
 
     // Formata e exibe um Cliente
 
-    void ExibeCliente(Cliente* client) {
+    void ExibeCliente(const Cliente* client) {
         printf("\nNome      : %s", client->Nome);
         printf("\nCPF       : "); PrintCPF(client->CPF);
         printf("\nEndereco  : %s", client->Endereco);
@@ -83,7 +87,7 @@
 
     // Retorna o cliente com o CPF passado como argumento
 
-    Cliente* ClientePorCPF(ListaClientes* lista, char cpf[]) {
+    Cliente* ClientePorCPF(const ListaClientes* lista, const string cpf) {
         Cliente* aux = lista->cliente;
         while (aux) {
             if (!strcmp(aux->CPF, cpf))
@@ -96,7 +100,7 @@
 
     // Retorna uma cópia profunda de um Cliente
 
-    Cliente* ClonaCliente(Cliente* cliente) {
+    Cliente* ClonaCliente(const Cliente* cliente) {
         Cliente* temp = CriaClienteArgs(cliente->CPF, cliente->Nome, cliente->Endereco, cliente->Categoria);
         temp->proximo = cliente->proximo;
         return temp;
@@ -105,7 +109,7 @@
 
     // Retorna o tamanho da string dado um campo (nome, endereço ou categoria)
 
-    int SizeString(char opc) {
+    int SizeString(const char opc) {
         if (opc == '1')
             return NOME_LEN;
         if (opc == '2')
@@ -122,14 +126,14 @@
 
     // Procura um Cliente com o CPF passado como argumento e chama ExibeCliente()
 
-    void ExibeClientePorCPF(ListaClientes* lista) {
+    void ExibeClientePorCPF(const ListaClientes* lista) {
         printf("\nDigite o CPF (apenas numeros): ");
 
         char cpf[CPF_LEN];
         fgets(cpf, CPF_LEN, stdin);
         cpf[strcspn(cpf, "\n")] = 0;
 
-        Cliente* aux = ClientePorCPF(lista, cpf);
+        const Cliente* aux = ClientePorCPF(lista, cpf);
 
         if (!aux) {
             printf("\nCliente not Encontrado... \n");
@@ -142,7 +146,7 @@
 
     // Exibe Toda uma Lista de Clientes
 
-    void ExibeTodosClientes(ListaClientes* lista) {
+    void ExibeTodosClientes(const ListaClientes* lista) {
         Cliente* cliente = lista->cliente;
         while (cliente) {
             ExibeCliente(cliente);
@@ -154,7 +158,7 @@
     
     // Retorna um novo Cliente inserido pelo usuário
 
-    Cliente* NovoCliente(ListaClientes* lista) {
+    Cliente* NovoCliente(const ListaClientes* lista) {
         char cpf       [CPF_LEN];
         char nome      [NOME_LEN];
         char endereco  [ENDERECO_LEN];
@@ -187,7 +191,7 @@
 
     // Insere um Cliente na última posição da lista
 
-    void InsereClienteNaLista(ListaClientes* lista, Cliente* cliente) {
+    void InsereClienteNaLista(ListaClientes* lista, const Cliente* cliente) {
         if (!cliente)
             return;
 

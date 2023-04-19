@@ -36,6 +36,8 @@
     "clientes.h": "c",
     "time.h": "c",
     "tools.h": "c",
-    "locacoes.h": "c"
+    "locacoes.h": "c",
+    "veiculos.h": "c",
+    "relatorios.h": "c"
   }
 }

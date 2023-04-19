@@ -7,7 +7,7 @@
 
     // Construtor da struct Data
 
-    DateTime* CriaDateTime(char dia[], char mes[], char ano[]) {
+    DateTime* CriaDateTime(string dia, string mes, string ano) {
         DateTime* aux = (DateTime *) malloc(sizeof(DateTime));
 
         if (!aux)

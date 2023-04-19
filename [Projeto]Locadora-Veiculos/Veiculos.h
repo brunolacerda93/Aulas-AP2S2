@@ -40,23 +40,23 @@
 
     // Construtores
         Veiculo*       CriaVeiculo();
-        Veiculo*       CriaVeiculoArgs      (char[], char[], char[], int, double);
+        Veiculo*       CriaVeiculoArgs(const string, const string, const string, const int, const double);
         ListaVeiculos* CriaListaVeiculos();
-        ListaVeiculos* CriaListaVeiculosArgs(Veiculo*);
+        ListaVeiculos* CriaListaVeiculosArgs(const Veiculo*);
 
     // Métodos Úteis
-        void     ExibeVeiculo    (Veiculo*);
-        Veiculo* VeiculoPorPlaca (ListaVeiculos*, char[]);
-        Veiculo* ClonaVeiculo    (Veiculo*);
+        void     ExibeVeiculo    (const Veiculo*);
+        Veiculo* VeiculoPorPlaca (const ListaVeiculos*, const string);
+        Veiculo* ClonaVeiculo    (const Veiculo*);
 
     // CRUD
-        Veiculo* NovoVeiculo          (ListaVeiculos*);
-        void     ExibeVeiculoPorPlaca (ListaVeiculos*);
-        void     ExibeTodosVeiculos   (ListaVeiculos*);
-        void     InsereVeiculoNaLista (ListaVeiculos*, Veiculo*);
         void     InsereVeiculo        (ListaVeiculos*);
         void     AtualizaVeiculo      (ListaVeiculos*);
         void     RemoveVeiculo        (ListaVeiculos*);
+        void     InsereVeiculoNaLista (ListaVeiculos*, const Veiculo*);
+        void     ExibeVeiculoPorPlaca (const ListaVeiculos*);
+        void     ExibeTodosVeiculos   (const ListaVeiculos*);
+        Veiculo* NovoVeiculo          (const ListaVeiculos*);
 
     // Submenu
         void MenuVeiculos(ListaVeiculos*);

@@ -12,8 +12,8 @@
 
     // Lista de Funções e Métodos
 
-    void ExibeLocacoesPorPlaca (ListaLocacoes*);
-    void ExibeLocacoesPorData  (ListaLocacoes*);
-    void MenuRelatorios        (ListaLocacoes*);
+    void ExibeLocacoesPorPlaca (const ListaLocacoes*);
+    void ExibeLocacoesPorData  (const ListaLocacoes*);
+    void MenuRelatorios        (const ListaLocacoes*);
 
 #endif

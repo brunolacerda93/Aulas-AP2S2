@@ -28,7 +28,7 @@
     // Lista de Funções e Métodos
 
     // Construtores
-        DateTime* CriaDateTime(char[], char[], char[]);
+        DateTime* CriaDateTime(string, string, string);
 
     // Métodos Úteis
         int       ValidaDia(int);
