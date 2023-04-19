@@ -7,7 +7,10 @@
     //
     // Construtor da struct Data
     //
-    DateTime* CriaDateTime(string dia, string mes, string ano) {
+    DateTime* CriaDateTime(const string dia,
+                           const string mes,
+                           const string ano) {
+                            
         DateTime* aux = (DateTime *) malloc(sizeof(DateTime));
 
         if (!aux)
@@ -40,7 +43,7 @@
     //
     // Exibe um DateTime formatado
     //
-    void ExibeData(DateTime* data) {
+    void ExibeData(const DateTime* data) {
         char novaData[100];
 
         strftime(novaData, 100, "%a %d %b %Y", data);
@@ -52,7 +55,7 @@
     //
     // Formata um DateTime
     //
-    string FormataData(DateTime* data) {
+    string FormataData(const DateTime* data) {
         string novaData = (string) malloc(100);
 
         strftime(novaData, 100, "%a%d%b%Y", data);
@@ -94,9 +97,9 @@
     }
 
     //
-    // Retorna 1 se a Data é válida
+    // Retorna 1 se o dia é válido
     //
-    int ValidaDia(int dia) {
+    int ValidaDia(const int dia) {
         if (dia <= 0 || dia > 31)
             return 0;
 
@@ -106,7 +109,7 @@
     //
     // Retorna 1 se o mês é válido
     //
-    int ValidaMes(int dia, int mes) {
+    int ValidaMes(const int dia, const int mes) {
         if (mes <= 0 || mes > 12)
             return 0;
 
@@ -122,7 +125,7 @@
     //
     // Retorna 1 se o ano é válido
     //
-    int ValidaAno(int dia, int mes, int ano) {
+    int ValidaAno(const int dia, const int mes, const int ano) {
         if (ano < 1900 || ano > 3000)
             return 0;
 
@@ -135,7 +138,7 @@
     //
     // Retorna 1 se o ano é bissexto
     //
-    int Bissexto(int ano) {
+    int Bissexto(const int ano) {
         if (ano%400 == 0 && ano%100 == 0)
             return 1;
         if (ano%4 == 0 && ano%100 != 0)
@@ -165,7 +168,7 @@
     //
     // Retorna a quantidade de dias entre duas datas
     //
-    int DiferencaEmDias(DateTime* dataFim, DateTime* dataIni) {
+    int DiferencaEmDias(const DateTime* dataFim, const DateTime* dataIni) {
         double segundos = difftime(mktime(dataFim), mktime(dataIni));
         return (int) (segundos/SECONDS_DAY);
     }
@@ -173,7 +176,11 @@
     //
     // Retorna 1 se o Range de Datas está dentro de um Range passado como argumento
     //
-    int DataRangeInRange(DateTime* inputDataFim, DateTime* inputDataIni, DateTime* rangeDataFim, DateTime* rangeDataIni) {
+    int DataRangeInRange(const DateTime* inputDataFim,
+                         const DateTime* inputDataIni,
+                         const DateTime* rangeDataFim,
+                         const DateTime* rangeDataIni) {
+
         double difIni = difftime(mktime(inputDataIni), mktime(rangeDataIni));
         double difFim = difftime(mktime(inputDataFim), mktime(rangeDataFim));
 

@@ -27,18 +27,17 @@
 
     // Lista de Funções e Métodos
 
-        DateTime* CriaDateTime(string, string, string);
+        DateTime* CriaDateTime(const string, const string, const string);
 
-        int       ValidaDia(int);
-        int       ValidaMes(int, int);
-        int       ValidaAno(int, int, int);
-        int       Bissexto (int);
-        int       DiferencaEmDias(DateTime*, DateTime*);
-        int       DataRangeInRange(DateTime*, DateTime*, DateTime*, DateTime*);
-        void      ExibeData(DateTime*);
-        string    FormataData(DateTime*);
+        int       ValidaDia         (const int);
+        int       ValidaMes         (const int, const int);
+        int       ValidaAno         (const int, const int, const int);
+        int       Bissexto          (const int);
+        int       DiferencaEmDias   (const DateTime*, const DateTime*);
+        int       DataRangeInRange  (const DateTime*, const DateTime*, const DateTime*, const DateTime*);
+        void      ExibeData         (const DateTime*);
+        string    FormataData       (const DateTime*);
         DateTime* NovaData();
         DateTime* CriaDataValida();
-        DateTime* DataParaDT(DateTime*);
 
 #endif
