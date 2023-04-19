@@ -5,8 +5,8 @@
 
     // Bibliotecas
 
-    #include "tools.h"
-    #include "Locacoes.c"
+    #include "../../tools.h"
+    #include "../Locacoes/Locacoes.c"
 
 //-------------------------------------------------------------------------------------------------------------//
 

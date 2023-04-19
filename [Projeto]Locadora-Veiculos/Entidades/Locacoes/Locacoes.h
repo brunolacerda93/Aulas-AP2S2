@@ -5,10 +5,10 @@
 
     // Bibliotecas
 
-    #include "tools.h"
-    #include "Data.c"
-    #include "Clientes.c"
-    #include "Veiculos.c"
+    #include "../../tools.h"
+    #include "../Data.c"
+    #include "../Clientes/Clientes.c"
+    #include "../Veiculos/Veiculos.c"
 
 //-------------------------------------------------------------------------------------------------------------//
 
@@ -52,6 +52,7 @@
     // Lista de Funções e Métodos
 
     // Construtores
+
         Termo*              CriaTermoArgs    (const Locacao*, const int);
         Locacao*            CriaLocacaoArgs  (const string, const string, const DateTime*, const DateTime*, const double);
         ListaLocacoes*      CriaListaLocacoes();
@@ -59,6 +60,7 @@
         DicionarioLocacoes* CriaDicionarioLocacoes();
 
     // Métodos Úteis
+
         void                GeraChave              (const Locacao*, string);
         void                ExibeLocacao           (const Locacao*);
         void                ExibeListaLocacoes     (const ListaLocacoes*);
@@ -73,6 +75,7 @@
         DicionarioLocacoes* MapListaParaDicionario (const ListaLocacoes*);
 
     // CRUD
+
         void     AtualizaLocacao      (ListaLocacoes*);
         void     RemoveLocacao        (ListaLocacoes*);
         void     TelaLocacaoIndex     (ListaLocacoes*, const int);
@@ -81,6 +84,7 @@
         Locacao* NovaLocacao          (const ListaClientes*, const ListaVeiculos*, const ListaLocacoes*);
 
     // SubMenu
+    
         void MenuLocacoes(const ListaClientes*, const ListaVeiculos*, ListaLocacoes*);
 
 #endif

@@ -4,9 +4,9 @@
 
     // "CONSTRUTORES"
 
-    
+    //
     // Construtor da struct Veiculo
-
+    //
     Veiculo* CriaVeiculo() {
         Veiculo* aux = (Veiculo *) malloc(sizeof(Veiculo));
 
@@ -17,9 +17,9 @@
         return aux;
     }
 
-
+    //
     // Construtor da struct Veiculo com Argumentos
-
+    //
     Veiculo* CriaVeiculoArgs(const string placa,
                              const string montadora,
                              const string modelo,
@@ -41,9 +41,9 @@
         return aux;
     }
 
-
+    //
     // Construtor da struct ListaVeiculos
-
+    //
     ListaVeiculos* CriaListaVeiculos() {
         ListaVeiculos* aux = (ListaVeiculos *) malloc(sizeof(ListaVeiculos));
 
@@ -56,9 +56,9 @@
         return aux;
     }
 
-
+    //
     // Construtor da struct ListaVeiculos com Argumentos
-
+    //
     ListaVeiculos* CriaListaVeiculosArgs(const Veiculo* veiculo) {
         ListaVeiculos* aux = (ListaVeiculos *) malloc(sizeof(ListaVeiculos));
 
@@ -75,9 +75,9 @@
 
     // Métodos Úteis
 
-
+    //
     // Formata e Exibe um Veiculo
-
+    //
     void ExibeVeiculo(const Veiculo* veiculo) {
         printf("\nPlaca       : "); PrintPlaca(veiculo->Placa);
         printf("\nMontadora   : %s",  veiculo->Montadora);
@@ -87,9 +87,9 @@
         printf("\n====================================================\n");
     }
 
-
+    //
     // Retorna o Veiculo com a Placa passada como argumento
-
+    //
     Veiculo* VeiculoPorPlaca(const ListaVeiculos* lista, const string placa) {
         Veiculo* aux = lista->veiculo;
         while (aux) {
@@ -100,9 +100,9 @@
         return NULL;
     }
 
-
+    //
     // Retorna uma cópia profunda de um Veiculo
-
+    //
     Veiculo* ClonaVeiculo(const Veiculo* veiculo) {
         Veiculo* temp = CriaVeiculoArgs(veiculo->Placa, veiculo->Montadora, veiculo->Modelo, veiculo->Ano, veiculo->ValorDiaria);
         temp->proximo = veiculo->proximo;
@@ -113,9 +113,9 @@
 
     // CRUD
 
-
+    //
     // Procura um Veiculo com a Placa passada como argumento e chama ExibeVeiculo()
-
+    //
     void ExibeVeiculoPorPlaca(const ListaVeiculos* lista) {
         printf("\nDigite a placa (AAA0000): ");
 
@@ -133,9 +133,9 @@
         ExibeVeiculo(aux);
     }
 
-
+    //
     // Exibe Toda uma Lista de Veiculos
-
+    //
     void ExibeTodosVeiculos(const ListaVeiculos* lista) {
         Veiculo* veiculo = lista->veiculo;
         while (veiculo) {
@@ -145,9 +145,9 @@
         }
     }
 
-
+    //
     // Retorna um novo Veiculo inserido pelo usuário
-
+    //
     Veiculo* NovoVeiculo(const ListaVeiculos* lista) {
         char   placa     [PLACA_LEN];
         char   montadora [MONTADORA_LEN];
@@ -181,9 +181,9 @@
         return CriaVeiculoArgs(placa, montadora, modelo, ano, diaria);
     }
 
-
+    //
     // Insere um Veiculo na última posição da lista
-
+    //
     void InsereVeiculoNaLista(ListaVeiculos* lista, const Veiculo* veiculo) {
         if (!veiculo)
             return;
@@ -203,9 +203,9 @@
         lista->tamanho++;
     }
 
-
+    //
     // Administra a inserção da lista
-
+    //
     void InsereVeiculo(ListaVeiculos* lista) {
         if (!lista)
             return;
@@ -213,9 +213,9 @@
         InsereVeiculoNaLista(lista, NovoVeiculo(lista));
     }
 
-
-    // Atualiza as informações de um Veiculo com a Placa passada como argumento
-
+    //
+    // Atualiza as informações de um Veiculo com a Placa inserida pelo usuário
+    //
     void AtualizaVeiculo(ListaVeiculos* lista) {
         printf("\nDigite a placa (AAA0000): ");
 
@@ -265,9 +265,9 @@
         } while (opc != '0');
     }
 
-
-    // Remove um Veiculo com a Placa passada como argumento
-
+    //
+    // Remove um Veiculo com a Placa inserida pelo usuário
+    //
     void RemoveVeiculo(ListaVeiculos* lista) {
         printf("\nDigite a placa (AAA0000): ");
 
@@ -311,8 +311,9 @@
 
 //-------------------------------------------------------------------------------------------------------------//
 
+    //
     // Submenu de Veiculos
-
+    //
     void MenuVeiculos(ListaVeiculos* lista) {
         char opc;
 

@@ -4,9 +4,9 @@
 
     // Métodos Úteis
 
-
-    // Exibe uma lista de Locações do Veículo com a placa passada como argumento
-
+    //
+    // Exibe uma lista de Locações do Veículo com a placa inserida pelo usuário
+    //
     void ExibeLocacoesPorPlaca(const ListaLocacoes* lista) {
         char placa[PLACA_LEN];
 
@@ -24,9 +24,9 @@
         ExibeListaLocacoes(filtrada);
     }
 
-
-    // Exibe uma lista de Locações entre as datas passadas como argumentos
-
+    //
+    // Exibe uma lista de Locações entre as datas inseridas pelo usuário
+    //
     void ExibeLocacoesPorData(const ListaLocacoes* lista) {
         printf("\nData Inicial:");
         const DateTime* dataInicial = CriaDataValida();
@@ -46,8 +46,9 @@
 
 //-------------------------------------------------------------------------------------------------------------//
 
-    // Submenu de Locacoes
-
+    //
+    // Submenu de Locações
+    //
     void MenuRelatorios(const ListaLocacoes* lista) {
         char opc;
 

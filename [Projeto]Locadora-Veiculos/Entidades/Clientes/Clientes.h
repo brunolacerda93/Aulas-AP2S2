@@ -5,7 +5,7 @@
 
     // Bibliotecas
 
-    #include "tools.h"
+    #include "../../tools.h"
 
 //-------------------------------------------------------------------------------------------------------------//
 
@@ -39,18 +39,21 @@
     // Lista de Funções e Métodos
 
     // Construtores
+
         Cliente*       CriaCliente();
         Cliente*       CriaClienteArgs(const string, const string, const string, const string);
         ListaClientes* CriaListaClientes();
         ListaClientes* CriaListaClientesArgs(const Cliente*);
 
     // Métodos Úteis
+
         void     ExibeCliente (const Cliente*);
         Cliente* ClientePorCPF(const ListaClientes*, const string);
         Cliente* Clone        (const Cliente*);
         int      SizeString   (const char);
 
     // CRUD
+
         void     InsereCliente       (ListaClientes*);
         void     AtualizaCliente     (ListaClientes*);
         void     RemoveCliente       (ListaClientes*);
@@ -60,6 +63,7 @@
         Cliente* NovoCliente         (const ListaClientes*);
 
     // SubMenu
+    
         void MenuClientes(ListaClientes*);
 
 #endif

@@ -4,9 +4,9 @@
 
     // "CONSTRUTORES"
 
-
+    //
     // Construtor da struct Cliente
-
+    //
     Cliente* CriaCliente() {
         Cliente* aux = (Cliente *) malloc(sizeof(Cliente));
 
@@ -17,9 +17,9 @@
         return aux;
     }
 
-
+    //
     // Construtor da struct Cliente com Argumentos
-
+    //
     Cliente* CriaClienteArgs(const string cpf,
                              const string nome,
                              const string endereco,
@@ -39,9 +39,9 @@
         return aux;
     }
 
-
+    //
     // Construtor da struct ListaClientes
-
+    //
     ListaClientes* CriaListaClientes() {
         ListaClientes* aux = (ListaClientes *) malloc(sizeof(ListaClientes));
 
@@ -54,9 +54,9 @@
         return aux;
     }
 
-
+    //
     // Construtor da struct ListaClientes com Argumentos
-
+    //
     ListaClientes* CriaListaClientesArgs(const Cliente* cliente) {
         ListaClientes* aux = (ListaClientes *) malloc(sizeof(ListaClientes));
 
@@ -73,9 +73,9 @@
 
     // Métodos úteis
 
-
+    //
     // Formata e exibe um Cliente
-
+    //
     void ExibeCliente(const Cliente* client) {
         printf("\nNome      : %s", client->Nome);
         printf("\nCPF       : "); PrintCPF(client->CPF);
@@ -84,9 +84,9 @@
         printf("\n====================================================\n");
     }
 
-
-    // Retorna o cliente com o CPF passado como argumento
-
+    //
+    // Retorna o Cliente com o CPF passado como argumento
+    //
     Cliente* ClientePorCPF(const ListaClientes* lista, const string cpf) {
         Cliente* aux = lista->cliente;
         while (aux) {
@@ -97,18 +97,18 @@
         return NULL;
     }
 
-
+    //
     // Retorna uma cópia profunda de um Cliente
-
+    //
     Cliente* ClonaCliente(const Cliente* cliente) {
         Cliente* temp = CriaClienteArgs(cliente->CPF, cliente->Nome, cliente->Endereco, cliente->Categoria);
         temp->proximo = cliente->proximo;
         return temp;
     }
 
-
+    //
     // Retorna o tamanho da string dado um campo (nome, endereço ou categoria)
-
+    //
     int SizeString(const char opc) {
         if (opc == '1')
             return NOME_LEN;
@@ -123,9 +123,9 @@
 
     // CRUD
 
-
+    //
     // Procura um Cliente com o CPF passado como argumento e chama ExibeCliente()
-
+    //
     void ExibeClientePorCPF(const ListaClientes* lista) {
         printf("\nDigite o CPF (apenas numeros): ");
 
@@ -143,9 +143,9 @@
         ExibeCliente(aux);
     }
 
-
+    //
     // Exibe Toda uma Lista de Clientes
-
+    //
     void ExibeTodosClientes(const ListaClientes* lista) {
         Cliente* cliente = lista->cliente;
         while (cliente) {
@@ -155,9 +155,9 @@
         }
     }
 
-    
+    //
     // Retorna um novo Cliente inserido pelo usuário
-
+    //
     Cliente* NovoCliente(const ListaClientes* lista) {
         char cpf       [CPF_LEN];
         char nome      [NOME_LEN];
@@ -188,9 +188,9 @@
         return CriaClienteArgs(cpf, nome, endereco, categoria);
     }
 
-
+    //
     // Insere um Cliente na última posição da lista
-
+    //
     void InsereClienteNaLista(ListaClientes* lista, const Cliente* cliente) {
         if (!cliente)
             return;
@@ -210,9 +210,9 @@
         lista->tamanho++;
     }
 
-
+    //
     // Administra a inserção na Lista
-
+    //
     void InsereCliente(ListaClientes* lista) {
         if (!lista)
             return;
@@ -220,9 +220,9 @@
         InsereClienteNaLista(lista, NovoCliente(lista));
     }
 
-
-    // Atualiza as informações de um Cliente com o CPF passado como argumento
-
+    //
+    // Atualiza as informações de um Cliente com o CPF inserido pelo usuário
+    //
     void AtualizaCliente(ListaClientes* lista) {
         printf("\nDigite o CPF (apenas numeros): ");
 
@@ -273,9 +273,9 @@
         } while (opc != '0');
     }
 
-
-    // Remove um Cliente com o CPF passado como argumento
-
+    //
+    // Remove um Cliente com o CPF inserido pelo usuário
+    //
     void RemoveCliente(ListaClientes* lista) {
         printf("\nDigite o CPF (apenas numeros): ");
 
@@ -319,8 +319,9 @@
 
 //-------------------------------------------------------------------------------------------------------------//
 
+    //
     // Submenu de Clientes
-
+    //
     void MenuClientes(ListaClientes* lista) {
         char opc;
 

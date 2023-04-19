@@ -6,7 +6,7 @@
     // Bibliotecas
 
     #include <time.h>
-    #include "tools.h"
+    #include "../tools.h"
 
 //-------------------------------------------------------------------------------------------------------------//
 
@@ -27,10 +27,8 @@
 
     // Lista de Funções e Métodos
 
-    // Construtores
         DateTime* CriaDateTime(string, string, string);
 
-    // Métodos Úteis
         int       ValidaDia(int);
         int       ValidaMes(int, int);
         int       ValidaAno(int, int, int);

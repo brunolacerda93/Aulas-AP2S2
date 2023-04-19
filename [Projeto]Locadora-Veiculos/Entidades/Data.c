@@ -4,9 +4,9 @@
 
     // "CONSTRUTORES"
 
-
+    //
     // Construtor da struct Data
-
+    //
     DateTime* CriaDateTime(string dia, string mes, string ano) {
         DateTime* aux = (DateTime *) malloc(sizeof(DateTime));
 
@@ -37,9 +37,9 @@
 
     // Métodos Úteis
 
-
+    //
     // Exibe um DateTime formatado
-
+    //
     void ExibeData(DateTime* data) {
         char novaData[100];
 
@@ -49,9 +49,9 @@
         printf("%s", novaData);
     }
 
-
-    // Formata o rolê já formatado
-
+    //
+    // Formata um DateTime
+    //
     string FormataData(DateTime* data) {
         string novaData = (string) malloc(100);
 
@@ -61,9 +61,9 @@
         return novaData;
     }
 
-
+    //
     // Retorna uma nova Data inserida pelo usuário
-
+    //
     DateTime* NovaData() {
         char dia[DIA_LEN];
         char mes[MES_LEN];
@@ -93,9 +93,9 @@
         return CriaDateTime(dia, mes, ano);
     }
 
-
-    // Verifica se a Data é válida
-
+    //
+    // Retorna 1 se a Data é válida
+    //
     int ValidaDia(int dia) {
         if (dia <= 0 || dia > 31)
             return 0;
@@ -103,9 +103,9 @@
         return 1;
     }
 
-
-    // Verifica se o mês é válido
-
+    //
+    // Retorna 1 se o mês é válido
+    //
     int ValidaMes(int dia, int mes) {
         if (mes <= 0 || mes > 12)
             return 0;
@@ -119,9 +119,9 @@
         return 1;
     }
 
-
-    // Verifica se o ano é válido
-
+    //
+    // Retorna 1 se o ano é válido
+    //
     int ValidaAno(int dia, int mes, int ano) {
         if (ano < 1900 || ano > 3000)
             return 0;
@@ -132,9 +132,9 @@
         return 1;
     }
 
-
-    // Valida se o ano é bissexto
-
+    //
+    // Retorna 1 se o ano é bissexto
+    //
     int Bissexto(int ano) {
         if (ano%400 == 0 && ano%100 == 0)
             return 1;
@@ -144,9 +144,9 @@
         return 0;
     }
 
-    
-    // Loop data
-
+    //
+    // Loop até o usuário inserir uma data válida
+    //
     DateTime* CriaDataValida() {
         DateTime* data;
 
@@ -162,17 +162,17 @@
         return data;
     }
 
-    
+    //
     // Retorna a quantidade de dias entre duas datas
-
+    //
     int DiferencaEmDias(DateTime* dataFim, DateTime* dataIni) {
         double segundos = difftime(mktime(dataFim), mktime(dataIni));
         return (int) (segundos/SECONDS_DAY);
     }
 
-
-    // Range de Datas dentro de um Range
-
+    //
+    // Retorna 1 se o Range de Datas está dentro de um Range passado como argumento
+    //
     int DataRangeInRange(DateTime* inputDataFim, DateTime* inputDataIni, DateTime* rangeDataFim, DateTime* rangeDataIni) {
         double difIni = difftime(mktime(inputDataIni), mktime(rangeDataIni));
         double difFim = difftime(mktime(inputDataFim), mktime(rangeDataFim));
@@ -182,4 +182,3 @@
 
         return 0;
     }
-

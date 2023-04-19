@@ -4,9 +4,9 @@
 
     // "CONSTRUTORES"
 
-
+    //
     // Construtor da struct Locacao com Argumentos
-
+    //
     Locacao* CriaLocacaoArgs(const string    cpf,
                              const string    placa,
                              const DateTime* dataLocacao,
@@ -32,9 +32,9 @@
         return aux;
     }
 
-
+    //
     // Construtor da struct ListaLocacoes
-
+    //
     ListaLocacoes* CriaListaLocacoes() {
         ListaLocacoes* aux = (ListaLocacoes *) malloc(sizeof(ListaLocacoes));
 
@@ -47,9 +47,9 @@
         return aux;
     }
 
-
+    //
     // Construtor da struct ListaLocacoes com Argumentos
-
+    //
     ListaLocacoes* CriaListaLocacoesArgs(const Locacao* locacao) {
         ListaLocacoes* aux = (ListaLocacoes *) malloc(sizeof(ListaLocacoes));
 
@@ -62,9 +62,9 @@
         return aux;
     }
 
-    
+    //
     // Construtor da struct Termo (do Dicionário)
-
+    //
     Termo* CriaTermoArgs(const Locacao* locacao, const int indice) {
         Termo* aux = (Termo *) malloc(sizeof(Termo));
 
@@ -78,9 +78,9 @@
         return aux;
     }
 
-
+    //
     // Construtor da struct DicionarioLocacoes
-
+    //
     DicionarioLocacoes* CriaDicionarioLocacoes() {
         DicionarioLocacoes* aux = (DicionarioLocacoes *) malloc(sizeof(DicionarioLocacoes));
 
@@ -96,9 +96,9 @@
 
     // Métodos Úteis
 
-
-    // Concatena informações de uma locacao para gerar uma chave
-
+    //
+    // Concatena informações de uma Locação para gerar uma chave
+    //
     void GeraChave(const Locacao* locacao, string result) {
         strcpy(result, locacao->CPF);
         strcat(result, locacao->Placa);
@@ -106,9 +106,9 @@
         strcat(result, FormataData(locacao->DataDevolucao));
     }
 
-
-    // Formata e Exibe uma Locacao
-
+    //
+    // Formata e Exibe uma Locação
+    //
     void ExibeLocacao(const Locacao* locacao) {
         printf("\nCPF              : "); PrintCPF(locacao->CPF);
         printf("\nPlaca            : "); PrintPlaca(locacao->Placa);
@@ -118,9 +118,9 @@
         printf("\n====================================================\n");
     }
 
-
-    // Exibe uma Lista de Locacoes
-
+    //
+    // Exibe uma Lista de Locações
+    //
     void ExibeListaLocacoes(const ListaLocacoes* lista) {
         if (!lista) return;
 
@@ -133,9 +133,9 @@
         }
     }
 
-
-    // Retorna a Locacao com a Chave passada como argumento
-
+    //
+    // Retorna a Locação com a Chave passada como argumento
+    //
     Locacao* LocacaoPorChave(const ListaLocacoes* lista, const string chave) {
         Locacao* aux = lista->locacao;
         while(aux) {
@@ -147,9 +147,9 @@
         return NULL;
     }
 
-
-    // Encontra uma Locação em um dicionário
-
+    //
+    // Encontra uma Locação em um Dicionário
+    //
     Locacao* LocacaoPorIndice(const DicionarioLocacoes* dicionario,
                               const ListaLocacoes* lista,
                               const int indice) {
@@ -168,9 +168,9 @@
         return NULL;
     }
 
-
+    //
     // Retorna uma ListaLocacoes com o CPF passado como argumento
-
+    //
     ListaLocacoes* ListaLocacaoPorCPF(const ListaLocacoes* lista, const string cpf) {
         ListaLocacoes* filtrada = CriaListaLocacoes();
         Locacao* aux = lista->locacao;
@@ -184,9 +184,9 @@
         return filtrada;
     }
 
-
+    //
     // Retorna uma ListaLocacoes com a Placa passada como argumento
-
+    //
     ListaLocacoes* ListaLocacaoPorPlaca(const ListaLocacoes* lista, const string placa) {
         ListaLocacoes* filtrada = CriaListaLocacoes();
         Locacao* aux = lista->locacao;
@@ -200,9 +200,9 @@
         return filtrada;
     }
 
-
-    // Retorna uma ListaLocacoes com a Data passada como argumento
-
+    //
+    // Retorna uma ListaLocacoes com as Datas passadas como argumentos
+    //
     ListaLocacoes* ListaLocacaoPorData(const ListaLocacoes* lista,
                                        const DateTime* dataFinal,
                                        const DateTime* dataInicial) {
@@ -219,18 +219,18 @@
         return filtrada;
     }
 
-
-    // Retorna uma cópia profunda de uma Locacao
-
+    //
+    // Retorna uma cópia profunda de uma Locação
+    //
     Locacao* ClonaLocacao(const Locacao* locacao) {
         Locacao* temp = CriaLocacaoArgs(locacao->CPF, locacao->Placa, locacao->DataLocacao, locacao->DataDevolucao, locacao->ValorTotal);
         temp->proximo = NULL;
         return temp;
     }
 
-
-    // Retorna uma ListaLocacoes com as Locacoes requisitadas dado um índice
-
+    //
+    // Retorna uma ListaLocacoes com as Locações requisitadas dado um índice
+    //
     ListaLocacoes* ListaLocacoesPorIndice(const ListaLocacoes* lista, const char opc) {
         if (opc == 'c' || opc == 'C') {
             char cpf[CPF_LEN];
@@ -290,9 +290,9 @@
         return NULL;
     }
 
-
+    //
     // Insere no Dicionário
-
+    //
     void InsereNoDicionario(DicionarioLocacoes* dicionario,
                             const Locacao* locacao,
                             const int indice) {
@@ -314,9 +314,9 @@
         aux->proximo = termo;
     }
 
-
+    //
     // Mapeador para criação do Dicionário de Locações
-
+    //
     DicionarioLocacoes* MapListaParaDicionario(const ListaLocacoes* lista) {
         DicionarioLocacoes* dicionario = CriaDicionarioLocacoes();
         Locacao* aux = lista->locacao;
@@ -334,9 +334,9 @@
 
     // CRUD
 
-
-    // Tela Locacao para Exibir uma lista de Locações filtrada
-
+    //
+    // Tela Locação para Exibir uma Lista de Locações filtrada
+    //
     void TelaLocacaoIndex(ListaLocacoes* lista, const int isUpdateDelete) {
         char opc;
 
@@ -370,9 +370,9 @@
         } while (opc != '0');
     }
 
-
-    // Retorna uma nova Locacao inserida pelo usuário
-
+    //
+    // Retorna uma nova Locação inserida pelo usuário
+    //
     Locacao* NovaLocacao(const ListaClientes* listaClientes,
                          const ListaVeiculos* listaVeiculos,
                          const ListaLocacoes* listaLocacoes) {
@@ -428,9 +428,9 @@
         return CriaLocacaoArgs(cpf, placa, dataLocacao, dataDevolucao, valor*DiferencaEmDias(dataDevolucao, dataLocacao));
     }
 
-
-    // Insere uma Locacao na última posição da lista
-
+    //
+    // Insere uma Locação na última posição da Lista
+    //
     void InsereLocacaoNaLista(ListaLocacoes* lista, const Locacao* locacao) {
         if (!locacao)
             return;
@@ -450,9 +450,9 @@
         lista->tamanho++;
     }
 
-
+    //
     // Administra a inserção na Lista
-
+    //
     void InsereLocacao(const ListaClientes* listaClientes,
                        const ListaVeiculos* listaVeiculos,
                        ListaLocacoes* listaLocacoes) {
@@ -463,9 +463,9 @@
         InsereLocacaoNaLista(listaLocacoes, NovaLocacao(listaClientes, listaVeiculos, listaLocacoes));
     }
 
-
+    //
     // Atualiza as informações de uma Locação
-
+    //
     void AtualizaLocacao(ListaLocacoes* lista) {
         const int loc;
 
@@ -510,9 +510,9 @@
         } while(opc != '0');
     }
 
-
+    //
     // Remove uma Locação da Lista
-
+    //
     void RemoveLocacao(ListaLocacoes* lista) {
         const int loc;
 
@@ -562,8 +562,9 @@
 
 //-------------------------------------------------------------------------------------------------------------//
 
-    // Submenu de Locacoes
-
+    //
+    // Submenu de Locações
+    //
     void MenuLocacoes(const ListaClientes* listaClientes,
                       const ListaVeiculos* listaVeiculos,
                       ListaLocacoes* listaLocacoes) {

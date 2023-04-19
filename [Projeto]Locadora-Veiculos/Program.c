@@ -1,4 +1,4 @@
-#include "Relatorios.c"
+#include "Entidades/Relatorios/Relatorios.c"
 
 void PreencheClientes(ListaClientes* lista) {
     InsereClienteNaLista(lista, CriaClienteArgs("45612378966", "Stulla Sigurdasson",

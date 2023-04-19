@@ -5,7 +5,7 @@
 
     // Bibliotecas
 
-    #include "tools.h"
+    #include "../../tools.h"
 
 //-------------------------------------------------------------------------------------------------------------//
 
@@ -39,17 +39,20 @@
     // Lista de Funções e Métodos
 
     // Construtores
+
         Veiculo*       CriaVeiculo();
         Veiculo*       CriaVeiculoArgs(const string, const string, const string, const int, const double);
         ListaVeiculos* CriaListaVeiculos();
         ListaVeiculos* CriaListaVeiculosArgs(const Veiculo*);
 
     // Métodos Úteis
+
         void     ExibeVeiculo    (const Veiculo*);
         Veiculo* VeiculoPorPlaca (const ListaVeiculos*, const string);
         Veiculo* ClonaVeiculo    (const Veiculo*);
 
     // CRUD
+
         void     InsereVeiculo        (ListaVeiculos*);
         void     AtualizaVeiculo      (ListaVeiculos*);
         void     RemoveVeiculo        (ListaVeiculos*);
@@ -59,6 +62,7 @@
         Veiculo* NovoVeiculo          (const ListaVeiculos*);
 
     // Submenu
+    
         void MenuVeiculos(ListaVeiculos*);
 
 #endif

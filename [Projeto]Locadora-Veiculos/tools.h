@@ -20,8 +20,9 @@
     
     // MACROS
 
+    //
     // MACRO para funções não implementadas
-    
+    //
     #define UNIMPLEMENTED \
         do { \
             fprintf(stderr, "\n%s:%d: %s is not implemented yet...\n\n", \
@@ -29,24 +30,25 @@
             abort(); \
         } while (0)
 
-
+    //
     // MACRO para exibir o nome da função
-
+    //
     #define CALLING printf("\n\n||===== Calling: %s =====||\n", __func__)
         
 //-------------------------------------------------------------------------------------------------------------//
 
     // FUNÇÕES E MÉTODOS
 
-    // limpa o buffer de entrada
-    
+    //
+    // Limpa o buffer de entrada
+    //
     void clearBuffer() {
         while(getchar() != '\n');
     }
 
-
-    // Troca o endereço de duas variáveis de inteiros
-
+    //
+    // Troca dois inteiros por endereço
+    //
     void swap(int *n1, int *n2) {
         int temp;
         temp = *n1;
@@ -54,9 +56,9 @@
         *n2 = temp;
     }
 
-
+    //
     // Retorna 1 se a hora é válida
-
+    //
     int validateTime(const int hour, const int min, const int sec) {
         if (hour < 0 && hour > 24)
             return 0;
@@ -70,31 +72,31 @@
         return 1;
     }
 
-
+    //
     // Retorna o maior de dois inteiros
-
+    //
     int maxInt(const int a, const int b) {
         return a >= b ? a : b;
     }
 
-
-    // Pause
-    
+    //
+    // Pausa e espera um input
+    //  
     void pause() {
         printf("\nPressione qualquer tecla para continuar... ");
         getchar();
     }
     
-
-    // Clear screen
-
+    //
+    // Limpa a tela do console
+    //
     void cleanScreen() {
         printf("\e[1;1H\e[2J");
     }
 
-
-    // Captura entrada de um Inteiro
-
+    //
+    // Captura entrada de um inteiro
+    //
     int IntInput() {
         int n;
 
@@ -104,9 +106,9 @@
         return n;
     }
 
-
+    //
     // Formata o CPF para exibição
-
+    //
     void PrintCPF(const string cpf) {
         size_t i = 0;
 
@@ -121,9 +123,9 @@
         }
     }
 
-
-    // Formata a Placa do Veiculo para exibição
-
+    //
+    // Formata a Placa do Veículo para exibição
+    //
     void PrintPlaca(const string placa) {
         size_t i = 0;
 
