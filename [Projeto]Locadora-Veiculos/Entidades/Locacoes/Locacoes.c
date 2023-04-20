@@ -361,15 +361,18 @@
             ExibeListaLocacoes(filtrada);
 
             if (isUpdateDelete == 1 && filtrada) {
-                AtualizaLocacao(lista);
+                AtualizaLocacao(lista, filtrada);
+                free(filtrada);
                 return;
             }
             else if (isUpdateDelete == 2 && filtrada) {
-                RemoveLocacao(lista);
+                RemoveLocacao(lista, filtrada);
+                free(filtrada);
                 return;
             }
 
             pause();
+            free(filtrada);
 
         } while (opc != '0');
     }
@@ -470,7 +473,7 @@
     //
     // Atualiza as informações de uma Locação
     //
-    void AtualizaLocacao(ListaLocacoes* lista) {
+    void AtualizaLocacao(ListaLocacoes* lista, ListaLocacoes* filtrada) {
         int loc;
 
         do { // hast
@@ -485,7 +488,7 @@
             
         } while (loc > lista->tamanho);
         
-        DicionarioLocacoes* dicionario = MapListaParaDicionario(lista);
+        DicionarioLocacoes* dicionario = MapListaParaDicionario(filtrada);
         Locacao* locacao = LocacaoPorIndice(dicionario, lista, loc);
         free(dicionario);
 
@@ -518,7 +521,7 @@
     //
     // Remove uma Locação da Lista
     //
-    void RemoveLocacao(ListaLocacoes* lista) {
+    void RemoveLocacao(ListaLocacoes* lista, ListaLocacoes* filtrada) {
         int loc;
 
         do { // hast
@@ -533,7 +536,7 @@
             
         } while (loc > lista->tamanho);
         
-        DicionarioLocacoes* dicionario = MapListaParaDicionario(lista);
+        DicionarioLocacoes* dicionario = MapListaParaDicionario(filtrada);
         Locacao* locacao = LocacaoPorIndice(dicionario, lista, loc);
         free(dicionario);
 

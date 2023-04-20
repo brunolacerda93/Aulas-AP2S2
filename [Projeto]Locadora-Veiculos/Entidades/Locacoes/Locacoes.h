@@ -63,7 +63,7 @@
 
         void                ExibeLocacao           (Locacao*);
         void                ExibeListaLocacoes     (ListaLocacoes*);
-        void                InsereNoDicionario     (DicionarioLocacoes*, const Locacao*, const int);
+        void                InsereNoDicionario     (DicionarioLocacoes*, const Locacao*, int);
         string              GeraChave              (const Locacao*);
         Locacao*            ClonaLocacao           (Locacao*);
         Locacao*            LocacaoPorChave        (ListaLocacoes*, string);
@@ -76,10 +76,10 @@
 
     // CRUD
 
-        void     AtualizaLocacao      (ListaLocacoes*);
-        void     RemoveLocacao        (ListaLocacoes*);
         void     TelaLocacaoIndex     (ListaLocacoes*, int);
         void     InsereLocacaoNaLista (ListaLocacoes*, Locacao*);
+        void     AtualizaLocacao      (ListaLocacoes*, ListaLocacoes*);
+        void     RemoveLocacao        (ListaLocacoes*, ListaLocacoes*);
         void     InsereLocacao        (ListaClientes*, ListaVeiculos*, ListaLocacoes*);
         Locacao* NovaLocacao          (ListaClientes*, ListaVeiculos*, ListaLocacoes*);
 
