@@ -62,13 +62,13 @@
     // Retorna 1 se a hora é válida
     //
     int validateTime(const int hour, const int min, const int sec) {
-        if (hour < 0 && hour > 24)
+        if (hour < 0 || hour > 24)
             return 0;
         
-        if (min < 0 && min > 59)
+        if (min < 0 || min > 59)
             return 0;
         
-        if (sec < 0 && sec > 59)
+        if (sec < 0 || sec > 59)
             return 0;
         
         return 1;
