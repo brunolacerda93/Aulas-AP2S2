@@ -85,7 +85,7 @@
     }
 
     //
-    // Retorna o Cliente com o CPF passado como argumento
+    // Retorna um ponteiro para o Cliente com o CPF passado como argumento
     //
     Cliente* ClientePorCPF(const ListaClientes* lista, const string cpf) {
         Cliente* aux = lista->cliente;
@@ -159,10 +159,10 @@
     // Retorna um novo Cliente inserido pelo usuário
     //
     Cliente* NovoCliente(const ListaClientes* lista) {
-        char cpf       [CPF_LEN];
-        char nome      [NOME_LEN];
-        char endereco  [ENDERECO_LEN];
-        char categoria [CATEGORIA_LEN];
+        string cpf       = String(CPF_LEN);
+        string nome      = String(NOME_LEN);
+        string endereco  = String(ENDERECO_LEN);
+        string categoria = String(CATEGORIA_LEN);
 
         cleanScreen();
         
@@ -234,6 +234,7 @@
 
         if (!aux) {
             printf("\nCliente not Encontrado... \n");
+            pause();
             return;
         }
 
@@ -259,7 +260,7 @@
             }
 
             const int size = SizeString(opc);
-            char str[size];
+            string str = String(size);
 
             printf("\nDigite o novo valor: ");
             fgets(str, size, stdin);

@@ -61,10 +61,10 @@
 
     // Métodos Úteis
 
-        void                GeraChave              (const Locacao*, string);
         void                ExibeLocacao           (const Locacao*);
         void                ExibeListaLocacoes     (const ListaLocacoes*);
         void                InsereNoDicionario     (DicionarioLocacoes*, const Locacao*, const int);
+        string              GeraChave              (const Locacao*);
         Locacao*            ClonaLocacao           (const Locacao*);
         Locacao*            LocacaoPorChave        (const ListaLocacoes*, const string);
         Locacao*            LocacaoPorIndice       (const DicionarioLocacoes*, const ListaLocacoes*, const int);

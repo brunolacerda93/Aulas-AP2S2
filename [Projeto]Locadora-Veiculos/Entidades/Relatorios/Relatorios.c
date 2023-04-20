@@ -22,6 +22,7 @@
         }
 
         ExibeListaLocacoes(filtrada);
+        free(filtrada);
     }
 
     //
@@ -42,6 +43,10 @@
         }
 
         ExibeListaLocacoes(filtrada);
+
+        free(dataInicial);
+        free(dataFinal);
+        free(filtrada);
     }
 
 //-------------------------------------------------------------------------------------------------------------//
@@ -65,7 +70,7 @@
 
             switch (opc) {
                 case '1': ExibeLocacoesPorPlaca(lista); break;
-                case '2': ExibeLocacoesPorData(lista);  break;
+                case '2':  ExibeLocacoesPorData(lista); break;
                 case '0': return;
                 default : printf("\n INVALIDO!!!\n");   break;
             }

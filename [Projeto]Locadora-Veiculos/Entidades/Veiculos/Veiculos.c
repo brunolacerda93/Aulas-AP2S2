@@ -149,9 +149,9 @@
     // Retorna um novo Veiculo inserido pelo usuário
     //
     Veiculo* NovoVeiculo(const ListaVeiculos* lista) {
-        char   placa     [PLACA_LEN];
-        char   montadora [MONTADORA_LEN];
-        char   modelo    [MODELO_LEN];
+        string placa     = String(PLACA_LEN);
+        string montadora = String(MONTADORA_LEN);
+        string modelo    = String(MODELO_LEN);
         int    ano;
         double diaria;
 
@@ -227,6 +227,7 @@
 
         if (!aux) {
             printf("\nVeiculo not Encontrado... \n");
+            pause();
             return;
         }
 
@@ -253,13 +254,8 @@
             printf("\nDigite o novo valor: ");
 
             switch(opc) {
-                case '1': aux->Ano = IntInput(); break;
-                case '2': {
-                    double n;
-                    scanf("%lf", &n);
-                    clearBuffer();
-                    aux->ValorDiaria = n;
-                } break;
+                case '1': aux->Ano = IntInput();                          break;
+                case '2': scanf("%lf", &aux->ValorDiaria); clearBuffer(); break;
             }
 
         } while (opc != '0');

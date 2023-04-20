@@ -5,10 +5,10 @@
 
     // Bibliotecas
 
+    #include <time.h>
     #include <stdio.h>
     #include <stdlib.h>
-    #include <stdbool.h>
-    #include <time.h>
+    #include <string.h>
 
 //-------------------------------------------------------------------------------------------------------------//
 
@@ -21,8 +21,10 @@
     
     // MACROS
 
+    //
     // MACRO para funções não implementadas
-    
+    //----------------------------------------------
+    //
     #define UNIMPLEMENTED \
         do { \
             fprintf(stderr, "\n%s:%d: %s is not implemented yet...\n\n", \
@@ -30,24 +32,26 @@
             abort(); \
         } while (0)
 
-
+    //
     // MACRO para exibir o nome da função
-
+    //------------------------------------------
+    //
     #define CALLING printf("\n\n||===== Calling: %s =====||\n", __func__)
         
 //-------------------------------------------------------------------------------------------------------------//
 
     // FUNÇÕES E MÉTODOS
 
-    // limpa o buffer de entrada
-    
-    void cleanBuffer() {
+    //
+    // Limpa o buffer de entrada
+    //
+    void clearBuffer() {
         while(getchar() != '\n');
     }
 
-
-    // Troca o endereço de duas variáveis de inteiros
-
+    //
+    // Troca dois inteiros por endereço
+    //
     void swap(int *n1, int *n2) {
         int temp;
         temp = *n1;
@@ -55,47 +59,59 @@
         *n2 = temp;
     }
 
-
-    // Retorna 0 se a hora é válida
-    // Retorna 1 se a hora é inválida
-    // Formato 24h
-
-    int validateTime(int hour, int min, int sec) {
-        if (hour >= 0 && hour < 24) {
-            if (min >= 0 && min < 60) {
-                if (sec >= 0 && sec < 60)
-                    return 0;
-            }
-        }
-        printf("\nDIGITE UMA HORA VALIDA!\n\n");
+    //
+    // Retorna 1 se a hora é válida
+    //
+    int validateTime(const int hour, const int min, const int sec) {
+        if (hour < 0 && hour > 24)
+            return 0;
+        
+        if (min < 0 && min > 59)
+            return 0;
+        
+        if (sec < 0 && sec > 59)
+            return 0;
+        
         return 1;
     }
 
-
+    //
     // Retorna o maior de dois inteiros
-
-    int maxInt(int a, int b) {
+    //
+    int maxInt(const int a, const int b) {
         return a >= b ? a : b;
     }
 
-
-    // Pause
-    
+    //
+    // Pausa e espera um input
+    //  
     void pause() {
-        printf("\nPressione qualquer tecla para continuar...");
+        printf("\nPressione qualquer tecla para continuar... ");
         getchar();
     }
     
-
-    // Clear screen
-
-    void clearScreen() {
+    //
+    // Limpa a tela do console
+    //
+    void cleanScreen() {
         printf("\e[1;1H\e[2J");
     }
 
-    
-    // Calcula tempo de execução de uma função (int *array, int size)
+    //
+    // Captura entrada de um inteiro
+    //
+    int IntInput() {
+        int n;
 
+        scanf("%d", &n);
+        clearBuffer();
+
+        return n;
+    }
+
+    //
+    // Calcula tempo de execução de uma função (int *array, int size, int num)
+    //
     void timeTaken( void func(int *array, const int size, const int num),
                     int *array,
                     const int size,
@@ -111,17 +127,44 @@
         printf("\n=============================\n");
     }
 
+    //
+    // Formata o CPF para exibição
+    //
+    void PrintCPF(const string cpf) {
+        size_t i = 0;
 
-    // Captura entrada de um Inteiro
+        while (cpf[i] != '\0') {
+            printf("%c", cpf[i]);
 
-    int userInput() {
-        int n;
+            switch(i++) {
+                case 2: printf("."); break;
+                case 5: printf("."); break;
+                case 8: printf("/"); break;
+            }
+        }
+    }
 
-        printf("\nEnter a number: ");
-        scanf("%d", &n);
-        cleanBuffer();
+    //
+    // Formata a Placa do Veículo para exibição
+    //
+    void PrintPlaca(const string placa) {
+        size_t i = 0;
 
-        return n;
+        while (placa[i] != '\0') {
+            printf("%c", placa[i]);
+
+            if (i == 2)
+                printf("-");
+            
+            i++;
+        }
+    }
+
+    //
+    // Retorna um ponteiro para uma string vazia do tamanho passado como argumento
+    //
+    string String(const size_t size) {
+        return (string) calloc(size, sizeof(char));
     }
 
 #endif

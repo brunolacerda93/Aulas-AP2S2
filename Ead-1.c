@@ -2,23 +2,13 @@
 
 #define tam 2000000
 
-int userInput() {
-    int n;
-
-    printf("\nEnter a number: ");
-    scanf("%d", &n);
-    cleanBuffer();
-
-    return n;
-}
-
 void sequentialSearch(int array[], const int size, const int num) {
     CALLING;
-    bool flag = false;
+    int flag = 0;
 
     for (size_t i = 0; i < size && !flag; i++) {
         if (array[i] == num) {
-            flag = true;
+            flag = 1;
         }
     }
     if (flag)

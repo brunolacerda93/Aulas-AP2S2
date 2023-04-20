@@ -1,32 +1,35 @@
 #include "tools.h"
 #include "sorting.h"
 
-// Corpo das funções
+#define SIZE 1000000
+
+
+// Métodos e funções
 
 
     // Bubble Sort
 
-    void bubbleSort(int array[], int n) {
-        int flag;
+    void bubbleSort(int array[], const int n) {
+        int swapped;
 
         for (int i = n-1; i>0; i--) {
-            flag = 1;
+            swapped = 0;
 
             for (int j = 0; j<i; j++) {
                 if (array[j] > array[j+1]) {
                     swap(&array[j], &array[j+1]);
-                    flag = 0;
+                    swapped = 1;
                 }
             }
             
-            if (flag) break;
+            if (!swapped) break;
         }
     }
 
 
     // Insertion Sort
 
-    void insertionSort(int array[], int n) {
+    void insertionSort(int array[], const int n) {
         int j, aux;
 
         for (int i=1; i<n; i++) {
@@ -43,7 +46,7 @@
 
     // Selection Sort
 
-    void selectionSort(int array[], int n) {
+    void selectionSort(int array[], const int n) {
         int min;
 
         for (int i=0; i < n-1; i++) {
@@ -61,37 +64,39 @@
 
     // Merge
 
-    void merge(int array[], int ini, int meio, int fim) {
-        int com1 = ini, com2 = meio+1, comAux = 0, tam = fim-ini+1;
-        int *vetAux;
+    void merge(int array[], const int ini, const int meio, const int fim) {
+        int com1 = ini;
+        int com2 = meio+1;
+        int tam = fim-ini+1;
+        int iAux = 0;
         
-        vetAux = (int*) malloc(tam * sizeof(int));
+        int *vetAux = createArray(tam);
 
         while (com1 <= meio && com2 <= fim) {
             if (array[com1] < array[com2]) {
-                vetAux[comAux] = array[com1];
+                vetAux[iAux] = array[com1];
                 com1++;
             } else {
-                vetAux[comAux] = array[com2];
+                vetAux[iAux] = array[com2];
                 com2++;
             }
-            comAux++;
+            iAux++;
         }
 
         while (com1 <= meio) {                              // caso ainda haja elementos na primeira metade
-            vetAux[comAux] = array[com1];
-            comAux++;
+            vetAux[iAux] = array[com1];
+            iAux++;
             com1++;
         }
 
         while (com2 <= fim) {                               // caso ainda haja elementos na segunda metade
-            vetAux[comAux] = array[com2];
-            comAux++;
+            vetAux[iAux] = array[com2];
+            iAux++;
             com2++;
         }
 
-        for (comAux = ini; comAux <= fim; comAux++) {       // move os elementos de volta para o array original
-            array[comAux] = vetAux[comAux-ini];
+        for (iAux = ini; iAux <= fim; iAux++) {       // move os elementos de volta para o array original
+            array[iAux] = vetAux[iAux-ini];
         }
         
         free(vetAux);
@@ -100,110 +105,111 @@
 
     // Merge Sort
 
-    void mergeSort(int array[], int ini, int fim) {
-        if (ini < fim) {
-            int meio = (fim+ini)/2;
+    void mergeSort(int array[], const int ini, const int fim) {
+        if (ini >= fim) return;
 
-            mergeSort(array, ini, meio);
-            mergeSort(array, meio+1, fim);
-            merge(array, ini, meio, fim);
-        }
+        int meio = (fim+ini)/2;
+
+        mergeSort(array, ini, meio);
+        mergeSort(array, meio+1, fim);
+        merge(array, ini, meio, fim);
     }
 
 
     // Quick Sort (Lomuto)
 
-    void lomutoQuickSort(int arr[], int ini, int fim) {
+    void lomutoQuickSort(int array[], const int ini, const int fim) {
         if (ini >= fim) return;
 
-        int pivot = arr[fim];
+        int pivot = array[fim];
         int swp;
 
         // set a pointer to divide array into two parts
-        // one part is smaller than pivot and another larger
+        // one part is smaller than the pivot and another larger
 
-        int pointer = ini;
+        int ptr = ini;
         for (int i = ini; i < fim; i++) {
-            if (arr[i] < pivot) {
-                if (pointer != i) {
-                    swp = arr[i];               // swap a[i] with a[pointer]
-                    arr[i] = arr[pointer];      // a[pointer] behind larger than pivot
-                    arr[pointer] = swp;
+            if (array[i] < pivot) {
+                if (ptr != i) {
+                    swp = array[i];                 // swap a[i] with array[ptr]
+                    array[i] = array[ptr];          // array[ptr] behind larger than pivot
+                    array[ptr] = swp;
                 }
-                pointer++;
+                ptr++;
             }
         }
 
         //swap back pivot to proper position
-        swp = arr[fim];
-        arr[fim] = arr[pointer];
-        arr[pointer] = swp;
+        swp = array[fim];
+        array[fim] = array[ptr];
+        array[ptr] = swp;
 
-        lomutoQuickSort(arr, ini, pointer - 1);
-        lomutoQuickSort(arr, pointer + 1, fim);
+        lomutoQuickSort(array, ini, ptr - 1);
+        lomutoQuickSort(array, ptr + 1, fim);
     }
 
 
     // Quick Sort (Hoare) -> Otimizado para evitar o pior caso
 
-    void hoareQuickSort(int arr[], int ini, int fim) {
-        int i = ini, j = fim, aux, m, x;
-
-        m = (ini + fim) / 2;
-        x = arr[m]; //pivot
+    void hoareQuickSort(int array[], const int ini, const int fim) {
+        int aux;
+        int i = ini, j = fim;
+        int meio = (ini + fim) / 2;
+        int pivot = array[meio];
 
         // Hoare’s Partition 
-        while (i <= j)
-        {
-            if (arr[i] < x) i++;        // até encontrar um valor maior ou igual o pivot
-            else if (arr[j] > x) j--;   // até encontrar um valor menor ou igual o pivot
+        while (i <= j) {
+            if (array[i] < pivot)
+                i++;                            // até encontrar um valor maior ou igual o pivot
+            else if (array[j] > pivot)
+                j--;                            // até encontrar um valor menor ou igual o pivot
             else {
                 // troque os valores
-                aux = arr[i];
-                arr[i++] = arr[j];  
-                arr[j--] = aux;
+                aux = array[i];
+                array[i++] = array[j];  
+                array[j--] = aux;
             }
         }
 
         if (ini < j)
-            hoareQuickSort(arr, ini, j);
+            hoareQuickSort(array, ini, j);
         if (fim > i)
-            hoareQuickSort(arr, i , fim);
+            hoareQuickSort(array, i, fim);
     }
 
 
-    // Cria Array
+    // Cria um Array de Inteiros
     
-    int *createArray(int size) {
+    int *createArray(const int size) {
         return (int*) malloc(size * sizeof(int));
     }
 
 
-    // Preenche Array
+    // Preenche um Array de Inteiros
 
-    void fillArray(int array[], int size) {
+    void fillArray(int array[], const int size) {
         time_t ts;
         srand((unsigned) time(&ts));
         for (int i=0; i<size; i++) {
-            array[i] = (rand() % RAND_MAX) * ((rand() % 100) + 1);
+            array[i] = (rand() % RAND_MAX) * ((rand() % 1000) + 1);
         }
     }
 
 
-    // Exibe Array
+    // Exibe um Array de Inteiros
 
-    void showArray(int array[], int size) {
+    void showArray(int array[], const int size) {
         for (int i=0; i<size; i++) {
-            printf("[%7d] ", array[i]);
+            printf("[%8d] ", array[i]);
             if ((i+1)%10 == 0)
                 printf("\n");
         }
     }
 
 
-    // Gera Novo Array
+    // Gera um Novo Array de Inteiros
 
-    int *resetArray(int array[], int size) {
+    int *resetArray(int array[], const int size) {
         free(array);
         array = createArray(size);
         fillArray(array, size);
@@ -215,17 +221,15 @@
 
     static void menu(const int size) {
         char opc;
-        clock_t t;  // variável para armazenar o tempo de execução
+        clock_t t;  // para armazenar o tempo de execução
 
         int *array = createArray(size);
         fillArray(array, size);
 
         do { // hast
+            cleanScreen();
 
-            //system("cls");
-            clearScreen();
-
-            printf("\narray[0] = %7d\n", array[0]);
+            printf("\n[0] = %08d\n", array[0]);
             printf("\n 1 - Bubble Sort");
             printf("\n 2 - Insertion Sort");
             printf("\n 3 - Selection Sort");
@@ -236,7 +240,7 @@
             printf("\n 8 - Reset Array");
             printf("\n 0 - Exit");
             printf("\n\n Choose: ");
-            scanf("%c", &opc); cleanBuffer();
+            scanf("%c", &opc); clearBuffer();
 
             t = clock();    // inicia a contagem do tempo
 
@@ -256,8 +260,17 @@
             t = clock() - t;    // finaliza a contagem do tempo
             double time_taken = ((double)t)/CLOCKS_PER_SEC; // em segundos
             
-            printf("\nTime taken: %.2lf seconds\n", time_taken);
+            printf("\nTime taken: %.3lf seconds\n", time_taken);
             pause();
 
         } while(opc != '0');
+    }
+
+//-------------------------------------------------------------------------------------------------------------//
+
+    // Main
+
+    int main(int argc, char const *argv[]) {
+        menu(SIZE);
+        return 0;
     }

@@ -23,7 +23,7 @@
         aux->DataLocacao = dataLocacao;
         aux->DataDevolucao = dataDevolucao;
         aux->ValorTotal = valor;
-        GeraChave(aux, aux->Chave);
+        strcpy(aux->Chave, GeraChave(aux));
 
         aux->proximo = NULL;
 
@@ -97,13 +97,17 @@
     // Métodos Úteis
 
     //
-    // Concatena informações de uma Locação para gerar uma chave
+    // Retorna uma chave gerada a partir do conteúdo de uma Locação
     //
-    void GeraChave(const Locacao* locacao, string result) {
+    string GeraChave(const Locacao* locacao) {
+        string result = String(CHAVE_LEN);
+
         strcpy(result, locacao->CPF);
         strcat(result, locacao->Placa);
         strcat(result, FormataData(locacao->DataLocacao));
         strcat(result, FormataData(locacao->DataDevolucao));
+
+        return result;
     }
 
     //
@@ -377,8 +381,8 @@
                          const ListaVeiculos* listaVeiculos,
                          const ListaLocacoes* listaLocacoes) {
 
-        char       cpf[CPF_LEN];
-        char       placa[PLACA_LEN];
+        string     cpf   = String(CPF_LEN);
+        string     placa = String(PLACA_LEN);
         DateTime*  dataLocacao;
         DateTime*  dataDevolucao;
         double     valor;
@@ -483,6 +487,7 @@
         
         const DicionarioLocacoes* dicionario = MapListaParaDicionario(lista);
         Locacao* locacao = LocacaoPorIndice(dicionario, lista, loc);
+        free(dicionario);
 
         char opc;
         do { // hast
@@ -530,6 +535,7 @@
         
         const DicionarioLocacoes* dicionario = MapListaParaDicionario(lista);
         Locacao* locacao = LocacaoPorIndice(dicionario, lista, loc);
+        free(dicionario);
 
         ExibeLocacao(locacao);
         printf("\nTem certeza? [s/S]: ");

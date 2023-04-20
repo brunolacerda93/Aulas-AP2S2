@@ -22,6 +22,7 @@
 
     //
     // MACRO para funções não implementadas
+    //----------------------------------------------
     //
     #define UNIMPLEMENTED \
         do { \
@@ -32,6 +33,7 @@
 
     //
     // MACRO para exibir o nome da função
+    //------------------------------------------
     //
     #define CALLING printf("\n\n||===== Calling: %s =====||\n", __func__)
         
@@ -137,6 +139,13 @@
             
             i++;
         }
+    }
+
+    //
+    // Retorna um ponteiro para uma string vazia do tamanho passado como argumento
+    //
+    string String(const size_t size) {
+        return (string) calloc(size, sizeof(char));
     }
 
 #endif
