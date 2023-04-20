@@ -7,14 +7,14 @@
     //
     // Exibe uma lista de Locações do Veículo com a placa inserida pelo usuário
     //
-    void ExibeLocacoesPorPlaca(const ListaLocacoes* lista) {
+    void ExibeLocacoesPorPlaca(ListaLocacoes* lista) {
         char placa[PLACA_LEN];
 
         printf("\nDigite a Placa: ");
         fgets(placa, PLACA_LEN, stdin);
         placa[strcspn(placa, "\n")] = 0;
 
-        const ListaLocacoes* filtrada = ListaLocacaoPorPlaca(lista, placa);
+        ListaLocacoes* filtrada = ListaLocacaoPorPlaca(lista, placa);
 
         if (!filtrada->locacao) {
             printf("\nhttp ERROR: 404 - Placa NOT Encontrada!!!\n");
@@ -28,14 +28,14 @@
     //
     // Exibe uma lista de Locações entre as datas inseridas pelo usuário
     //
-    void ExibeLocacoesPorData(const ListaLocacoes* lista) {
+    void ExibeLocacoesPorData(ListaLocacoes* lista) {
         printf("\nData Inicial:");
-        const DateTime* dataInicial = CriaDataValida();
+        DateTime* dataInicial = CriaDataValida();
 
         printf("\nData Final:");
-        const DateTime* dataFinal = CriaDataValida();
+        DateTime* dataFinal = CriaDataValida();
 
-        const ListaLocacoes* filtrada = ListaLocacaoPorData(lista, dataFinal, dataInicial);
+        ListaLocacoes* filtrada = ListaLocacaoPorData(lista, dataFinal, dataInicial);
 
         if(!filtrada->locacao) {
             printf("\nhttp ERROR: 404 - Locacao NOT Encontrada!!!\n");
@@ -54,8 +54,8 @@
     //
     // Submenu de Locações
     //
-    void MenuRelatorios(const ListaLocacoes* lista) {
-        char opc;
+    void MenuRelatorios(ListaLocacoes* lista) {
+        int opc;
 
         do { // hast
             cleanScreen();

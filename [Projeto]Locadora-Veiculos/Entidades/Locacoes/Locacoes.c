@@ -7,11 +7,11 @@
     //
     // Construtor da struct Locacao com Argumentos
     //
-    Locacao* CriaLocacaoArgs(const string    cpf,
-                             const string    placa,
-                             const DateTime* dataLocacao,
-                             const DateTime* dataDevolucao,
-                             const double    valor) {
+    Locacao* CriaLocacaoArgs(string    cpf,
+                             string    placa,
+                             DateTime* dataLocacao,
+                             DateTime* dataDevolucao,
+                             const double valor) {
 
         Locacao* aux = (Locacao *) malloc(sizeof(Locacao));
 
@@ -20,9 +20,9 @@
         
         strcpy(aux->CPF, cpf);
         strcpy(aux->Placa, placa);
-        aux->DataLocacao = dataLocacao;
-        aux->DataDevolucao = dataDevolucao;
-        aux->ValorTotal = valor;
+        aux->DataLocacao    = dataLocacao;
+        aux->DataDevolucao  = dataDevolucao;
+        aux->ValorTotal     = valor;
         strcpy(aux->Chave, GeraChave(aux));
 
         aux->proximo = NULL;
@@ -50,7 +50,7 @@
     //
     // Construtor da struct ListaLocacoes com Argumentos
     //
-    ListaLocacoes* CriaListaLocacoesArgs(const Locacao* locacao) {
+    ListaLocacoes* CriaListaLocacoesArgs(Locacao* locacao) {
         ListaLocacoes* aux = (ListaLocacoes *) malloc(sizeof(ListaLocacoes));
 
         if (!aux)
@@ -113,7 +113,7 @@
     //
     // Formata e Exibe uma Locação
     //
-    void ExibeLocacao(const Locacao* locacao) {
+    void ExibeLocacao(Locacao* locacao) {
         printf("\nCPF              : "); PrintCPF(locacao->CPF);
         printf("\nPlaca            : "); PrintPlaca(locacao->Placa);
         printf("\nData Locacao     : "); ExibeData(locacao->DataLocacao);
@@ -125,7 +125,7 @@
     //
     // Exibe uma Lista de Locações
     //
-    void ExibeListaLocacoes(const ListaLocacoes* lista) {
+    void ExibeListaLocacoes(ListaLocacoes* lista) {
         if (!lista) return;
 
         Locacao* aux = lista->locacao;
@@ -140,7 +140,7 @@
     //
     // Retorna a Locação com a Chave passada como argumento
     //
-    Locacao* LocacaoPorChave(const ListaLocacoes* lista, const string chave) {
+    Locacao* LocacaoPorChave(ListaLocacoes* lista, string chave) {
         Locacao* aux = lista->locacao;
         while(aux) {
             if (!strcmp(aux->Chave, chave)) {
@@ -154,8 +154,8 @@
     //
     // Encontra uma Locação em um Dicionário
     //
-    Locacao* LocacaoPorIndice(const DicionarioLocacoes* dicionario,
-                              const ListaLocacoes* lista,
+    Locacao* LocacaoPorIndice(DicionarioLocacoes* dicionario,
+                              ListaLocacoes* lista,
                               const int indice) {
         if (indice <= 0)
             return NULL;
@@ -175,7 +175,7 @@
     //
     // Retorna uma ListaLocacoes com o CPF passado como argumento
     //
-    ListaLocacoes* ListaLocacaoPorCPF(const ListaLocacoes* lista, const string cpf) {
+    ListaLocacoes* ListaLocacaoPorCPF(ListaLocacoes* lista, string cpf) {
         ListaLocacoes* filtrada = CriaListaLocacoes();
         Locacao* aux = lista->locacao;
 
@@ -191,7 +191,7 @@
     //
     // Retorna uma ListaLocacoes com a Placa passada como argumento
     //
-    ListaLocacoes* ListaLocacaoPorPlaca(const ListaLocacoes* lista, const string placa) {
+    ListaLocacoes* ListaLocacaoPorPlaca(ListaLocacoes* lista, string placa) {
         ListaLocacoes* filtrada = CriaListaLocacoes();
         Locacao* aux = lista->locacao;
 
@@ -207,9 +207,9 @@
     //
     // Retorna uma ListaLocacoes com as Datas passadas como argumentos
     //
-    ListaLocacoes* ListaLocacaoPorData(const ListaLocacoes* lista,
-                                       const DateTime* dataFinal,
-                                       const DateTime* dataInicial) {
+    ListaLocacoes* ListaLocacaoPorData(ListaLocacoes* lista,
+                                       DateTime* dataFinal,
+                                       DateTime* dataInicial) {
 
         ListaLocacoes* filtrada = CriaListaLocacoes();
         Locacao* aux = lista->locacao;
@@ -226,7 +226,7 @@
     //
     // Retorna uma cópia profunda de uma Locação
     //
-    Locacao* ClonaLocacao(const Locacao* locacao) {
+    Locacao* ClonaLocacao(Locacao* locacao) {
         Locacao* temp = CriaLocacaoArgs(locacao->CPF, locacao->Placa, locacao->DataLocacao, locacao->DataDevolucao, locacao->ValorTotal);
         temp->proximo = NULL;
         return temp;
@@ -235,7 +235,7 @@
     //
     // Retorna uma ListaLocacoes com as Locações requisitadas dado um índice
     //
-    ListaLocacoes* ListaLocacoesPorIndice(const ListaLocacoes* lista, const char opc) {
+    ListaLocacoes* ListaLocacoesPorIndice(ListaLocacoes* lista, const int opc) {
         if (opc == 'c' || opc == 'C') {
             char cpf[CPF_LEN];
 
@@ -243,7 +243,7 @@
             fgets(cpf, CPF_LEN, stdin);
             cpf[strcspn(cpf, "\n")] = 0;
 
-            const ListaLocacoes* filtrada = ListaLocacaoPorCPF(lista, cpf);
+            ListaLocacoes* filtrada = ListaLocacaoPorCPF(lista, cpf);
 
             if (!filtrada->locacao) {
                 printf("\nhttp ERROR: 404 - CPF NOT Encontrado!!!\n");
@@ -260,7 +260,7 @@
             fgets(placa, PLACA_LEN, stdin);
             placa[strcspn(placa, "\n")] = 0;
 
-            const ListaLocacoes* filtrada = ListaLocacaoPorPlaca(lista, placa);
+            ListaLocacoes* filtrada = ListaLocacaoPorPlaca(lista, placa);
 
             if (!filtrada->locacao) {
                 printf("\nhttp ERROR: 404 - Placa NOT Encontrada!!!\n");
@@ -277,7 +277,7 @@
             printf("\nData Final:");
             DateTime* dataFinal = CriaDataValida();
 
-            const ListaLocacoes* filtrada = ListaLocacaoPorData(lista, dataFinal, dataInicial);
+            ListaLocacoes* filtrada = ListaLocacaoPorData(lista, dataFinal, dataInicial);
 
             if(!filtrada->locacao) {
                 printf("\nhttp ERROR: 404 - Locacao NOT Encontrada!!!\n");
@@ -342,7 +342,7 @@
     // Tela Locação para Exibir uma Lista de Locações filtrada
     //
     void TelaLocacaoIndex(ListaLocacoes* lista, const int isUpdateDelete) {
-        char opc;
+        int opc;
 
         do { // hast
             cleanScreen();
@@ -354,10 +354,10 @@
             printf("\n 0 - Retorna");
             printf("\n--> ");
 
-            char opc = getchar(); clearBuffer();
+            opc = getchar(); clearBuffer();
             if (opc == '0') return;
 
-            const ListaLocacoes* filtrada = ListaLocacoesPorIndice(lista, opc);
+            ListaLocacoes* filtrada = ListaLocacoesPorIndice(lista, opc);
             ExibeListaLocacoes(filtrada);
 
             if (isUpdateDelete == 1 && filtrada) {
@@ -377,9 +377,9 @@
     //
     // Retorna uma nova Locação inserida pelo usuário
     //
-    Locacao* NovaLocacao(const ListaClientes* listaClientes,
-                         const ListaVeiculos* listaVeiculos,
-                         const ListaLocacoes* listaLocacoes) {
+    Locacao* NovaLocacao(ListaClientes* listaClientes,
+                         ListaVeiculos* listaVeiculos,
+                         ListaLocacoes* listaLocacoes) {
 
         string     cpf   = String(CPF_LEN);
         string     placa = String(PLACA_LEN);
@@ -435,7 +435,7 @@
     //
     // Insere uma Locação na última posição da Lista
     //
-    void InsereLocacaoNaLista(ListaLocacoes* lista, const Locacao* locacao) {
+    void InsereLocacaoNaLista(ListaLocacoes* lista, Locacao* locacao) {
         if (!locacao)
             return;
             
@@ -457,8 +457,8 @@
     //
     // Administra a inserção na Lista
     //
-    void InsereLocacao(const ListaClientes* listaClientes,
-                       const ListaVeiculos* listaVeiculos,
+    void InsereLocacao(ListaClientes* listaClientes,
+                       ListaVeiculos* listaVeiculos,
                        ListaLocacoes* listaLocacoes) {
 
         if (!listaLocacoes || !listaClientes || !listaVeiculos)
@@ -471,7 +471,7 @@
     // Atualiza as informações de uma Locação
     //
     void AtualizaLocacao(ListaLocacoes* lista) {
-        const int loc;
+        int loc;
 
         do { // hast
             printf("\nDigite o indice da locacao que deseja alterar: ");
@@ -485,11 +485,11 @@
             
         } while (loc > lista->tamanho);
         
-        const DicionarioLocacoes* dicionario = MapListaParaDicionario(lista);
+        DicionarioLocacoes* dicionario = MapListaParaDicionario(lista);
         Locacao* locacao = LocacaoPorIndice(dicionario, lista, loc);
         free(dicionario);
 
-        char opc;
+        int opc;
         do { // hast
             cleanScreen();
             ExibeLocacao(locacao);
@@ -509,7 +509,7 @@
             }
 
             printf("\nDigite o novo valor: ");
-            const double valor; scanf("%lf", &valor); clearBuffer();
+            double valor; scanf("%lf", &valor); clearBuffer();
             locacao->ValorTotal = valor*DiferencaEmDias(locacao->DataDevolucao, locacao->DataLocacao);
 
         } while(opc != '0');
@@ -519,7 +519,7 @@
     // Remove uma Locação da Lista
     //
     void RemoveLocacao(ListaLocacoes* lista) {
-        const int loc;
+        int loc;
 
         do { // hast
             printf("\nDigite o indice da locacao que deseja remover: ");
@@ -533,13 +533,13 @@
             
         } while (loc > lista->tamanho);
         
-        const DicionarioLocacoes* dicionario = MapListaParaDicionario(lista);
+        DicionarioLocacoes* dicionario = MapListaParaDicionario(lista);
         Locacao* locacao = LocacaoPorIndice(dicionario, lista, loc);
         free(dicionario);
 
         ExibeLocacao(locacao);
         printf("\nTem certeza? [s/S]: ");
-        char opc = getchar(); clearBuffer();
+        int opc = getchar(); clearBuffer();
 
         if (opc != 's' && opc != 'S')
             return;
@@ -571,10 +571,10 @@
     //
     // Submenu de Locações
     //
-    void MenuLocacoes(const ListaClientes* listaClientes,
-                      const ListaVeiculos* listaVeiculos,
+    void MenuLocacoes(ListaClientes* listaClientes,
+                      ListaVeiculos* listaVeiculos,
                       ListaLocacoes* listaLocacoes) {
-        char opc;
+        int opc;
 
         do { // hast
             cleanScreen();

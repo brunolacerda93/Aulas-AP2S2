@@ -20,10 +20,10 @@
     //
     // Construtor da struct Cliente com Argumentos
     //
-    Cliente* CriaClienteArgs(const string cpf,
-                             const string nome,
-                             const string endereco,
-                             const string categoria) {
+    Cliente* CriaClienteArgs(string cpf,
+                             string nome,
+                             string endereco,
+                             string categoria) {
 
         Cliente* aux = (Cliente *) malloc(sizeof(Cliente));
 
@@ -57,7 +57,7 @@
     //
     // Construtor da struct ListaClientes com Argumentos
     //
-    ListaClientes* CriaListaClientesArgs(const Cliente* cliente) {
+    ListaClientes* CriaListaClientesArgs(Cliente* cliente) {
         ListaClientes* aux = (ListaClientes *) malloc(sizeof(ListaClientes));
 
         if (!aux)
@@ -76,9 +76,9 @@
     //
     // Formata e exibe um Cliente
     //
-    void ExibeCliente(const Cliente* client) {
+    void ExibeCliente(Cliente* client) {
         printf("\nNome      : %s", client->Nome);
-        printf("\nCPF       : "); PrintCPF(client->CPF);
+        printf("\nCPF       : ");  PrintCPF(client->CPF);
         printf("\nEndereco  : %s", client->Endereco);
         printf("\nCategoria : %s", client->Categoria);
         printf("\n====================================================\n");
@@ -87,7 +87,7 @@
     //
     // Retorna um ponteiro para o Cliente com o CPF passado como argumento
     //
-    Cliente* ClientePorCPF(const ListaClientes* lista, const string cpf) {
+    Cliente* ClientePorCPF(ListaClientes* lista, string cpf) {
         Cliente* aux = lista->cliente;
         while (aux) {
             if (!strcmp(aux->CPF, cpf))
@@ -100,7 +100,7 @@
     //
     // Retorna uma cópia profunda de um Cliente
     //
-    Cliente* ClonaCliente(const Cliente* cliente) {
+    Cliente* ClonaCliente(Cliente* cliente) {
         Cliente* temp = CriaClienteArgs(cliente->CPF, cliente->Nome, cliente->Endereco, cliente->Categoria);
         temp->proximo = cliente->proximo;
         return temp;
@@ -109,12 +109,12 @@
     //
     // Retorna o tamanho da string dado um campo (nome, endereço ou categoria)
     //
-    int SizeString(const char opc) {
-        if (opc == '1')
+    int SizeString(const int opc) {
+        if (opc == 1)
             return NOME_LEN;
-        if (opc == '2')
+        if (opc == 2)
             return ENDERECO_LEN;
-        if (opc == '3')
+        if (opc == 3)
             return CATEGORIA_LEN;
         return 0;
     }
@@ -126,14 +126,14 @@
     //
     // Procura um Cliente com o CPF passado como argumento e chama ExibeCliente()
     //
-    void ExibeClientePorCPF(const ListaClientes* lista) {
+    void ExibeClientePorCPF(ListaClientes* lista) {
         printf("\nDigite o CPF (apenas numeros): ");
 
         char cpf[CPF_LEN];
         fgets(cpf, CPF_LEN, stdin);
         cpf[strcspn(cpf, "\n")] = 0;
 
-        const Cliente* aux = ClientePorCPF(lista, cpf);
+        Cliente* aux = ClientePorCPF(lista, cpf);
 
         if (!aux) {
             printf("\nCliente not Encontrado... \n");
@@ -146,7 +146,7 @@
     //
     // Exibe Toda uma Lista de Clientes
     //
-    void ExibeTodosClientes(const ListaClientes* lista) {
+    void ExibeTodosClientes(ListaClientes* lista) {
         Cliente* cliente = lista->cliente;
         while (cliente) {
             ExibeCliente(cliente);
@@ -158,7 +158,7 @@
     //
     // Retorna um novo Cliente inserido pelo usuário
     //
-    Cliente* NovoCliente(const ListaClientes* lista) {
+    Cliente* NovoCliente(ListaClientes* lista) {
         string cpf       = String(CPF_LEN);
         string nome      = String(NOME_LEN);
         string endereco  = String(ENDERECO_LEN);
@@ -191,7 +191,7 @@
     //
     // Insere um Cliente na última posição da lista
     //
-    void InsereClienteNaLista(ListaClientes* lista, const Cliente* cliente) {
+    void InsereClienteNaLista(ListaClientes* lista, Cliente* cliente) {
         if (!cliente)
             return;
 
@@ -238,7 +238,7 @@
             return;
         }
 
-        char opc;
+        int opc;
         do { // hast
             cleanScreen();
             ExibeCliente(aux);
@@ -259,7 +259,7 @@
                 continue;
             }
 
-            const int size = SizeString(opc);
+            const int size = SizeString(opc-48);
             string str = String(size);
 
             printf("\nDigite o novo valor: ");
@@ -299,7 +299,7 @@
 
         ExibeCliente(atual);
         printf("\nTem certeza? [s/S]: ");
-        char opc = getchar(); clearBuffer();
+        int opc = getchar(); clearBuffer();
 
         if (opc != 's' && opc != 'S')
             return;
@@ -324,7 +324,7 @@
     // Submenu de Clientes
     //
     void MenuClientes(ListaClientes* lista) {
-        char opc;
+        int opc;
 
         do { // hast
             cleanScreen();

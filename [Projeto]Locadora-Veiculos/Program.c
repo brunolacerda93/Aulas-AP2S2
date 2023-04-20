@@ -28,7 +28,7 @@ void PreencheLocacoes(ListaLocacoes* lista) {
 }
 
 void Menu(ListaClientes* listaClientes, ListaVeiculos* listaVeiculos, ListaLocacoes* listaLocacoes) {
-    char opc;
+    int opc;
     
     do {
         cleanScreen();

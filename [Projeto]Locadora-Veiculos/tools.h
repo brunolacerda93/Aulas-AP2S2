@@ -36,7 +36,7 @@
     //------------------------------------------
     //
     #define CALLING printf("\n\n||===== Calling: %s =====||\n", __func__)
-        
+
 //-------------------------------------------------------------------------------------------------------------//
 
     // FUNÇÕES E MÉTODOS
@@ -111,14 +111,14 @@
     //
     // Formata o CPF para exibição
     //
-    void PrintCPF(const string cpf) {
+    void PrintCPF(string cpf) {
         size_t i = 0;
 
         while (cpf[i] != '\0') {
             printf("%c", cpf[i]);
 
             switch(i++) {
-                case 2: printf("."); break;
+                case 2:
                 case 5: printf("."); break;
                 case 8: printf("/"); break;
             }
@@ -128,7 +128,7 @@
     //
     // Formata a Placa do Veículo para exibição
     //
-    void PrintPlaca(const string placa) {
+    void PrintPlaca(string placa) {
         size_t i = 0;
 
         while (placa[i] != '\0') {

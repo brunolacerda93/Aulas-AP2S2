@@ -23,12 +23,12 @@
     // Estrutura dos tipos
 
     typedef struct Locacao {
-        char   CPF  [CPF_LEN];
-        char   Placa[PLACA_LEN];
+        char       CPF[CPF_LEN];
+        char       Placa[PLACA_LEN];
         DateTime*  DataLocacao;
         DateTime*  DataDevolucao;
-        double ValorTotal;
-        char   Chave[CHAVE_LEN];
+        double     ValorTotal;
+        char       Chave[CHAVE_LEN];
         struct Locacao* proximo;
     } Locacao;
 
@@ -53,38 +53,38 @@
 
     // Construtores
 
-        Termo*              CriaTermoArgs    (const Locacao*, const int);
-        Locacao*            CriaLocacaoArgs  (const string, const string, const DateTime*, const DateTime*, const double);
+        Termo*              CriaTermoArgs    (const Locacao*, int);
+        Locacao*            CriaLocacaoArgs  (string, string, DateTime*, DateTime*, double);
         ListaLocacoes*      CriaListaLocacoes();
-        ListaLocacoes*      CriaListaLocacoesArgs(const Locacao*);
+        ListaLocacoes*      CriaListaLocacoesArgs(Locacao*);
         DicionarioLocacoes* CriaDicionarioLocacoes();
 
     // Métodos Úteis
 
-        void                ExibeLocacao           (const Locacao*);
-        void                ExibeListaLocacoes     (const ListaLocacoes*);
+        void                ExibeLocacao           (Locacao*);
+        void                ExibeListaLocacoes     (ListaLocacoes*);
         void                InsereNoDicionario     (DicionarioLocacoes*, const Locacao*, const int);
         string              GeraChave              (const Locacao*);
-        Locacao*            ClonaLocacao           (const Locacao*);
-        Locacao*            LocacaoPorChave        (const ListaLocacoes*, const string);
-        Locacao*            LocacaoPorIndice       (const DicionarioLocacoes*, const ListaLocacoes*, const int);
-        ListaLocacoes*      ListaLocacaoPorCPF     (const ListaLocacoes*, const string);
-        ListaLocacoes*      ListaLocacaoPorPlaca   (const ListaLocacoes*, const string);
-        ListaLocacoes*      ListaLocacaoPorData    (const ListaLocacoes*, const DateTime*, const DateTime*);
-        ListaLocacoes*      ListaLocacoesPorIndice (const ListaLocacoes*, const char);
+        Locacao*            ClonaLocacao           (Locacao*);
+        Locacao*            LocacaoPorChave        (ListaLocacoes*, string);
+        Locacao*            LocacaoPorIndice       (DicionarioLocacoes*, ListaLocacoes*, int);
+        ListaLocacoes*      ListaLocacaoPorCPF     (ListaLocacoes*, string);
+        ListaLocacoes*      ListaLocacaoPorPlaca   (ListaLocacoes*, string);
+        ListaLocacoes*      ListaLocacaoPorData    (ListaLocacoes*, DateTime*, DateTime*);
+        ListaLocacoes*      ListaLocacoesPorIndice (ListaLocacoes*, int);
         DicionarioLocacoes* MapListaParaDicionario (const ListaLocacoes*);
 
     // CRUD
 
         void     AtualizaLocacao      (ListaLocacoes*);
         void     RemoveLocacao        (ListaLocacoes*);
-        void     TelaLocacaoIndex     (ListaLocacoes*, const int);
-        void     InsereLocacaoNaLista (ListaLocacoes*, const Locacao*);
-        void     InsereLocacao        (const ListaClientes*, const ListaVeiculos*, ListaLocacoes*);
-        Locacao* NovaLocacao          (const ListaClientes*, const ListaVeiculos*, const ListaLocacoes*);
+        void     TelaLocacaoIndex     (ListaLocacoes*, int);
+        void     InsereLocacaoNaLista (ListaLocacoes*, Locacao*);
+        void     InsereLocacao        (ListaClientes*, ListaVeiculos*, ListaLocacoes*);
+        Locacao* NovaLocacao          (ListaClientes*, ListaVeiculos*, ListaLocacoes*);
 
     // SubMenu
     
-        void MenuLocacoes(const ListaClientes*, const ListaVeiculos*, ListaLocacoes*);
+        void MenuLocacoes(ListaClientes*, ListaVeiculos*, ListaLocacoes*);
 
 #endif

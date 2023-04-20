@@ -41,26 +41,26 @@
     // Construtores
 
         Cliente*       CriaCliente();
-        Cliente*       CriaClienteArgs(const string, const string, const string, const string);
+        Cliente*       CriaClienteArgs(string, string, string, string);
         ListaClientes* CriaListaClientes();
-        ListaClientes* CriaListaClientesArgs(const Cliente*);
+        ListaClientes* CriaListaClientesArgs(Cliente*);
 
     // Métodos Úteis
 
-        void     ExibeCliente (const Cliente*);
-        Cliente* ClientePorCPF(const ListaClientes*, const string);
-        Cliente* Clone        (const Cliente*);
-        int      SizeString   (const char);
+        void     ExibeCliente (Cliente*);
+        Cliente* ClientePorCPF(ListaClientes*, string);
+        Cliente* ClonaCliente (Cliente*);
+        int      SizeString   (int);
 
     // CRUD
 
         void     InsereCliente       (ListaClientes*);
         void     AtualizaCliente     (ListaClientes*);
         void     RemoveCliente       (ListaClientes*);
-        void     ExibeClientePorCPF  (const ListaClientes*);
-        void     ExibeTodosClientes  (const ListaClientes*);
-        void     InsereClienteNaLista(ListaClientes*, const Cliente*);
-        Cliente* NovoCliente         (const ListaClientes*);
+        void     ExibeClientePorCPF  (ListaClientes*);
+        void     ExibeTodosClientes  (ListaClientes*);
+        void     InsereClienteNaLista(ListaClientes*, Cliente*);
+        Cliente* NovoCliente         (ListaClientes*);
 
     // SubMenu
     

@@ -7,23 +7,23 @@
     //
     // Construtor da struct Data
     //
-    DateTime* CriaDateTime(const string dia,
-                           const string mes,
-                           const string ano) {
+    DateTime* CriaDateTime(string dia,
+                           string mes,
+                           string ano) {
                             
         DateTime* aux = (DateTime *) malloc(sizeof(DateTime));
 
         if (!aux)
             return NULL;
 
-        int _ano = atoi(ano)-1900;
-        int _mes = atoi(mes)-1;
+        int _ano = strtol(ano, NULL, 10)-1900;
+        int _mes = strtol(mes, NULL, 10)-1;
 
         aux->tm_sec  = 0;
         aux->tm_min  = 0;
         aux->tm_hour = 0;
         aux->tm_wday = 0;
-        aux->tm_mday = atoi(dia);
+        aux->tm_mday = strtol(dia, NULL, 10);
         aux->tm_mon  = _mes;
         aux->tm_year = _ano;
         aux->tm_yday = 0;
@@ -76,21 +76,21 @@
         fgets(dia, DIA_LEN, stdin);
         dia[strcspn(dia, "\n")] = 0;
 
-        if (!ValidaDia(atoi(dia)))
+        if (!ValidaDia(strtol(dia, NULL, 10)))
             return NULL;
 
         printf("Mes: ");
         fgets(mes, MES_LEN, stdin);
         mes[strcspn(mes, "\n")] = 0;
 
-        if (!ValidaMes(atoi(dia), atoi(mes)))
+        if (!ValidaMes(strtol(dia, NULL, 10), strtol(mes, NULL, 10)))
             return NULL;
 
         printf("Ano: ");
         fgets(ano, ANO_LEN, stdin);
         ano[strcspn(ano, "\n")] = 0;
 
-        if (!ValidaAno(atoi(dia), atoi(mes), atoi(ano)))
+        if (!ValidaAno(strtol(dia, NULL, 10), strtol(mes, NULL, 10), strtol(ano, NULL, 10)))
             return NULL;
 
         return CriaDateTime(dia, mes, ano);
@@ -168,7 +168,7 @@
     //
     // Retorna a quantidade de dias entre duas datas
     //
-    int DiferencaEmDias(const DateTime* dataFim, const DateTime* dataIni) {
+    int DiferencaEmDias(DateTime* dataFim, DateTime* dataIni) {
         double segundos = difftime(mktime(dataFim), mktime(dataIni));
         return (int) (segundos/SECONDS_DAY);
     }
@@ -176,10 +176,10 @@
     //
     // Retorna 1 se o Range de Datas está dentro de um Range passado como argumento
     //
-    int DataRangeInRange(const DateTime* inputDataFim,
-                         const DateTime* inputDataIni,
-                         const DateTime* rangeDataFim,
-                         const DateTime* rangeDataIni) {
+    int DataRangeInRange(DateTime* inputDataFim,
+                         DateTime* inputDataIni,
+                         DateTime* rangeDataFim,
+                         DateTime* rangeDataIni) {
 
         double difIni = difftime(mktime(inputDataIni), mktime(rangeDataIni));
         double difFim = difftime(mktime(inputDataFim), mktime(rangeDataFim));

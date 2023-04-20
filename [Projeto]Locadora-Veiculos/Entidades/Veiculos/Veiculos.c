@@ -20,9 +20,9 @@
     //
     // Construtor da struct Veiculo com Argumentos
     //
-    Veiculo* CriaVeiculoArgs(const string placa,
-                             const string montadora,
-                             const string modelo,
+    Veiculo* CriaVeiculoArgs(string placa,
+                             string montadora,
+                             string modelo,
                              const int ano,
                              const double diaria) {
 
@@ -59,7 +59,7 @@
     //
     // Construtor da struct ListaVeiculos com Argumentos
     //
-    ListaVeiculos* CriaListaVeiculosArgs(const Veiculo* veiculo) {
+    ListaVeiculos* CriaListaVeiculosArgs(Veiculo* veiculo) {
         ListaVeiculos* aux = (ListaVeiculos *) malloc(sizeof(ListaVeiculos));
 
         if (!aux)
@@ -78,7 +78,7 @@
     //
     // Formata e Exibe um Veiculo
     //
-    void ExibeVeiculo(const Veiculo* veiculo) {
+    void ExibeVeiculo(Veiculo* veiculo) {
         printf("\nPlaca       : "); PrintPlaca(veiculo->Placa);
         printf("\nMontadora   : %s",  veiculo->Montadora);
         printf("\nModelo      : %s",  veiculo->Modelo);
@@ -90,7 +90,7 @@
     //
     // Retorna o Veiculo com a Placa passada como argumento
     //
-    Veiculo* VeiculoPorPlaca(const ListaVeiculos* lista, const string placa) {
+    Veiculo* VeiculoPorPlaca(ListaVeiculos* lista, string placa) {
         Veiculo* aux = lista->veiculo;
         while (aux) {
             if (!strcmp(aux->Placa, placa))
@@ -103,7 +103,7 @@
     //
     // Retorna uma cópia profunda de um Veiculo
     //
-    Veiculo* ClonaVeiculo(const Veiculo* veiculo) {
+    Veiculo* ClonaVeiculo(Veiculo* veiculo) {
         Veiculo* temp = CriaVeiculoArgs(veiculo->Placa, veiculo->Montadora, veiculo->Modelo, veiculo->Ano, veiculo->ValorDiaria);
         temp->proximo = veiculo->proximo;
         return temp;
@@ -116,14 +116,14 @@
     //
     // Procura um Veiculo com a Placa passada como argumento e chama ExibeVeiculo()
     //
-    void ExibeVeiculoPorPlaca(const ListaVeiculos* lista) {
+    void ExibeVeiculoPorPlaca(ListaVeiculos* lista) {
         printf("\nDigite a placa (AAA0000): ");
 
         char placa[PLACA_LEN];
         fgets(placa, PLACA_LEN, stdin);
         placa[strcspn(placa, "\n")] = 0;
 
-        const Veiculo* aux = VeiculoPorPlaca(lista, placa);
+        Veiculo* aux = VeiculoPorPlaca(lista, placa);
 
         if (!aux) {
             printf("\nVeiculo not Encontrado... \n");
@@ -136,7 +136,7 @@
     //
     // Exibe Toda uma Lista de Veiculos
     //
-    void ExibeTodosVeiculos(const ListaVeiculos* lista) {
+    void ExibeTodosVeiculos(ListaVeiculos* lista) {
         Veiculo* veiculo = lista->veiculo;
         while (veiculo) {
             ExibeVeiculo(veiculo);
@@ -148,7 +148,7 @@
     //
     // Retorna um novo Veiculo inserido pelo usuário
     //
-    Veiculo* NovoVeiculo(const ListaVeiculos* lista) {
+    Veiculo* NovoVeiculo(ListaVeiculos* lista) {
         string placa     = String(PLACA_LEN);
         string montadora = String(MONTADORA_LEN);
         string modelo    = String(MODELO_LEN);
@@ -184,7 +184,7 @@
     //
     // Insere um Veiculo na última posição da lista
     //
-    void InsereVeiculoNaLista(ListaVeiculos* lista, const Veiculo* veiculo) {
+    void InsereVeiculoNaLista(ListaVeiculos* lista, Veiculo* veiculo) {
         if (!veiculo)
             return;
 
@@ -231,7 +231,7 @@
             return;
         }
 
-        char opc;
+        int opc;
         do { // hast
             cleanScreen();
             ExibeVeiculo(aux);
@@ -286,7 +286,7 @@
 
         ExibeVeiculo(atual);
         printf("\nTem certeza? [s/S]: ");
-        char opc = getchar(); clearBuffer();
+        int opc = getchar(); clearBuffer();
 
         if (opc != 's' && opc != 'S')
             return;
@@ -311,7 +311,7 @@
     // Submenu de Veiculos
     //
     void MenuVeiculos(ListaVeiculos* lista) {
-        char opc;
+        int opc;
 
         do { // hast
             cleanScreen();
