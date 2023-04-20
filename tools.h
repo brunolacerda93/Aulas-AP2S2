@@ -37,7 +37,7 @@
     //------------------------------------------
     //
     #define CALLING printf("\n\n||===== Calling: %s =====||\n", __func__)
-        
+
 //-------------------------------------------------------------------------------------------------------------//
 
     // FUNÇÕES E MÉTODOS
@@ -98,46 +98,54 @@
     }
 
     //
-    // Captura entrada de um inteiro
+    // Captura a entrada de um inteiro
     //
-    int IntInput() {
-        int n;
+    int Int() {
+        int num  = 0;
+        int sign = 1;
+        int c;
 
-        scanf("%d", &n);
-        clearBuffer();
+        while ((c = getchar()) != '\n') {
+            if (c == '-')
+                sign = -1;
 
-        return n;
+            else if (c >= '0' && c <= '9')
+                num = num * 10 + (c - '0');
+        }
+
+        return num *= sign;
     }
 
     //
-    // Calcula tempo de execução de uma função (int *array, int size, int num)
+    // Captura a entrada de um double
     //
-    void timeTaken( void func(int *array, const int size, const int num),
-                    int *array,
-                    const int size,
-                    const int num) {
-        clock_t t;
-        double time_taken;
+    double Double() {
+        char input[100];
+        double num;
 
-        t = clock();
-        func(array, size, num);
-        t = clock() - t;
-        time_taken = ((double)t)/CLOCKS_PER_SEC;
-        printf("\n Time taken: %.3lf seconds", time_taken);
-        printf("\n=============================\n");
+        fgets(input, 100, stdin);
+
+        return strtod(input, NULL);
+    }
+
+    //
+    // Retorna um ponteiro para uma string vazia do tamanho passado como argumento
+    //
+    string String(const size_t size) {
+        return (string) calloc(size, sizeof(char));
     }
 
     //
     // Formata o CPF para exibição
     //
-    void PrintCPF(const string cpf) {
+    void PrintCPF(string cpf) {
         size_t i = 0;
 
         while (cpf[i] != '\0') {
             printf("%c", cpf[i]);
 
             switch(i++) {
-                case 2: printf("."); break;
+                case 2:
                 case 5: printf("."); break;
                 case 8: printf("/"); break;
             }
@@ -147,7 +155,7 @@
     //
     // Formata a Placa do Veículo para exibição
     //
-    void PrintPlaca(const string placa) {
+    void PrintPlaca(string placa) {
         size_t i = 0;
 
         while (placa[i] != '\0') {
@@ -155,16 +163,9 @@
 
             if (i == 2)
                 printf("-");
-            
+
             i++;
         }
-    }
-
-    //
-    // Retorna um ponteiro para uma string vazia do tamanho passado como argumento
-    //
-    string String(const size_t size) {
-        return (string) calloc(size, sizeof(char));
     }
 
 #endif

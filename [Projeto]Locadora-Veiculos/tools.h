@@ -22,7 +22,7 @@
 
     //
     // MACRO para funções não implementadas
-    //----------------------------------------------
+    //--------------------------------------------
     //
     #define UNIMPLEMENTED \
         do { \
@@ -33,7 +33,7 @@
 
     //
     // MACRO para exibir o nome da função
-    //------------------------------------------
+    //----------------------------------------
     //
     #define CALLING printf("\n\n||===== Calling: %s =====||\n", __func__)
 
@@ -97,15 +97,41 @@
     }
 
     //
-    // Captura entrada de um inteiro
+    // Captura a entrada de um inteiro
     //
-    int IntInput() {
-        int n;
+    int Int() {
+        int num  = 0;
+        int sign = 1;
+        int c;
 
-        scanf("%d", &n);
-        clearBuffer();
+        while ((c = getchar()) != '\n') {
+            if (c == '-')
+                sign = -1;
 
-        return n;
+            else if (c >= '0' && c <= '9')
+                num = num * 10 + (c - '0');
+        }
+
+        return num *= sign;
+    }
+
+    //
+    // Captura a entrada de um double
+    //
+    double Double() {
+        char input[100];
+        double num;
+
+        fgets(input, 100, stdin);
+
+        return strtod(input, NULL);
+    }
+
+    //
+    // Retorna um ponteiro para uma string vazia do tamanho passado como argumento
+    //
+    string String(const size_t size) {
+        return (string) calloc(size, sizeof(char));
     }
 
     //
@@ -136,16 +162,9 @@
 
             if (i == 2)
                 printf("-");
-            
+
             i++;
         }
-    }
-
-    //
-    // Retorna um ponteiro para uma string vazia do tamanho passado como argumento
-    //
-    string String(const size_t size) {
-        return (string) calloc(size, sizeof(char));
     }
 
 #endif

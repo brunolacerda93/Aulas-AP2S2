@@ -284,6 +284,9 @@
                 return NULL;
             }
 
+            free(dataInicial);
+            free(dataFinal);
+
             return filtrada;
         }
 
@@ -478,7 +481,7 @@
 
         do { // hast
             printf("\nDigite o indice da locacao que deseja alterar: ");
-            scanf("%d", &loc); clearBuffer();
+            loc = Int();
 
             if (loc <= 0)
                 return;
@@ -512,8 +515,7 @@
             }
 
             printf("\nDigite o novo valor: ");
-            double valor; scanf("%lf", &valor); clearBuffer();
-            locacao->ValorTotal = valor*DiferencaEmDias(locacao->DataDevolucao, locacao->DataLocacao);
+            locacao->ValorTotal = Double()*DiferencaEmDias(locacao->DataDevolucao, locacao->DataLocacao);
 
         } while(opc != '0');
     }
@@ -526,7 +528,7 @@
 
         do { // hast
             printf("\nDigite o indice da locacao que deseja remover: ");
-            scanf("%d", &loc); clearBuffer();
+            loc = Int();
 
             if (loc <= 0)
                 return;

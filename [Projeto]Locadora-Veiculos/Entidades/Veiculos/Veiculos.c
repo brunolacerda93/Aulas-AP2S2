@@ -173,10 +173,10 @@
         modelo[strcspn(modelo, "\n")] = 0;
 
         printf("\nDigite o ano (YYYY): ");
-        ano = IntInput();
+        ano = Int();
 
         printf("\nDigite o valor da diaria (R$88.88): ");
-        scanf("%lf", &diaria); clearBuffer();
+        diaria = Double();
 
         return CriaVeiculoArgs(placa, montadora, modelo, ano, diaria);
     }
@@ -254,8 +254,8 @@
             printf("\nDigite o novo valor: ");
 
             switch(opc) {
-                case '1': aux->Ano = IntInput();                          break;
-                case '2': scanf("%lf", &aux->ValorDiaria); clearBuffer(); break;
+                case '1': aux->Ano = Int();            break;
+                case '2': aux->ValorDiaria = Double(); break;
             }
 
         } while (opc != '0');
