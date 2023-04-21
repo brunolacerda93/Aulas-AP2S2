@@ -10,10 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6489552a-ce8a-443e-a11c-4373f4efaa84" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entidades/Data.c" beforeDir="false" afterPath="$PROJECT_DIR$/Entidades/Data.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Entidades/Locacoes/Locacoes.c" beforeDir="false" afterPath="$PROJECT_DIR$/Entidades/Locacoes/Locacoes.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entidades/Veiculos/Veiculos.c" beforeDir="false" afterPath="$PROJECT_DIR$/Entidades/Veiculos/Veiculos.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools.h" beforeDir="false" afterPath="$PROJECT_DIR$/tools.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entidades/Locacoes/Locacoes.h" beforeDir="false" afterPath="$PROJECT_DIR$/Entidades/Locacoes/Locacoes.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Program.c" beforeDir="false" afterPath="$PROJECT_DIR$/Program.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,13 +44,14 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "D:/Workspace/Git/Aulas-AP2S2/[Projeto]Locadora-Veiculos",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Color Scheme Font",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.C/C++",
     "structure.view.defaults.are.configured": "true",
     "vue.rearranger.settings.migration": "true"
   }
@@ -72,10 +75,16 @@
       <workItem from="1681997287773" duration="687000" />
       <workItem from="1681997989393" duration="1324000" />
       <workItem from="1681999328432" duration="17610000" />
+      <workItem from="1682090191752" duration="392000" />
+      <workItem from="1682090597530" duration="14358000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
