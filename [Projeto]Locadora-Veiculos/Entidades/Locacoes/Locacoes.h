@@ -5,7 +5,6 @@
 
     // Bibliotecas
 
-    #include "../../tools.h"
     #include "../Data.c"
     #include "../Clientes/Clientes.c"
     #include "../Veiculos/Veiculos.c"
@@ -76,12 +75,15 @@
 
     // CRUD
 
-        void     TelaLocacaoIndex     (ListaLocacoes*, int);
+        int      ValidaDataLocacao    (DateTime*, DateTime*);
+        int      ValidaDataRange      (ListaLocacoes*, Locacao*);
+        int      ValidaLocacao        (Locacao*,       ListaClientes*, ListaVeiculos*);
         void     InsereLocacaoNaLista (ListaLocacoes*, Locacao*);
         void     AtualizaLocacao      (ListaLocacoes*, ListaLocacoes*);
-        void     RemoveLocacao        (ListaLocacoes*, ListaLocacoes*);
         void     InsereLocacao        (ListaClientes*, ListaVeiculos*, ListaLocacoes*);
-        Locacao* NovaLocacao          (ListaClientes*, ListaVeiculos*, ListaLocacoes*);
+        void     TelaLocacaoIndex     (ListaLocacoes*, ListaClientes*, ListaVeiculos*, int);
+        void     RemoveLocacao        (ListaLocacoes*, ListaLocacoes*, ListaClientes*, ListaVeiculos*);
+        Locacao* NovaLocacao          (ListaClientes*, ListaVeiculos*);
 
     // SubMenu
     

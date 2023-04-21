@@ -215,7 +215,7 @@
         Locacao* aux = lista->locacao;
 
         while (aux) {
-            if (DataRangeInRange(aux->DataDevolucao, aux->DataLocacao, dataFinal, dataInicial))
+            if (DataRangeInRange(aux->DataDevolucao, aux->DataLocacao, dataFinal, dataInicial) == 1)
                 InsereLocacaoNaLista(filtrada, ClonaLocacao(aux));
 
             aux = aux->proximo;
@@ -344,7 +344,10 @@
     //
     // Tela Locação para Exibir uma Lista de Locações filtrada
     //
-    void TelaLocacaoIndex(ListaLocacoes* lista, const int isUpdateDelete) {
+    void TelaLocacaoIndex(ListaLocacoes* listaLocacoes,
+                          ListaClientes* listaClientes,
+                          ListaVeiculos* listaVeiculos,
+                          const int isUpdateDelete) {
         int opc;
 
         do { // hast
@@ -360,16 +363,16 @@
             opc = getchar(); clearBuffer();
             if (opc == '0') return;
 
-            ListaLocacoes* filtrada = ListaLocacoesPorIndice(lista, opc);
+            ListaLocacoes* filtrada = ListaLocacoesPorIndice(listaLocacoes, opc);
             ExibeListaLocacoes(filtrada);
 
             if (isUpdateDelete == 1 && filtrada) {
-                AtualizaLocacao(lista, filtrada);
+                AtualizaLocacao(listaLocacoes, filtrada);
                 free(filtrada);
                 return;
             }
             else if (isUpdateDelete == 2 && filtrada) {
-                RemoveLocacao(lista, filtrada);
+                RemoveLocacao(listaLocacoes, filtrada, listaClientes, listaVeiculos);
                 free(filtrada);
                 return;
             }
@@ -384,8 +387,7 @@
     // Retorna uma nova Locação inserida pelo usuário
     //
     Locacao* NovaLocacao(ListaClientes* listaClientes,
-                         ListaVeiculos* listaVeiculos,
-                         ListaLocacoes* listaLocacoes) {
+                         ListaVeiculos* listaVeiculos) {
 
         string     cpf   = String(CPF_LEN);
         string     placa = String(PLACA_LEN);
@@ -417,7 +419,7 @@
             const Veiculo* veiculo = VeiculoPorPlaca(listaVeiculos, placa);
 
             if (!veiculo) {
-                printf("\nhttp ERROR 404: Placa not Encontrada!!!\n\n"); pause();
+                printf("\nhttp ERROR 404: Placa not Encontrada!!!\n"); pause();
                 continue;
             }
 
@@ -427,7 +429,9 @@
             printf("\nData da Devolucao: ");
             dataDevolucao = CriaDataValida();
 
-            if (!dataLocacao || !dataDevolucao) continue;
+            if (!ValidaDataLocacao(dataDevolucao, dataLocacao)) {
+                pause(); continue;
+            }
 
             valor = veiculo->ValorDiaria;
 
@@ -470,7 +474,21 @@
         if (!listaLocacoes || !listaClientes || !listaVeiculos)
             return;
 
-        InsereLocacaoNaLista(listaLocacoes, NovaLocacao(listaClientes, listaVeiculos, listaLocacoes));
+        Locacao* novaLocacao = NovaLocacao(listaClientes, listaVeiculos);
+
+        if (novaLocacao && LocacaoPorChave(listaLocacoes, novaLocacao->Chave)) {
+            printf("\nERRO: Existe uma Locacao com as mesmas informacoes no sistema...\n");
+            free(novaLocacao);
+            return;
+        }
+
+        if (!ValidaDataRange(listaLocacoes, novaLocacao)) {
+            printf("\nERRO: Datas informadas conflitam com registros anteriores!!!\n");
+            free(novaLocacao);
+            return;
+        }
+
+        InsereLocacaoNaLista(listaLocacoes, novaLocacao);
     }
 
     //
@@ -523,7 +541,10 @@
     //
     // Remove uma Locação da Lista
     //
-    void RemoveLocacao(ListaLocacoes* lista, ListaLocacoes* filtrada) {
+    void RemoveLocacao(ListaLocacoes* listaLocacoes,
+                       ListaLocacoes* filtrada,
+                       ListaClientes* listaClientes,
+                       ListaVeiculos* listaVeiculos) {
         int loc;
 
         do { // hast
@@ -533,24 +554,25 @@
             if (loc <= 0)
                 return;
 
-            if (loc > lista->tamanho)
+            if (loc > listaLocacoes->tamanho)
                 printf("\nINVALIDO!!!\n");
             
-        } while (loc > lista->tamanho);
+        } while (loc > listaLocacoes->tamanho);
         
         DicionarioLocacoes* dicionario = MapListaParaDicionario(filtrada);
-        Locacao* locacao = LocacaoPorIndice(dicionario, lista, loc);
+        Locacao* locacao = LocacaoPorIndice(dicionario, listaLocacoes, loc);
         free(dicionario);
+
+        if (!ValidaLocacao(locacao, listaClientes, listaVeiculos)) return;
 
         ExibeLocacao(locacao);
         printf("\nTem certeza? [s/S]: ");
         int opc = getchar(); clearBuffer();
 
-        if (opc != 's' && opc != 'S')
-            return;
+        if (opc != 's' && opc != 'S') return;
         
         Locacao* anterior = NULL;
-        Locacao* atual    = lista->locacao;
+        Locacao* atual    = listaLocacoes->locacao;
 
         while (atual && strcmp(atual->Chave, locacao->Chave)) {
             anterior = atual;
@@ -558,8 +580,8 @@
         }
 
         if (!anterior) {
-            Locacao* temp = lista->locacao;
-            lista->locacao = lista->locacao->proximo;
+            Locacao* temp = listaLocacoes->locacao;
+            listaLocacoes->locacao = listaLocacoes->locacao->proximo;
             free(temp);
         }
         else {
@@ -567,8 +589,85 @@
             free(atual);
         }
 
-        lista->tamanho--;
+        listaLocacoes->tamanho--;
         printf("\nRemovido!\n");
+    }
+
+    //
+    // Retorna 1 se o CPF e a Placa da Locação não estão registrados no sistema
+    //
+    int ValidaLocacao(Locacao* locacao, ListaClientes* listaClientes, ListaVeiculos* listaVeiculos) {
+        if (ClientePorCPF(listaClientes, locacao->CPF)) {
+            printf("\nERRO: Cliente possui cadastro ativo no sistema!\n");
+            return 0;
+        }
+
+        if (VeiculoPorPlaca(listaVeiculos, locacao->Placa)) {
+            printf("\nERRO: Veiculo possui cadastro ativo no sistema!\n");
+            return 0;
+        }
+
+        return 1;
+    }
+
+    //
+    // Retorna 1 se as Datas passadas são válidas no contexto de uma Locação
+    //
+    int ValidaDataLocacao(DateTime* dataDevolucao, DateTime* dataLocacao) {
+        if (!dataLocacao || !dataDevolucao) {
+            printf("\nhttp ERROR 202: Falha ao criar Data...\n");
+            return 0;
+        }
+
+        if (difftime(mktime(dataDevolucao), mktime(dataLocacao)) <= 0) {
+            printf("\nA Data de Devolucao deve ser maior do que a Data de Locacao!!!\n");
+            return 0;
+        }
+
+        return 1;
+    }
+
+    //
+    // Retorna 1 se as Datas da Locação não conflitam com as Datas que já existem na Lista de Locações
+    //
+    int ValidaDataRange(ListaLocacoes* listaLocacoes, Locacao* locacao) {
+        Locacao* aux = listaLocacoes->locacao;
+        Locacao* temp;
+        ListaLocacoes* lista;
+
+        while (aux) {
+            if (!strcmp(locacao->CPF, aux->CPF)) {
+                lista = ListaLocacaoPorCPF(listaLocacoes, locacao->CPF);
+                temp = lista->locacao;
+
+                while (temp) {
+                    if (DataRangeInRange( locacao->DataDevolucao,
+                                          locacao->DataLocacao,
+                                          temp->DataDevolucao,
+                                          temp->DataLocacao) != -1) { return 0; }
+                    temp = temp->proximo;
+                }
+                free(lista);
+            }
+
+            if (!strcmp(locacao->Placa, aux->Placa)) {
+                lista = ListaLocacaoPorPlaca(listaLocacoes, locacao->Placa);
+                temp = lista->locacao;
+
+                while (temp) {
+                    if (DataRangeInRange( locacao->DataDevolucao,
+                                          locacao->DataLocacao,
+                                          temp->DataDevolucao,
+                                          temp->DataLocacao) != -1) { return 0; }
+                    temp = temp->proximo;
+                }
+                free(lista);
+            }
+
+            aux = aux->proximo;
+        }
+
+        return 1;
     }
 
 //-------------------------------------------------------------------------------------------------------------//
@@ -596,13 +695,13 @@
             opc = getchar(); clearBuffer();
 
             switch (opc) {
-                case '1':      InsereLocacao(listaClientes, listaVeiculos, listaLocacoes); pause(); break;
-                case '2':   TelaLocacaoIndex(listaLocacoes, 0);          break;
-                case '3': ExibeListaLocacoes(listaLocacoes);    pause(); break;
-                case '4':   TelaLocacaoIndex(listaLocacoes, 1); pause(); break;
-                case '5':   TelaLocacaoIndex(listaLocacoes, 2); pause(); break;
-                case '0':                                                break;
-                default : printf("\n INVALIDO!!!\n"); pause();           break;
+                case '1':      InsereLocacao(listaClientes, listaVeiculos, listaLocacoes);    pause(); break;
+                case '2':   TelaLocacaoIndex(listaLocacoes, listaClientes, listaVeiculos, 0);          break;
+                case '3': ExibeListaLocacoes(listaLocacoes);                                  pause(); break;
+                case '4':   TelaLocacaoIndex(listaLocacoes, listaClientes, listaVeiculos, 1); pause(); break;
+                case '5':   TelaLocacaoIndex(listaLocacoes, listaClientes, listaVeiculos, 2); pause(); break;
+                case '0':                                                                              break;
+                default : printf("\n INVALIDO!!!\n"); pause();                                         break;
             }
 
         } while (opc != '0');

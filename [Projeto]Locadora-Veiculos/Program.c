@@ -30,7 +30,7 @@ void PreencheLocacoes(ListaLocacoes* lista) {
 void Menu(ListaClientes* listaClientes, ListaVeiculos* listaVeiculos, ListaLocacoes* listaLocacoes) {
     int opc;
     
-    do {
+    do { // hast
         cleanScreen();
         
         printf("===============================\n");

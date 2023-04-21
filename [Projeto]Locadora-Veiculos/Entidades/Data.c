@@ -175,17 +175,27 @@
 
     //
     // Retorna 1 se o Range de Datas está dentro de um Range passado como argumento
+    // Retorna -1 se o Range de Datas está fora de um Range Passado como argumento
+    // Retorna 0 se há intersecção
     //
     int DataRangeInRange(DateTime* inputDataFim,
                          DateTime* inputDataIni,
                          DateTime* rangeDataFim,
                          DateTime* rangeDataIni) {
 
-        double difIni = difftime(mktime(inputDataIni), mktime(rangeDataIni));
-        double difFim = difftime(mktime(inputDataFim), mktime(rangeDataFim));
+        time_t inputIni = mktime(inputDataIni);
+        time_t inputFim = mktime(inputDataFim);
+        time_t rangeIni = mktime(rangeDataIni);
+        time_t rangeFim = mktime(rangeDataFim);
 
-        if (difIni >= 0 && difFim <= 0)
+        if (inputIni >= rangeIni && inputFim <= rangeFim)
             return 1;
+
+        if (inputIni < rangeIni && inputFim < rangeIni)
+            return -1;
+
+        if (inputIni > rangeFim && inputFim > rangeFim)
+            return -1;
 
         return 0;
     }
