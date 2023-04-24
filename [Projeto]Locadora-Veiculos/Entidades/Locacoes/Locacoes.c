@@ -504,10 +504,10 @@
             if (loc <= 0)
                 return;
 
-            if (loc > lista->tamanho)
+            if (loc > filtrada->tamanho)
                 printf("\nINVALIDO!!!\n");
             
-        } while (loc > lista->tamanho);
+        } while (loc > filtrada->tamanho);
         
         DicionarioLocacoes* dicionario = MapListaParaDicionario(filtrada);
         Locacao* locacao = LocacaoPorIndice(dicionario, lista, loc);
@@ -554,10 +554,10 @@
             if (loc <= 0)
                 return;
 
-            if (loc > listaLocacoes->tamanho)
+            if (loc > filtrada->tamanho)
                 printf("\nINVALIDO!!!\n");
             
-        } while (loc > listaLocacoes->tamanho);
+        } while (loc > filtrada->tamanho);
         
         DicionarioLocacoes* dicionario = MapListaParaDicionario(filtrada);
         Locacao* locacao = LocacaoPorIndice(dicionario, listaLocacoes, loc);
