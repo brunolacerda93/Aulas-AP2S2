@@ -4,18 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="CMakeSettings">
-    <configurations>
-      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
-    </configurations>
+    <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6489552a-ce8a-443e-a11c-4373f4efaa84" name="Changes" comment="">
+    <list default="true" id="0f7aa899-7c55-4e6b-9162-7fbb99791493" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entidades/Data.c" beforeDir="false" afterPath="$PROJECT_DIR$/Entidades/Data.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entidades/Clientes/Clientes.c" beforeDir="false" afterPath="$PROJECT_DIR$/Entidades/Clientes/Clientes.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Entidades/Clientes/Clientes.h" beforeDir="false" afterPath="$PROJECT_DIR$/Entidades/Clientes/Clientes.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Entidades/Locacoes/Locacoes.c" beforeDir="false" afterPath="$PROJECT_DIR$/Entidades/Locacoes/Locacoes.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Entidades/Locacoes/Locacoes.h" beforeDir="false" afterPath="$PROJECT_DIR$/Entidades/Locacoes/Locacoes.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Program.c" beforeDir="false" afterPath="$PROJECT_DIR$/Program.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools.h" beforeDir="false" afterPath="$PROJECT_DIR$/tools.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../sorting.c" beforeDir="false" afterPath="$PROJECT_DIR$/../sorting.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../tools.h" beforeDir="false" afterPath="$PROJECT_DIR$/../tools.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,10 +30,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
+  <component name="MacroExpansionManager">
+    <option name="directoryName" value="9un6jmfs" />
   </component>
-  <component name="ProjectId" id="2Oh00yudumTOs2yO8pcvXOhdBq6" />
+  <component name="ProjectId" id="2P1j3Par7L3eEQJDu79HWpqguQr" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -45,14 +47,11 @@
     "cidr.known.project.marker": "true",
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/Workspace/Git/Aulas-AP2S2/[Projeto]Locadora-Veiculos",
     "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.C/C++",
-    "structure.view.defaults.are.configured": "true",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -67,24 +66,20 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="6489552a-ce8a-443e-a11c-4373f4efaa84" name="Changes" comment="" />
-      <created>1681997286775</created>
+      <changelist id="0f7aa899-7c55-4e6b-9162-7fbb99791493" name="Changes" comment="" />
+      <created>1682631282167</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1681997286775</updated>
-      <workItem from="1681997287773" duration="687000" />
-      <workItem from="1681997989393" duration="1324000" />
-      <workItem from="1681999328432" duration="17610000" />
-      <workItem from="1682090191752" duration="392000" />
-      <workItem from="1682090597530" duration="14358000" />
+      <updated>1682631282167</updated>
+      <workItem from="1682631284257" duration="96000" />
+      <workItem from="1682631389608" duration="1174000" />
+      <workItem from="1682632875985" duration="1386000" />
+      <workItem from="1682634292721" duration="37000" />
+      <workItem from="1682634344225" duration="6393000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XSLT-Support.FileAssociations.UIState">
-    <expand />
-    <select />
   </component>
 </project>

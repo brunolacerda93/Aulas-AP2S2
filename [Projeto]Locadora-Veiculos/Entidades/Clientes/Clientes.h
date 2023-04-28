@@ -15,6 +15,7 @@
     #define NOME_LEN       100
     #define ENDERECO_LEN   500
     #define CATEGORIA_LEN  10
+    #define CLIENTES "CLIENTES"
 
 //-------------------------------------------------------------------------------------------------------------//
 

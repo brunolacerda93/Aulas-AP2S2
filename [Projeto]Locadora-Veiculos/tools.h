@@ -37,6 +37,12 @@
     //
     #define CALLING printf("\n\n||===== Calling: %s =====||\n", __func__)
 
+    //
+    // MACRO para texto padrão de erro
+    //-------------------------------------
+    //
+    #define FERROR "Erro ao abrir "
+
 //-------------------------------------------------------------------------------------------------------------//
 
     // FUNÇÕES E MÉTODOS
@@ -120,7 +126,6 @@
     //
     double Double() {
         char input[100];
-        double num;
 
         fgets(input, 100, stdin);
 
@@ -165,6 +170,17 @@
 
             i++;
         }
+    }
+
+    //
+    // Exibe a mensagem de erro no Console
+    //
+    void fprint_err(string Filename) {
+        string error = String(50);
+        strcat(error, FERROR);
+        strcat(error, Filename);
+        perror(error);
+        free(error);
     }
 
 #endif

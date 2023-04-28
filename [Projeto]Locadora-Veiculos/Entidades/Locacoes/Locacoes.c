@@ -20,14 +20,14 @@
         
         strcpy(aux->CPF, cpf);
         strcpy(aux->Placa, placa);
-        aux->DataLocacao    = dataLocacao;
-        aux->DataDevolucao  = dataDevolucao;
+        aux->DataLocacao    = *dataLocacao;
+        aux->DataDevolucao  = *dataDevolucao;
         aux->ValorTotal     = valor;
         strcpy(aux->Chave, GeraChave(aux));
 
         aux->proximo = NULL;
 
-        if (!aux->DataLocacao || !aux->DataDevolucao) return NULL;
+        //if (!aux->DataLocacao || !aux->DataDevolucao) return NULL;
 
         return aux;
     }
@@ -104,8 +104,8 @@
 
         strcpy(result, locacao->CPF);
         strcat(result, locacao->Placa);
-        strcat(result, FormataData(locacao->DataLocacao));
-        strcat(result, FormataData(locacao->DataDevolucao));
+        strcat(result, FormataData(&locacao->DataLocacao));
+        strcat(result, FormataData(&locacao->DataDevolucao));
 
         return result;
     }
@@ -116,8 +116,8 @@
     void ExibeLocacao(Locacao* locacao) {
         printf("\nCPF              : "); PrintCPF(locacao->CPF);
         printf("\nPlaca            : "); PrintPlaca(locacao->Placa);
-        printf("\nData Locacao     : "); ExibeData(locacao->DataLocacao);
-        printf("\nData Devolucao   : "); ExibeData(locacao->DataDevolucao);
+        printf("\nData Locacao     : "); ExibeData(&locacao->DataLocacao);
+        printf("\nData Devolucao   : "); ExibeData(&locacao->DataDevolucao);
         printf("\nValor Total (R$) : %.2lf", locacao->ValorTotal);
         printf("\n====================================================\n");
     }
@@ -215,7 +215,7 @@
         Locacao* aux = lista->locacao;
 
         while (aux) {
-            if (DataRangeInRange(aux->DataDevolucao, aux->DataLocacao, dataFinal, dataInicial) == 1)
+            if (DataRangeInRange(&aux->DataDevolucao, &aux->DataLocacao, dataFinal, dataInicial) == 1)
                 InsereLocacaoNaLista(filtrada, ClonaLocacao(aux));
 
             aux = aux->proximo;
@@ -227,7 +227,7 @@
     // Retorna uma cópia profunda de uma Locação
     //
     Locacao* ClonaLocacao(Locacao* locacao) {
-        Locacao* temp = CriaLocacaoArgs(locacao->CPF, locacao->Placa, locacao->DataLocacao, locacao->DataDevolucao, locacao->ValorTotal);
+        Locacao* temp = CriaLocacaoArgs(locacao->CPF, locacao->Placa, &locacao->DataLocacao, &locacao->DataDevolucao, locacao->ValorTotal);
         temp->proximo = NULL;
         return temp;
     }
@@ -533,7 +533,7 @@
             }
 
             printf("\nDigite o novo valor: ");
-            locacao->ValorTotal = Double()*DiferencaEmDias(locacao->DataDevolucao, locacao->DataLocacao);
+            locacao->ValorTotal = Double()*DiferencaEmDias(&locacao->DataDevolucao, &locacao->DataLocacao);
 
         } while(opc != '0');
     }
@@ -641,10 +641,10 @@
                 temp = lista->locacao;
 
                 while (temp) {
-                    if (DataRangeInRange( locacao->DataDevolucao,
-                                          locacao->DataLocacao,
-                                          temp->DataDevolucao,
-                                          temp->DataLocacao) != -1) { return 0; }
+                    if (DataRangeInRange( &locacao->DataDevolucao,
+                                          &locacao->DataLocacao,
+                                          &temp->DataDevolucao,
+                                          &temp->DataLocacao) != -1) { return 0; }
                     temp = temp->proximo;
                 }
                 free(lista);
@@ -655,10 +655,10 @@
                 temp = lista->locacao;
 
                 while (temp) {
-                    if (DataRangeInRange( locacao->DataDevolucao,
-                                          locacao->DataLocacao,
-                                          temp->DataDevolucao,
-                                          temp->DataLocacao) != -1) { return 0; }
+                    if (DataRangeInRange( &locacao->DataDevolucao,
+                                          &locacao->DataLocacao,
+                                          &temp->DataDevolucao,
+                                          &temp->DataLocacao) != -1) { return 0; }
                     temp = temp->proximo;
                 }
                 free(lista);

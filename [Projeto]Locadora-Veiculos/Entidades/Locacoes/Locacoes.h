@@ -15,19 +15,19 @@
 
     #define CPF_LEN   15
     #define PLACA_LEN 10
-    #define CHAVE_LEN 500
+    #define CHAVE_LEN 100
 
 //-------------------------------------------------------------------------------------------------------------//
 
     // Estrutura dos tipos
 
     typedef struct Locacao {
-        char       CPF[CPF_LEN];
-        char       Placa[PLACA_LEN];
-        DateTime*  DataLocacao;
-        DateTime*  DataDevolucao;
-        double     ValorTotal;
-        char       Chave[CHAVE_LEN];
+        char      CPF[CPF_LEN];
+        char      Placa[PLACA_LEN];
+        DateTime  DataLocacao;
+        DateTime  DataDevolucao;
+        double    ValorTotal;
+        char      Chave[CHAVE_LEN];
         struct Locacao* proximo;
     } Locacao;
 

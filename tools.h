@@ -23,7 +23,7 @@
 
     //
     // MACRO para funções não implementadas
-    //----------------------------------------------
+    //--------------------------------------------
     //
     #define UNIMPLEMENTED \
         do { \
@@ -34,7 +34,7 @@
 
     //
     // MACRO para exibir o nome da função
-    //------------------------------------------
+    //----------------------------------------
     //
     #define CALLING printf("\n\n||===== Calling: %s =====||\n", __func__)
 
@@ -121,7 +121,6 @@
     //
     double Double() {
         char input[100];
-        double num;
 
         fgets(input, 100, stdin);
 

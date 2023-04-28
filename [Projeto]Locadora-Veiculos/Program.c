@@ -56,16 +56,20 @@ void Menu(ListaClientes* listaClientes, ListaVeiculos* listaVeiculos, ListaLocac
 }
 
 int main(int argc, char const *argv[]) {
-    ListaClientes* listaClientes = CriaListaClientes();
+    ListaClientes* listaClientes = ReadClientes();
+
+//    ListaClientes* listaClientes = CriaListaClientes();
     ListaVeiculos* listaVeiculos = CriaListaVeiculos();
     ListaLocacoes* listaLocacoes = CriaListaLocacoes();
 
-    PreencheClientes(listaClientes);
+//    PreencheClientes(listaClientes);
     PreencheVeiculos(listaVeiculos);
     PreencheLocacoes(listaLocacoes);
 
     Menu(listaClientes, listaVeiculos, listaLocacoes);
     printf("\nlistaLocacoes->locacao->Chave: %s\n\n", listaLocacoes->locacao->Chave);
+
+    PermanenciaClientes(listaClientes);
 
     return 0;
 }

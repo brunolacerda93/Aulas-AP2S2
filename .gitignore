@@ -55,3 +55,6 @@ dkms.conf
 .vscode/c_cpp_properties.json
 .vscode/tasks.json
 \[Projeto\]Locadora-Veiculos/.idea/workspace.xml
+*.xml
+junk
+\[Projeto\]Locadora-Veiculos/CLIENTES

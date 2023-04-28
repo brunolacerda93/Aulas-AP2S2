@@ -6,10 +6,10 @@
 
 // Métodos e funções
 
-
+    //
     // Bubble Sort
-
-    void bubbleSort(int array[], const int n) {
+    //
+    void bubbleSort(int* array, const int n) {
         int swapped;
 
         for (int i = n-1; i>0; i--) {
@@ -26,10 +26,10 @@
         }
     }
 
-
+    //
     // Insertion Sort
-
-    void insertionSort(int array[], const int n) {
+    //
+    void insertionSort(int* array, const int n) {
         int j, aux;
 
         for (int i=1; i<n; i++) {
@@ -43,10 +43,10 @@
         }
     }
 
-
+    //
     // Selection Sort
-
-    void selectionSort(int array[], const int n) {
+    //
+    void selectionSort(int* array, const int n) {
         int min;
 
         for (int i=0; i < n-1; i++) {
@@ -61,10 +61,10 @@
         }
     }
 
-
+    //
     // Merge
-
-    void merge(int array[], const int ini, const int meio, const int fim) {
+    //
+    void merge(int* array, const int ini, const int meio, const int fim) {
         int com1 = ini;
         int com2 = meio+1;
         int tam = fim-ini+1;
@@ -102,10 +102,10 @@
         free(vetAux);
     }
 
-
+    //
     // Merge Sort
-
-    void mergeSort(int array[], const int ini, const int fim) {
+    //
+    void mergeSort(int* array, const int ini, const int fim) {
         if (ini >= fim) return;
 
         int meio = (fim+ini)/2;
@@ -115,10 +115,10 @@
         merge(array, ini, meio, fim);
     }
 
-
+    //
     // Quick Sort (Lomuto)
-
-    void lomutoQuickSort(int array[], const int ini, const int fim) {
+    //
+    void lomutoQuickSort(int* array, const int ini, const int fim) {
         if (ini >= fim) return;
 
         int pivot = array[fim];
@@ -148,10 +148,10 @@
         lomutoQuickSort(array, ptr + 1, fim);
     }
 
-
+    //
     // Quick Sort (Hoare) -> Otimizado para evitar o pior caso
-
-    void hoareQuickSort(int array[], const int ini, const int fim) {
+    //
+    void hoareQuickSort(int* array, const int ini, const int fim) {
         int aux;
         int i = ini, j = fim;
         int meio = (ini + fim) / 2;
@@ -177,28 +177,29 @@
             hoareQuickSort(array, i, fim);
     }
 
-
+    //
     // Cria um Array de Inteiros
-    
+    //
     int *createArray(const int size) {
         return (int*) malloc(size * sizeof(int));
     }
 
-
-    // Preenche um Array de Inteiros
-
-    void fillArray(int array[], const int size) {
-        time_t ts;
-        srand((unsigned) time(&ts));
+    //  
+    // Preenche um Array de Inteiros com números aleatórios
+    //
+    void fillArray(int* array, const int size) {
+        static unsigned int ts = 0;
+        srand(ts += 36);
+        
         for (int i=0; i<size; i++) {
             array[i] = (rand() % RAND_MAX) * ((rand() % 1000) + 1);
         }
     }
 
-
+    //
     // Exibe um Array de Inteiros
-
-    void showArray(int array[], const int size) {
+    //
+    void showArray(int* array, const int size) {
         for (int i=0; i<size; i++) {
             printf("[%8d] ", array[i]);
             if ((i+1)%10 == 0)
@@ -206,19 +207,19 @@
         }
     }
 
-
+    //
     // Gera um Novo Array de Inteiros
-
-    int *resetArray(int array[], const int size) {
+    //
+    int *resetArray(int* array, const int size) {
         free(array);
         array = createArray(size);
         fillArray(array, size);
         return array;
     }
 
-
+    //
     // Menu Principal
-
+    //
     static void menu(const int size) {
         char opc;
         clock_t t;  // para armazenar o tempo de execução
@@ -270,7 +271,7 @@
 
     // Main
 
-    int main(int argc, char const *argv[]) {
-        menu(SIZE);
-        return 0;
-    }
+    // int main(int argc, char const *argv[]) {
+    //     menu(SIZE);
+    //     return 0;
+    // }

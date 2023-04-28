@@ -102,7 +102,7 @@
     //
     Cliente* ClonaCliente(Cliente* cliente) {
         Cliente* temp = CriaClienteArgs(cliente->CPF, cliente->Nome, cliente->Endereco, cliente->Categoria);
-        temp->proximo = cliente->proximo;
+        temp->proximo = NULL;
         return temp;
     }
 
@@ -316,6 +316,58 @@
 
         lista->tamanho--;
         printf("\nRemovido!\n");
+    }
+
+//-------------------------------------------------------------------------------------------------------------//
+
+    // Manipulação dos Arquivos
+
+    //
+    // Registra Clientes no arquivo CLIENTES
+    //
+    void PermanenciaClientes(ListaClientes* lista) {
+        if (!lista) return;
+
+        FILE* file;
+        Cliente* aux = lista->cliente;
+
+        file = fopen(CLIENTES, "wb");
+
+        if (!file) {
+            fprint_err(CLIENTES);
+            return;
+        }
+
+        for (size_t i=0; i < lista->tamanho; i++) {
+            fwrite(aux, sizeof(Cliente), 1, file);
+            aux = aux->proximo;
+        }
+
+        fclose(file);
+    }
+
+    //
+    // Lê o arquivo CLIENTES e retorna uma Lista de Clientes com os dados obtidos
+    //
+    ListaClientes* ReadClientes() {
+        FILE* file;
+        Cliente cliente;
+        ListaClientes* lista = CriaListaClientes();
+
+        file = fopen(CLIENTES, "rb");
+        if (!file) {
+            fprint_err(CLIENTES);
+            return lista;
+        }
+
+        fread(&cliente, sizeof(Cliente), 1, file);
+        do {
+            InsereClienteNaLista(lista, ClonaCliente(&cliente));
+            fread(&cliente, sizeof(Cliente), 1, file);
+        } while (!feof(file));
+
+        fclose(file);
+        return lista;
     }
 
 //-------------------------------------------------------------------------------------------------------------//
