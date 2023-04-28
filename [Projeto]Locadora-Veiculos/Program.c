@@ -27,12 +27,29 @@ void PreencheLocacoes(ListaLocacoes* lista) {
                                                 68.49*DiferencaEmDias(data2, data1)));
 }
 
-void Menu(ListaClientes* listaClientes, ListaVeiculos* listaVeiculos, ListaLocacoes* listaLocacoes) {
+int LogOff(ListaClientes * listaClientes, ListaVeiculos* listaVeiculos, ListaLocacoes* listaLocacoes) {
+    printf("\nDeseja salvar as alteracoes?");
+    printf("\nDigite qualquer tecla para voltar");
+    printf("\n   1 = SIM  ||  0 = NAO");
+    printf("\n--> ");
+    int opc = getchar(); clearBuffer();
+
+    if (opc == '1') {
+        PermanenciaClientes(listaClientes);
+        PermanenciaVeiculos(listaVeiculos);
+        PermanenciaLocacoes(listaLocacoes);
+        return '0';
+    }
+
+    return opc;
+}
+
+void Menu(ListaClientes * listaClientes, ListaVeiculos* listaVeiculos, ListaLocacoes* listaLocacoes) {
     int opc;
-    
+
     do { // hast
         cleanScreen();
-        
+
         printf("===============================\n");
         printf("      Locacoes Louca-Acoes!\n\n");
         printf("  1 - Clientes\n");
@@ -42,14 +59,14 @@ void Menu(ListaClientes* listaClientes, ListaVeiculos* listaVeiculos, ListaLocac
         printf("  0 - Retornar\n");
         printf("\nEscolha: ");
         opc = getchar(); clearBuffer();
-        
+
         switch (opc) {
-            case '1': MenuClientes(listaClientes);                               break;
-            case '2': MenuVeiculos(listaVeiculos);                               break;
-            case '3': MenuLocacoes(listaClientes, listaVeiculos, listaLocacoes); break;
-            case '4': MenuRelatorios(listaLocacoes);                             break;
-            case '0': pause();                                                   break;
-            default : printf("\n INVALIDO!!!\n"); pause();                       break;
+            case '1': MenuClientes(listaClientes);                                        break;
+            case '2': MenuVeiculos(listaVeiculos);                                        break;
+            case '3': MenuLocacoes(listaClientes, listaVeiculos, listaLocacoes);          break;
+            case '4': MenuRelatorios(listaLocacoes);                                      break;
+            case '0': opc = LogOff(listaClientes, listaVeiculos, listaLocacoes); pause(); break;
+            default : printf("\n INVALIDO!!!\n"); pause();                                break;
         }
 
     } while(opc != '0');
@@ -57,19 +74,15 @@ void Menu(ListaClientes* listaClientes, ListaVeiculos* listaVeiculos, ListaLocac
 
 int main(int argc, char const *argv[]) {
     ListaClientes* listaClientes = ReadClientes();
-
-//    ListaClientes* listaClientes = CriaListaClientes();
-    ListaVeiculos* listaVeiculos = CriaListaVeiculos();
-    ListaLocacoes* listaLocacoes = CriaListaLocacoes();
+    ListaVeiculos* listaVeiculos = ReadVeiculos();
+    ListaLocacoes* listaLocacoes = ReadLocacoes();
 
 //    PreencheClientes(listaClientes);
-    PreencheVeiculos(listaVeiculos);
-    PreencheLocacoes(listaLocacoes);
+//    PreencheVeiculos(listaVeiculos);
+//    PreencheLocacoes(listaLocacoes);
 
     Menu(listaClientes, listaVeiculos, listaLocacoes);
     printf("\nlistaLocacoes->locacao->Chave: %s\n\n", listaLocacoes->locacao->Chave);
-
-    PermanenciaClientes(listaClientes);
 
     return 0;
 }

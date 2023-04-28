@@ -672,6 +672,58 @@
 
 //-------------------------------------------------------------------------------------------------------------//
 
+    // Manipulação dos Arquivos
+
+    //
+    // Registra Locações no arquivo LOCACOES
+    //
+    void PermanenciaLocacoes(ListaLocacoes* lista) {
+        if (!lista) return;
+
+        FILE* file;
+        Locacao* aux = lista->locacao;
+
+        file = fopen(LOCACOES, "wb");
+
+        if (!file) {
+            fprint_err(LOCACOES);
+            return;
+        }
+
+        for (size_t i=0; i < lista->tamanho; i++) {
+            fwrite(aux, sizeof(Locacao), 1, file);
+            aux = aux->proximo;
+        }
+
+        fclose(file);
+    }
+
+    //
+    // Lê o arquivo LOCACOES e retorna uma Lista de Locações com os dados obtidos
+    //
+    ListaLocacoes* ReadLocacoes() {
+        FILE* file;
+        Locacao locacao;
+        ListaLocacoes* lista = CriaListaLocacoes();
+
+        file = fopen(LOCACOES, "rb");
+        if (!file) {
+            fprint_err(LOCACOES);
+            return lista;
+        }
+
+        fread(&locacao, sizeof(Locacao), 1, file);
+        do {
+            InsereLocacaoNaLista(lista, ClonaLocacao(&locacao));
+            fread(&locacao, sizeof(Locacao), 1, file);
+        } while (!feof(file));
+
+        fclose(file);
+        return lista;
+    }
+
+//-------------------------------------------------------------------------------------------------------------//
+
     //
     // Submenu de Locações
     //

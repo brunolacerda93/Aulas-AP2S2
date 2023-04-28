@@ -14,6 +14,7 @@
     #define PLACA_LEN     10
     #define MONTADORA_LEN 50
     #define MODELO_LEN    50
+    #define VEICULOS "VEICULOS"
 
 //-------------------------------------------------------------------------------------------------------------//
 
@@ -60,6 +61,11 @@
         void     ExibeVeiculoPorPlaca (ListaVeiculos*);
         void     ExibeTodosVeiculos   (ListaVeiculos*);
         Veiculo* NovoVeiculo          (ListaVeiculos*);
+
+    // Arquivos
+
+        void            PermanenciaVeiculos(ListaVeiculos* lista);
+        ListaVeiculos*  ReadVeiculos();
 
     // Submenu
     

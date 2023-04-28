@@ -63,6 +63,11 @@
         void     InsereClienteNaLista(ListaClientes*, Cliente*);
         Cliente* NovoCliente         (ListaClientes*);
 
+    // Arquivos
+
+        void PermanenciaClientes(ListaClientes* lista);
+        ListaClientes* ReadClientes();
+
     // SubMenu
     
         void MenuClientes(ListaClientes*);

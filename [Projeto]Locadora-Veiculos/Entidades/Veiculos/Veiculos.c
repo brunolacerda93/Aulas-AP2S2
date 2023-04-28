@@ -105,7 +105,7 @@
     //
     Veiculo* ClonaVeiculo(Veiculo* veiculo) {
         Veiculo* temp = CriaVeiculoArgs(veiculo->Placa, veiculo->Montadora, veiculo->Modelo, veiculo->Ano, veiculo->ValorDiaria);
-        temp->proximo = veiculo->proximo;
+        temp->proximo = NULL;
         return temp;
     }
 
@@ -303,6 +303,58 @@
 
         lista->tamanho--;
         printf("\nRemovido!\n");
+    }
+
+//-------------------------------------------------------------------------------------------------------------//
+
+    // Manipulação dos Arquivos
+
+    //
+    // Registra Veículos no arquivo VEICULOS
+    //
+    void PermanenciaVeiculos(ListaVeiculos* lista) {
+        if (!lista) return;
+
+        FILE* file;
+        Veiculo* aux = lista->veiculo;
+
+        file = fopen(VEICULOS, "wb");
+
+        if (!file) {
+            fprint_err(VEICULOS);
+            return;
+        }
+
+        for (size_t i=0; i < lista->tamanho; i++) {
+            fwrite(aux, sizeof(Veiculo), 1, file);
+            aux = aux->proximo;
+        }
+
+        fclose(file);
+    }
+
+    //
+    // Lê o arquivo VEICULOS e retorna uma Lista de Veículos com os dados obtidos
+    //
+    ListaVeiculos* ReadVeiculos() {
+        FILE* file;
+        Veiculo veiculo;
+        ListaVeiculos* lista = CriaListaVeiculos();
+
+        file = fopen(VEICULOS, "rb");
+        if (!file) {
+            fprint_err(VEICULOS);
+            return lista;
+        }
+
+        fread(&veiculo, sizeof(Veiculo), 1, file);
+        do {
+            InsereVeiculoNaLista(lista, ClonaVeiculo(&veiculo));
+            fread(&veiculo, sizeof(Veiculo), 1, file);
+        } while (!feof(file));
+
+        fclose(file);
+        return lista;
     }
 
 //-------------------------------------------------------------------------------------------------------------//

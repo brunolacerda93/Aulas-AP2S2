@@ -16,6 +16,7 @@
     #define CPF_LEN   15
     #define PLACA_LEN 10
     #define CHAVE_LEN 100
+    #define LOCACOES "LOCACOES"
 
 //-------------------------------------------------------------------------------------------------------------//
 
@@ -84,6 +85,11 @@
         void     TelaLocacaoIndex     (ListaLocacoes*, ListaClientes*, ListaVeiculos*, int);
         void     RemoveLocacao        (ListaLocacoes*, ListaLocacoes*, ListaClientes*, ListaVeiculos*);
         Locacao* NovaLocacao          (ListaClientes*, ListaVeiculos*);
+
+    // Arquivos
+
+        void           PermanenciaLocacoes(ListaLocacoes* lista);
+        ListaLocacoes* ReadLocacoes();
 
     // SubMenu
     
