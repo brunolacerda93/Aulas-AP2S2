@@ -13,8 +13,6 @@
 
     // Definição dos tamanhos
 
-    #define CPF_LEN   15
-    #define PLACA_LEN 10
     #define CHAVE_LEN 100
     #define LOCACOES "LOCACOES"
 

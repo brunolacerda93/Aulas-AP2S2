@@ -9,16 +9,7 @@
   <component name="ChangeListManager">
     <list default="true" id="0f7aa899-7c55-4e6b-9162-7fbb99791493" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entidades/Clientes/Clientes.c" beforeDir="false" afterPath="$PROJECT_DIR$/Entidades/Clientes/Clientes.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entidades/Clientes/Clientes.h" beforeDir="false" afterPath="$PROJECT_DIR$/Entidades/Clientes/Clientes.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entidades/Locacoes/Locacoes.c" beforeDir="false" afterPath="$PROJECT_DIR$/Entidades/Locacoes/Locacoes.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Entidades/Locacoes/Locacoes.h" beforeDir="false" afterPath="$PROJECT_DIR$/Entidades/Locacoes/Locacoes.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entidades/Relatorios/Relatorios.c" beforeDir="false" afterPath="$PROJECT_DIR$/Entidades/Relatorios/Relatorios.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entidades/Veiculos/Veiculos.c" beforeDir="false" afterPath="$PROJECT_DIR$/Entidades/Veiculos/Veiculos.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Entidades/Veiculos/Veiculos.h" beforeDir="false" afterPath="$PROJECT_DIR$/Entidades/Veiculos/Veiculos.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Program.c" beforeDir="false" afterPath="$PROJECT_DIR$/Program.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools.h" beforeDir="false" afterPath="$PROJECT_DIR$/tools.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../tools.h" beforeDir="false" afterPath="$PROJECT_DIR$/../tools.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +72,8 @@
       <workItem from="1682634344225" duration="6393000" />
       <workItem from="1682684873746" duration="18842000" />
       <workItem from="1682775597907" duration="126000" />
-      <workItem from="1682776037898" duration="9200000" />
+      <workItem from="1682776037898" duration="9471000" />
+      <workItem from="1682786551374" duration="186000" />
     </task>
     <servers />
   </component>
