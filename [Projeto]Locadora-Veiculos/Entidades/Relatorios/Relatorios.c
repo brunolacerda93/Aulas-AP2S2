@@ -10,9 +10,7 @@
     void ExibeLocacoesPorPlaca(ListaLocacoes* lista) {
         char placa[PLACA_LEN];
 
-        printf("\nDigite a Placa: ");
-        fgets(placa, PLACA_LEN, stdin);
-        placa[strcspn(placa, "\n")] = 0;
+        if (PlacaInput(placa)) return;
 
         ListaLocacoes* filtrada = ListaLocacaoPorPlaca(lista, placa);
 
@@ -77,5 +75,5 @@
 
             pause();
 
-        } while (opc != '0');
+        } while (1);
     }

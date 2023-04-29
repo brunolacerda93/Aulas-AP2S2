@@ -5,13 +5,13 @@
 
     // Bibliotecas
 
-    #include "../../tools.h"
+    #include "../ValidaInput.h"
 
 //-------------------------------------------------------------------------------------------------------------//
 
     // Definição dos tamanhos
 
-    #define CPF_LEN        15
+    #define CPF_LEN        20
     #define NOME_LEN       100
     #define ENDERECO_LEN   500
     #define CATEGORIA_LEN  10
@@ -48,10 +48,14 @@
 
     // Métodos Úteis
 
-        void     ExibeCliente (Cliente*);
-        Cliente* ClientePorCPF(ListaClientes*, string);
-        Cliente* ClonaCliente (Cliente*);
-        int      SizeString   (int);
+    int      SizeString    (int);
+    int      CPFInput      (string);
+    int      NomeInput     (string);
+    int      EnderecoInput (string);
+    int      CategoriaInput(string);
+    void     ExibeCliente  (Cliente*);
+    Cliente* ClientePorCPF (ListaClientes*, string);
+    Cliente* ClonaCliente  (Cliente*);
 
     // CRUD
 
@@ -65,7 +69,7 @@
 
     // Arquivos
 
-        void PermanenciaClientes(ListaClientes* lista);
+        void PersistenciaClientes(ListaClientes *lista);
         ListaClientes* ReadClientes();
 
     // SubMenu

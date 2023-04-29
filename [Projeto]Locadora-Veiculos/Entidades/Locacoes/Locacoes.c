@@ -18,12 +18,12 @@
         if (!aux)
             return NULL;
         
-        strcpy(aux->CPF, cpf);
-        strcpy(aux->Placa, placa);
+        strcpy_s(aux->CPF, CPF_LEN, cpf);
+        strcpy_s(aux->Placa, PLACA_LEN, placa);
         aux->DataLocacao    = *dataLocacao;
         aux->DataDevolucao  = *dataDevolucao;
         aux->ValorTotal     = valor;
-        strcpy(aux->Chave, GeraChave(aux));
+        strcpy_s(aux->Chave, CHAVE_LEN, GeraChave(aux));
 
         aux->proximo = NULL;
 
@@ -72,7 +72,7 @@
             return NULL;
         
         aux->indice = indice;
-        strcpy(aux->chave, locacao->Chave);
+        strcpy_s(aux->chave, CHAVE_LEN, locacao->Chave);
         aux->proximo = NULL;
 
         return aux;
@@ -102,10 +102,10 @@
     string GeraChave(const Locacao* locacao) {
         string result = String(CHAVE_LEN);
 
-        strcpy(result, locacao->CPF);
-        strcat(result, locacao->Placa);
-        strcat(result, FormataData(&locacao->DataLocacao));
-        strcat(result, FormataData(&locacao->DataDevolucao));
+        strcpy_s(result, CHAVE_LEN, locacao->CPF);
+        strcat_s(result, CHAVE_LEN, locacao->Placa);
+        strcat_s(result, CHAVE_LEN, FormataData(&locacao->DataLocacao));
+        strcat_s(result, CHAVE_LEN, FormataData(&locacao->DataDevolucao));
 
         return result;
     }
@@ -239,9 +239,7 @@
         if (opc == 'c' || opc == 'C') {
             char cpf[CPF_LEN];
 
-            printf("\nDigite o CPF: ");
-            fgets(cpf, CPF_LEN, stdin);
-            cpf[strcspn(cpf, "\n")] = 0;
+            if (CPFInput(cpf)) return NULL;
 
             ListaLocacoes* filtrada = ListaLocacaoPorCPF(lista, cpf);
 
@@ -256,9 +254,7 @@
         else if (opc == 'p' || opc == 'P') {
             char placa[PLACA_LEN];
 
-            printf("\nDigite a Placa: ");
-            fgets(placa, PLACA_LEN, stdin);
-            placa[strcspn(placa, "\n")] = 0;
+            if (PlacaInput(placa)) return NULL;
 
             ListaLocacoes* filtrada = ListaLocacaoPorPlaca(lista, placa);
 
@@ -380,7 +376,7 @@
             pause();
             free(filtrada);
 
-        } while (opc != '0');
+        } while (1);
     }
 
     //
@@ -389,8 +385,8 @@
     Locacao* NovaLocacao(ListaClientes* listaClientes,
                          ListaVeiculos* listaVeiculos) {
 
-        string     cpf   = String(CPF_LEN);
-        string     placa = String(PLACA_LEN);
+        char       cpf   [CPF_LEN];
+        char       placa [PLACA_LEN];
         DateTime*  dataLocacao;
         DateTime*  dataDevolucao;
         double     valor;
@@ -398,23 +394,15 @@
         do { // hast
             cleanScreen();
             printf("\nDigite 0 para cancelar!");
-            
-            printf("\nDigite o CPF (apenas numeros): ");
-            fgets(cpf, CPF_LEN, stdin);
-            cpf[strcspn(cpf, "\n")] = 0;
 
-            if (!strcmp(cpf, "0")) return NULL;
+            if (CPFInput(cpf)) return NULL;
 
             if (!ClientePorCPF(listaClientes, cpf)) {
                 printf("\nhttp ERROR 404: CPF not Encontrado!!!\n"); pause();
                 continue;
             }
 
-            printf("\nDigite a Placa (AAA0000): ");
-            fgets(placa, PLACA_LEN, stdin);
-            placa[strcspn(placa, "\n")] = 0;
-
-            if (!strcmp(placa, "0")) return NULL;
+            if (PlacaInput(placa)) return NULL;
 
             const Veiculo* veiculo = VeiculoPorPlaca(listaVeiculos, placa);
 
@@ -482,7 +470,7 @@
             return;
         }
 
-        if (!ValidaDataRange(listaLocacoes, novaLocacao)) {
+        if (novaLocacao && !ValidaDataRange(listaLocacoes, novaLocacao)) {
             printf("\nERRO: Datas informadas conflitam com registros anteriores!!!\n");
             free(novaLocacao);
             return;
@@ -535,7 +523,7 @@
             printf("\nDigite o novo valor: ");
             locacao->ValorTotal = Double()*DiferencaEmDias(&locacao->DataDevolucao, &locacao->DataLocacao);
 
-        } while(opc != '0');
+        } while(1);
     }
 
     //
@@ -677,13 +665,13 @@
     //
     // Registra Locações no arquivo LOCACOES
     //
-    void PermanenciaLocacoes(ListaLocacoes* lista) {
+    void PersistenciaLocacoes(ListaLocacoes* lista) {
         if (!lista) return;
 
         FILE* file;
         Locacao* aux = lista->locacao;
 
-        file = fopen(LOCACOES, "wb");
+        fopen_s(&file,LOCACOES, "wb");
 
         if (!file) {
             fprint_err(LOCACOES);
@@ -706,7 +694,7 @@
         Locacao locacao;
         ListaLocacoes* lista = CriaListaLocacoes();
 
-        file = fopen(LOCACOES, "rb");
+        fopen_s(&file, LOCACOES, "rb");
         if (!file) {
             fprint_err(LOCACOES);
             return lista;

@@ -118,7 +118,7 @@
                 num = num * 10 + (c - '0');
         }
 
-        return num *= sign;
+        return num * sign;
     }
 
     //

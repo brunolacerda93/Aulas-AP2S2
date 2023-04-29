@@ -5,7 +5,7 @@
 
     // Bibliotecas
 
-    #include "../../tools.h"
+    #include "../ValidaInput.h"
 
 //-------------------------------------------------------------------------------------------------------------//
 
@@ -48,6 +48,7 @@
 
     // Métodos Úteis
 
+        int      PlacaInput      (string);
         void     ExibeVeiculo    (Veiculo*);
         Veiculo* VeiculoPorPlaca (ListaVeiculos*, string);
         Veiculo* ClonaVeiculo    (Veiculo*);
@@ -64,7 +65,7 @@
 
     // Arquivos
 
-        void            PermanenciaVeiculos(ListaVeiculos* lista);
+        void            PersistenciaVeiculos(ListaVeiculos *lista);
         ListaVeiculos*  ReadVeiculos();
 
     // Submenu

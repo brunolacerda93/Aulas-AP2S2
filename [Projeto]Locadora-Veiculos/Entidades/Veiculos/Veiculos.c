@@ -31,9 +31,9 @@
         if (!aux)
             return NULL;
 
-        strcpy(aux->Placa, placa);
-        strcpy(aux->Montadora, montadora);
-        strcpy(aux->Modelo, modelo);
+        strcpy_s(aux->Placa, PLACA_LEN, placa);
+        strcpy_s(aux->Montadora, MONTADORA_LEN, montadora);
+        strcpy_s(aux->Modelo, MODELO_LEN, modelo);
         aux->Ano = ano;
         aux->ValorDiaria = diaria;
 
@@ -74,6 +74,28 @@
 //-------------------------------------------------------------------------------------------------------------//
 
     // Métodos Úteis
+
+    //
+    // Retorn 0 se a Placa digitada pelo usuário é válida
+    //
+    int PlacaInput(string placa) {
+        do { // hast
+            printf("\nDigite a Placa: ");
+            fgets(placa, PLACA_LEN, stdin);
+            placa[strcspn(placa, "\n")] = 0;
+
+            if (!strcmp(placa, "0")) return 1;
+
+            if (ValidaPlaca(placa)) continue;
+
+            for (size_t i = 0; i < 5; i++) {
+                if (!isupper(placa[i])) { placa[i] = (char)toupper(placa[i]); }
+            }
+
+            return 0;
+
+        } while (1);
+    }
 
     //
     // Formata e Exibe um Veiculo
@@ -117,11 +139,9 @@
     // Procura um Veiculo com a Placa passada como argumento e chama ExibeVeiculo()
     //
     void ExibeVeiculoPorPlaca(ListaVeiculos* lista) {
-        printf("\nDigite a placa (AAA0000): ");
-
         char placa[PLACA_LEN];
-        fgets(placa, PLACA_LEN, stdin);
-        placa[strcspn(placa, "\n")] = 0;
+
+        if (PlacaInput(placa)) return;
 
         Veiculo* aux = VeiculoPorPlaca(lista, placa);
 
@@ -149,20 +169,20 @@
     // Retorna um novo Veiculo inserido pelo usuário
     //
     Veiculo* NovoVeiculo(ListaVeiculos* lista) {
-        string placa     = String(PLACA_LEN);
-        string montadora = String(MONTADORA_LEN);
-        string modelo    = String(MODELO_LEN);
+        char   placa     [PLACA_LEN];
+        char   montadora [MONTADORA_LEN];
+        char   modelo    [MODELO_LEN];
         int    ano;
         double diaria;
 
         cleanScreen();
 
-        printf("\nDigite a Placa (AAA0000): ");
-        fgets(placa, PLACA_LEN, stdin);
-        placa[strcspn(placa, "\n")] = 0;
+        if (PlacaInput(placa)) return NULL;
 
-        if (VeiculoPorPlaca(lista, placa))
+        if (VeiculoPorPlaca(lista, placa)) {
+            printf("\nA Placa informada ja se encontra cadastrada no sistema!!!\n");
             return NULL;
+        }
 
         printf("\nDigite a Montadora: ");
         fgets(montadora, MONTADORA_LEN, stdin);
@@ -217,11 +237,9 @@
     // Atualiza as informações de um Veiculo com a Placa inserida pelo usuário
     //
     void AtualizaVeiculo(ListaVeiculos* lista) {
-        printf("\nDigite a placa (AAA0000): ");
-
         char placa[PLACA_LEN];
-        fgets(placa, PLACA_LEN, stdin);
-        placa[strcspn(placa, "\n")] = 0;
+
+        if (PlacaInput(placa)) return;
 
         Veiculo* aux = VeiculoPorPlaca(lista, placa);
 
@@ -256,20 +274,19 @@
             switch(opc) {
                 case '1': aux->Ano = Int();            break;
                 case '2': aux->ValorDiaria = Double(); break;
+                default : break;
             }
 
-        } while (opc != '0');
+        } while (1);
     }
 
     //
     // Remove um Veiculo com a Placa inserida pelo usuário
     //
     void RemoveVeiculo(ListaVeiculos* lista) {
-        printf("\nDigite a placa (AAA0000): ");
-
         char placa[PLACA_LEN];
-        fgets(placa, PLACA_LEN, stdin);
-        placa[strcspn(placa, "\n")] = 0;
+
+        if (PlacaInput(placa)) return;
 
         Veiculo* anterior = NULL;
         Veiculo* atual    = lista->veiculo;
@@ -312,13 +329,13 @@
     //
     // Registra Veículos no arquivo VEICULOS
     //
-    void PermanenciaVeiculos(ListaVeiculos* lista) {
+    void PersistenciaVeiculos(ListaVeiculos* lista) {
         if (!lista) return;
 
         FILE* file;
         Veiculo* aux = lista->veiculo;
 
-        file = fopen(VEICULOS, "wb");
+        fopen_s(&file, VEICULOS, "wb");
 
         if (!file) {
             fprint_err(VEICULOS);
@@ -341,7 +358,7 @@
         Veiculo veiculo;
         ListaVeiculos* lista = CriaListaVeiculos();
 
-        file = fopen(VEICULOS, "rb");
+        fopen_s(&file, VEICULOS, "rb");
         if (!file) {
             fprint_err(VEICULOS);
             return lista;

@@ -35,9 +35,9 @@ int LogOff(ListaClientes * listaClientes, ListaVeiculos* listaVeiculos, ListaLoc
     int opc = getchar(); clearBuffer();
 
     if (opc == '1') {
-        PermanenciaClientes(listaClientes);
-        PermanenciaVeiculos(listaVeiculos);
-        PermanenciaLocacoes(listaLocacoes);
+        PersistenciaClientes(listaClientes);
+        PersistenciaVeiculos(listaVeiculos);
+        PersistenciaLocacoes(listaLocacoes);
         return '0';
     }
 

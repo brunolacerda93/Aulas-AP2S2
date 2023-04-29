@@ -30,10 +30,10 @@
         if (!aux)
             return NULL;
 
-        strcpy(aux->CPF, cpf);
-        strcpy(aux->Nome, nome);
-        strcpy(aux->Endereco, endereco);
-        strcpy(aux->Categoria, categoria);
+        strcpy_s(aux->CPF, CPF_LEN, cpf);
+        strcpy_s(aux->Nome, NOME_LEN, nome);
+        strcpy_s(aux->Endereco, ENDERECO_LEN, endereco);
+        strcpy_s(aux->Categoria, CATEGORIA_LEN, categoria);
         
         aux->proximo = NULL;
         return aux;
@@ -74,6 +74,77 @@
     // Métodos úteis
 
     //
+    // Retorna 0 se o CPF digitado pelo usuário é válido
+    //
+    int CPFInput(string cpf) {
+        do { // hast
+            printf("\nDigite o CPF (apenas numeros): ");
+            fgets(cpf, CPF_LEN, stdin);
+            cpf[strcspn(cpf, "\n")] = 0;
+
+            if (!strcmp(cpf,"0")) return 1;
+
+            if (ValidaCPF(cpf)) continue;
+
+            return 0;
+
+        } while (1);
+    }
+
+    //
+    // Retorna 0 se o Nome digitado pelo usuário é válido
+    //
+    int NomeInput(string nome) {
+        do { // hast
+            printf("\nDigite o Nome: ");
+            fgets(nome, NOME_LEN, stdin);
+            nome[strcspn(nome, "\n")] = 0;
+
+            if (!strcmp(nome,"0")) return 1;
+
+            if (ValidaNome(nome)) continue;
+
+            return 0;
+
+        } while (1);
+    }
+
+    //
+    // Retorna 0 se o Endereço digitado pelo usuário é válido
+    //
+    int EnderecoInput(string endereco) {
+        printf("\nDigite o Endereco: ");
+        fgets(endereco, ENDERECO_LEN, stdin);
+        endereco[strcspn(endereco, "\n")] = 0;
+
+        if (!strcmp(endereco,"0")) return 1;
+
+        return 0;
+    }
+
+    //
+    // Retorna 0 se a Categoria digitada pelo usuário é válida
+    //
+    int CategoriaInput(string categoria) {
+        do { // hast
+            printf("\nDigite a Categoria da Habilitacao (A B C D): ");
+            fgets(categoria, CATEGORIA_LEN, stdin);
+            categoria[strcspn(categoria, "\n")] = 0;
+
+            if (!strcmp(categoria,"0")) return 1;
+
+            for (size_t i = 0; i < strlen(categoria); i++) {
+                if (!isupper(categoria[i])) { categoria[i] = (char)toupper(categoria[i]); }
+            }
+
+            if (ValidaCategoria(categoria)) continue;
+
+            return 0;
+
+        } while (1);
+    }
+
+    //
     // Formata e exibe um Cliente
     //
     void ExibeCliente(Cliente* client) {
@@ -110,11 +181,11 @@
     // Retorna o tamanho da string dado um campo (nome, endereço ou categoria)
     //
     int SizeString(const int opc) {
-        if (opc == 1)
+        if (opc == '1')
             return NOME_LEN;
-        if (opc == 2)
+        if (opc == '2')
             return ENDERECO_LEN;
-        if (opc == 3)
+        if (opc == '3')
             return CATEGORIA_LEN;
         return 0;
     }
@@ -127,11 +198,9 @@
     // Procura um Cliente com o CPF passado como argumento e chama ExibeCliente()
     //
     void ExibeClientePorCPF(ListaClientes* lista) {
-        printf("\nDigite o CPF (apenas numeros): ");
-
         char cpf[CPF_LEN];
-        fgets(cpf, CPF_LEN, stdin);
-        cpf[strcspn(cpf, "\n")] = 0;
+
+        if (CPFInput(cpf)) return;
 
         Cliente* aux = ClientePorCPF(lista, cpf);
 
@@ -159,31 +228,25 @@
     // Retorna um novo Cliente inserido pelo usuário
     //
     Cliente* NovoCliente(ListaClientes* lista) {
-        string cpf       = String(CPF_LEN);
-        string nome      = String(NOME_LEN);
-        string endereco  = String(ENDERECO_LEN);
-        string categoria = String(CATEGORIA_LEN);
+        char cpf       [CPF_LEN];
+        char nome      [NOME_LEN];
+        char endereco  [ENDERECO_LEN];
+        char categoria [CATEGORIA_LEN];
 
         cleanScreen();
-        
-        printf("\nDigite o CPF (apenas numeros): ");
-        fgets(cpf, CPF_LEN, stdin);
-        cpf[strcspn(cpf, "\n")] = 0;
 
-        if (ClientePorCPF(lista, cpf))
+        if (CPFInput(cpf)) return NULL;
+
+        if (ClientePorCPF(lista, cpf)) {
+            printf("\nO CPF informado ja se encontra cadastrado no sistema!!!\n");
             return NULL;
+        }
 
-        printf("\nDigite o Nome: ");
-        fgets(nome, NOME_LEN, stdin);
-        nome[strcspn(nome, "\n")] = 0;
+        if (NomeInput(nome)) return NULL;
 
-        printf("\nDigite o Endereco: ");
-        fgets(endereco, ENDERECO_LEN, stdin);
-        endereco[strcspn(endereco, "\n")] = 0;
+        if (EnderecoInput(endereco)) return NULL;
 
-        printf("\nDigite a Categoria da Habilitacao (A B C D): ");
-        fgets(categoria, CATEGORIA_LEN, stdin);
-        categoria[strcspn(categoria, "\n")] = 0;
+        if (CategoriaInput(categoria)) return NULL;
 
         return CriaClienteArgs(cpf, nome, endereco, categoria);
     }
@@ -224,11 +287,9 @@
     // Atualiza as informações de um Cliente com o CPF inserido pelo usuário
     //
     void AtualizaCliente(ListaClientes* lista) {
-        printf("\nDigite o CPF (apenas numeros): ");
-
         char cpf[CPF_LEN];
-        fgets(cpf, CPF_LEN, stdin);
-        cpf[strcspn(cpf, "\n")] = 0;
+
+        if (CPFInput(cpf)) return;
 
         Cliente* aux = ClientePorCPF(lista, cpf);
 
@@ -259,30 +320,27 @@
                 continue;
             }
 
-            const int size = SizeString(opc-48);
-            string str = String(size);
-
-            printf("\nDigite o novo valor: ");
-            fgets(str, size, stdin);
-            str[(strcspn(str, "\n"))] = 0;
+            string str = String(SizeString(opc));
 
             switch (opc) {
-                case '1': strcpy(aux->Nome, str);       break;
-                case '2': strcpy(aux->Endereco, str);   break;
-                case '3': strcpy(aux->Categoria, str);  break;
+                case '1': if (!NomeInput(str))      strcpy_s(aux->Nome,      NOME_LEN,      str); break;
+                case '2': if (!EnderecoInput(str))  strcpy_s(aux->Endereco,  ENDERECO_LEN,  str); break;
+                case '3': if (!CategoriaInput(str)) strcpy_s(aux->Categoria, CATEGORIA_LEN, str); break;
+                default : break;
             }
-        } while (opc != '0');
+
+            free(str);
+
+        } while (1);
     }
 
     //
     // Remove um Cliente com o CPF inserido pelo usuário
     //
     void RemoveCliente(ListaClientes* lista) {
-        printf("\nDigite o CPF (apenas numeros): ");
-
         char cpf[CPF_LEN];
-        fgets(cpf, CPF_LEN, stdin);
-        cpf[strcspn(cpf, "\n")] = 0;
+
+        if (CPFInput(cpf)) return;
 
         Cliente* anterior = NULL;
         Cliente* atual    = lista->cliente;
@@ -325,13 +383,13 @@
     //
     // Registra Clientes no arquivo CLIENTES
     //
-    void PermanenciaClientes(ListaClientes* lista) {
+    void PersistenciaClientes(ListaClientes* lista) {
         if (!lista) return;
 
         FILE* file;
         Cliente* aux = lista->cliente;
 
-        file = fopen(CLIENTES, "wb");
+        fopen_s(&file, CLIENTES, "wb");
 
         if (!file) {
             fprint_err(CLIENTES);
@@ -354,7 +412,7 @@
         Cliente cliente;
         ListaClientes* lista = CriaListaClientes();
 
-        file = fopen(CLIENTES, "rb");
+        fopen_s(&file, CLIENTES, "rb");
         if (!file) {
             fprint_err(CLIENTES);
             return lista;
