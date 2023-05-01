@@ -105,7 +105,7 @@
         printf("\nMontadora   : %s",  veiculo->Montadora);
         printf("\nModelo      : %s",  veiculo->Modelo);
         printf("\nAno         : %4d", veiculo->Ano);
-        printf("\nDiaria (R$) : %.2lf", veiculo->ValorDiaria);
+        printf("\nDiária (R$) : %.2lf", veiculo->ValorDiaria);
         printf("\n====================================================\n");
     }
 
@@ -146,7 +146,7 @@
         Veiculo* aux = VeiculoPorPlaca(lista, placa);
 
         if (!aux) {
-            printf("\nVeiculo not Encontrado... \n");
+            printf("\nhttp ERROR: 404 - Veículo NOT Found!!!\n");
             return;
         }
 
@@ -180,7 +180,7 @@
         if (PlacaInput(placa)) return NULL;
 
         if (VeiculoPorPlaca(lista, placa)) {
-            printf("\nA Placa informada ja se encontra cadastrada no sistema!!!\n");
+            printf("\nA Placa informada já se encontra cadastrada no sistema!!!\n");
             return NULL;
         }
 
@@ -195,7 +195,7 @@
         printf("\nDigite o ano (YYYY): ");
         ano = Int();
 
-        printf("\nDigite o valor da diaria (R$88.88): ");
+        printf("\nDigite o valor da diária (R$88.88): ");
         diaria = Double();
 
         return CriaVeiculoArgs(placa, montadora, modelo, ano, diaria);
@@ -244,7 +244,7 @@
         Veiculo* aux = VeiculoPorPlaca(lista, placa);
 
         if (!aux) {
-            printf("\nVeiculo not Encontrado... \n");
+            printf("\nhttp ERROR: 404 - Veículo NOT Found!!!\n");
             pause();
             return;
         }
@@ -254,9 +254,9 @@
             cleanScreen();
             ExibeVeiculo(aux);
 
-            printf("\nQual informacao deseja alterar?\n");
+            printf("\nQual informação deseja alterar?\n");
             printf("\n 1 - Ano");
-            printf("\n 2 - Diaria (R$)");
+            printf("\n 2 - Diária (R$)");
             printf("\n 0 - Retornar");
             printf("\n\nEscolha: ");
             opc = getchar(); clearBuffer();
@@ -264,7 +264,7 @@
             if (opc == '0') break;
 
             if (opc < '1' || opc > '2') {
-                printf("\nINVALIDO!!!\n");
+                printf("\nINVÁLIDO!!!\n");
                 pause();
                 continue;
             }
@@ -297,7 +297,7 @@
         }
 
         if ((!anterior && strcmp(atual->Placa, placa)) || !atual) {
-            printf("Veiculo not Encontrado... \n");
+            printf("\nhttp ERROR: 404 - Veículo NOT Found!!!\n");
             return;
         }
 
@@ -386,7 +386,7 @@
             cleanScreen();
             
             printf("===============================\n");
-            printf("      VEICULOS\n\n");
+            printf("      VEÍCULOS\n\n");
             printf("  1 - Cadastrar\n");
             printf("  2 - Exibir Um\n");
             printf("  3 - Exibir Todos\n");

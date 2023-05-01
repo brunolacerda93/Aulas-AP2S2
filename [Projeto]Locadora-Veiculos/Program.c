@@ -1,5 +1,4 @@
 #include "Entidades/Relatorios/Relatorios.c"
-#include <locale.h>
 
 void PreencheClientes(ListaClientes* lista) {
     InsereClienteNaLista(lista, CriaClienteArgs("45612378966", "Stulla Sigurdasson",
@@ -74,7 +73,7 @@ void Menu(ListaClientes * listaClientes, ListaVeiculos* listaVeiculos, ListaLoca
 }
 
 int main(int argc, char const *argv[]) {
-    setlocale(LC_ALL, ".utf8");
+    Locale();
 
     ListaClientes* listaClientes = ReadClientes();
     ListaVeiculos* listaVeiculos = ReadVeiculos();

@@ -116,8 +116,8 @@
     void ExibeLocacao(Locacao* locacao) {
         printf("\nCPF              : "); PrintCPF(locacao->CPF);
         printf("\nPlaca            : "); PrintPlaca(locacao->Placa);
-        printf("\nData Locacao     : "); ExibeData(&locacao->DataLocacao);
-        printf("\nData Devolucao   : "); ExibeData(&locacao->DataDevolucao);
+        printf("\nData Locação     : "); ExibeData(&locacao->DataLocacao);
+        printf("\nData Devolução   : "); ExibeData(&locacao->DataDevolucao);
         printf("\nValor Total (R$) : %.2lf", locacao->ValorTotal);
         printf("\n====================================================\n");
     }
@@ -244,7 +244,7 @@
             ListaLocacoes* filtrada = ListaLocacaoPorCPF(lista, cpf);
 
             if (!filtrada->locacao) {
-                printf("\nhttp ERROR: 404 - CPF NOT Encontrado!!!\n");
+                printf("\nhttp ERROR: 404 - CPF NOT Found!!!\n");
                 return NULL;
             }
 
@@ -259,7 +259,7 @@
             ListaLocacoes* filtrada = ListaLocacaoPorPlaca(lista, placa);
 
             if (!filtrada->locacao) {
-                printf("\nhttp ERROR: 404 - Placa NOT Encontrada!!!\n");
+                printf("\nhttp ERROR: 404 - Placa NOT Found!!!\n");
                 return NULL;
             }
 
@@ -276,7 +276,7 @@
             ListaLocacoes* filtrada = ListaLocacaoPorData(lista, dataFinal, dataInicial);
 
             if(!filtrada->locacao) {
-                printf("\nhttp ERROR: 404 - Locacao NOT Encontrada!!!\n");
+                printf("\nhttp ERROR: 404 - Locacao NOT Found!!!\n");
                 return NULL;
             }
 
@@ -288,7 +288,7 @@
 
         else if (opc == '0') return NULL;
 
-        else printf("\n INVALIDO!!!\n\n");
+        else printf("\n INVÁLIDO!!!\n\n");
         
         return NULL;
     }
@@ -399,7 +399,7 @@
             if (CPFInput(cpf)) return NULL;
 
             if (!ClientePorCPF(listaClientes, cpf)) {
-                printf("\nhttp ERROR 404: CPF not Encontrado!!!\n"); pause();
+                printf("\nhttp ERROR: 404 - CPF NOT Found!!!\n"); pause();
                 continue;
             }
 
@@ -408,14 +408,14 @@
             const Veiculo* veiculo = VeiculoPorPlaca(listaVeiculos, placa);
 
             if (!veiculo) {
-                printf("\nhttp ERROR 404: Placa not Encontrada!!!\n"); pause();
+                printf("\nhttp ERROR: 404 - Placa NOT Found!!!\n"); pause();
                 continue;
             }
 
-            printf("\nData da Locacao: ");
+            printf("\nData da Locação: ");
             dataLocacao = CriaDataValida();
 
-            printf("\nData da Devolucao: ");
+            printf("\nData da Devolução: ");
             dataDevolucao = CriaDataValida();
 
             if (!ValidaDataLocacao(dataDevolucao, dataLocacao)) {
@@ -466,7 +466,7 @@
         Locacao* novaLocacao = NovaLocacao(listaClientes, listaVeiculos);
 
         if (novaLocacao && LocacaoPorChave(listaLocacoes, novaLocacao->Chave)) {
-            printf("\nERRO: Existe uma Locacao com as mesmas informacoes no sistema...\n");
+            printf("\nERRO: Existe uma Locação com as mesmas informações no sistema...\n");
             free(novaLocacao);
             return;
         }
@@ -487,14 +487,14 @@
         int loc;
 
         do { // hast
-            printf("\nDigite o indice da locacao que deseja alterar: ");
+            printf("\nDigite o índice da Locação que deseja alterar: ");
             loc = Int();
 
             if (loc <= 0)
                 return;
 
             if (loc > filtrada->tamanho)
-                printf("\nINVALIDO!!!\n");
+                printf("\nINVÁLIDO!!!\n");
             
         } while (loc > filtrada->tamanho);
         
@@ -507,8 +507,8 @@
             cleanScreen();
             ExibeLocacao(locacao);
 
-            printf("\nQual informacao deseja alterar?\n");
-            printf("\n 1 - Valor Diaria");
+            printf("\nQual informação deseja alterar?\n");
+            printf("\n 1 - Valor Diária");
             printf("\n 0 - Retornar");
             printf("\n\nEscolha: ");
             opc = getchar(); clearBuffer();
@@ -516,7 +516,7 @@
             if (opc == '0') break;
 
             if (opc != '1') {
-                printf("\nINVALIDO!!!\n");
+                printf("\nINVÁLIDO!!!\n");
                 pause();
                 continue;
             }
@@ -537,14 +537,14 @@
         int loc;
 
         do { // hast
-            printf("\nDigite o indice da locacao que deseja remover: ");
+            printf("\nDigite o índice da Locação que deseja remover: ");
             loc = Int();
 
             if (loc <= 0)
                 return;
 
             if (loc > filtrada->tamanho)
-                printf("\nINVALIDO!!!\n");
+                printf("\nINVÁLIDO!!!\n");
             
         } while (loc > filtrada->tamanho);
         
@@ -725,7 +725,7 @@
             cleanScreen();
             
             printf("===============================\n");
-            printf("      LOCACOES\n\n");
+            printf("      LOCAÇÕES\n\n");
             printf("  1 - Cadastrar\n");
             printf("  2 - Exibir por Indexador\n");
             printf("  3 - Exibir Todas\n");

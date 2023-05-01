@@ -19,7 +19,7 @@
 
         for (size_t i = 0; i < length; i++) {
             if (!isdigit(cpf[i])) {
-                printf("\nDigite apenas numeros!!!\n");
+                printf("\nDigite apenas números!!!\n");
                 return 1;
             }
         }
@@ -39,8 +39,8 @@
         }
 
         for (size_t i = 0; i < length; i++) {
-            if (!isalpha(nome[i]) && nome[i] != ' ') {
-                printf("\nNome nao deve conter numeros!!!\n");
+            if (isdigit(nome[i]) && nome[i] != ' ') {
+                printf("\nNome não deve conter números!!!\n");
                 return 1;
             }
         }
@@ -56,7 +56,7 @@
 
         for (size_t i = 0; i < length; i++) {
             if (cat[i] != 'A' && cat[i] != 'B' && cat[i] != 'C' && cat[i] != 'D' && cat[i] != ' ') {
-                printf("\nCategoria invalida!!!\n");
+                printf("\nCategoria inválida!!!\n");
                 return 1;
             }
         }
@@ -72,7 +72,7 @@
 
         for (size_t i = 0; i < length; i++) {
             if (!isalnum(placa[i])) {
-                printf("\nDigite apenas letras e numeros!!!\n");
+                printf("\nDigite apenas letras e números!!!\n");
                 return 1;
             }
         }
@@ -84,7 +84,7 @@
 
         for (size_t i = 0; i < 3; i++) {
             if (!isalpha(placa[i])) {
-                printf("\nPlaca Invalida!!!\n");
+                printf("\nPlaca Inválida!!!\n");
                 return 1;
             }
         }
@@ -92,7 +92,7 @@
         for (size_t i = 3; i < length; i++) {
             if (i == 4) continue;
             if (!isdigit(placa[i])) {
-                printf("\nPlaca Invalida!!!\n");
+                printf("\nPlaca Inválida!!!\n");
                 return 1;
             }
         }

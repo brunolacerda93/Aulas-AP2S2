@@ -9,6 +9,7 @@
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>
+    #include <locale.h>
 
 //-------------------------------------------------------------------------------------------------------------//
 
@@ -38,16 +39,45 @@
     //
     #define CALLING printf("\n\n||===== Calling: %s =====||\n", __func__)
 
+    //
+    // MACRO para texto padrão de erro
+    //-------------------------------------
+    //
+    #define FERROR "Erro ao abrir "
+
 //-------------------------------------------------------------------------------------------------------------//
 
     // FUNÇÕES E MÉTODOS
 
     //
+    // Define o padrão UTF8 para os caracteres do terminal
+    //
+    void Locale() { setlocale(LC_ALL, ".utf8"); }
+
+    //
     // Limpa o buffer de entrada
     //
-    void clearBuffer() {
-        while(getchar() != '\n');
-    }
+    void clearBuffer() { while(getchar() != '\n'); }
+
+    //
+    // Pausa e espera um input
+    //
+    void pause() { printf("\nPressione <enter> para continuar... "); getchar(); }
+
+    //
+    // Limpa a tela do console
+    //
+    void cleanScreen() { printf("\e[1;1H\e[2J"); }
+
+    //
+    // Retorna o maior de dois inteiros
+    //
+    int maxInt(const int a, const int b) { return a >= b ? a : b; }
+
+    //
+    // Retorna um ponteiro para uma string vazia do tamanho passado como argumento
+    //
+    string String(const size_t size) { return (string) calloc(size, sizeof(char)); }
 
     //
     // Troca dois inteiros por endereço
@@ -65,36 +95,14 @@
     int validateTime(const int hour, const int min, const int sec) {
         if (hour < 0 || hour > 24)
             return 0;
-        
+
         if (min < 0 || min > 59)
             return 0;
-        
+
         if (sec < 0 || sec > 59)
             return 0;
-        
+
         return 1;
-    }
-
-    //
-    // Retorna o maior de dois inteiros
-    //
-    int maxInt(const int a, const int b) {
-        return a >= b ? a : b;
-    }
-
-    //
-    // Pausa e espera um input
-    //  
-    void pause() {
-        printf("\nPressione qualquer tecla para continuar... ");
-        getchar();
-    }
-    
-    //
-    // Limpa a tela do console
-    //
-    void cleanScreen() {
-        printf("\e[1;1H\e[2J");
     }
 
     //
@@ -128,13 +136,6 @@
     }
 
     //
-    // Retorna um ponteiro para uma string vazia do tamanho passado como argumento
-    //
-    string String(const size_t size) {
-        return (string) calloc(size, sizeof(char));
-    }
-
-    //
     // Formata o CPF para exibição
     //
     void PrintCPF(string cpf) {
@@ -165,6 +166,17 @@
 
             i++;
         }
+    }
+
+    //
+    // Exibe a mensagem de erro no Console
+    //
+    void fprint_err(string Filename) {
+        string error = String(50);
+        strcat(error, FERROR);
+        strcat(error, Filename);
+        perror(error);
+        free(error);
     }
 
 #endif

@@ -78,7 +78,7 @@
     //
     int CPFInput(string cpf) {
         do { // hast
-            printf("\nDigite o CPF (apenas numeros): ");
+            printf("\nDigite o CPF (apenas números): ");
             fgets(cpf, CPF_LEN, stdin);
             cpf[strcspn(cpf, "\n")] = 0;
 
@@ -113,7 +113,7 @@
     // Retorna 0 se o Endereço digitado pelo usuário é válido
     //
     int EnderecoInput(string endereco) {
-        printf("\nDigite o Endereco: ");
+        printf("\nDigite o Endereço: ");
         fgets(endereco, ENDERECO_LEN, stdin);
         endereco[strcspn(endereco, "\n")] = 0;
 
@@ -127,7 +127,7 @@
     //
     int CategoriaInput(string categoria) {
         do { // hast
-            printf("\nDigite a Categoria da Habilitacao (A B C D): ");
+            printf("\nDigite a Categoria da Habilitação (A B C D): ");
             fgets(categoria, CATEGORIA_LEN, stdin);
             categoria[strcspn(categoria, "\n")] = 0;
 
@@ -150,7 +150,7 @@
     void ExibeCliente(Cliente* client) {
         printf("\nNome      : %s", client->Nome);
         printf("\nCPF       : ");  PrintCPF(client->CPF);
-        printf("\nEndereco  : %s", client->Endereco);
+        printf("\nEndereço  : %s", client->Endereco);
         printf("\nCategoria : %s", client->Categoria);
         printf("\n====================================================\n");
     }
@@ -205,7 +205,7 @@
         Cliente* aux = ClientePorCPF(lista, cpf);
 
         if (!aux) {
-            printf("\nCliente not Encontrado... \n");
+            printf("\nhttp ERROR: 404 - Cliente NOT Found!!!\n");
             return;
         }
         
@@ -238,7 +238,7 @@
         if (CPFInput(cpf)) return NULL;
 
         if (ClientePorCPF(lista, cpf)) {
-            printf("\nO CPF informado ja se encontra cadastrado no sistema!!!\n");
+            printf("\nO CPF informado já se encontra cadastrado no sistema!!!\n");
             return NULL;
         }
 
@@ -294,7 +294,7 @@
         Cliente* aux = ClientePorCPF(lista, cpf);
 
         if (!aux) {
-            printf("\nCliente not Encontrado... \n");
+            printf("\nhttp ERROR: 404 - Cliente NOT Found!!!\n");
             pause();
             return;
         }
@@ -304,9 +304,9 @@
             cleanScreen();
             ExibeCliente(aux);
 
-            printf("\nQual informacao deseja alterar?\n");
+            printf("\nQual informação deseja alterar?\n");
             printf("\n 1 - Nome");
-            printf("\n 2 - Endereco");
+            printf("\n 2 - Endereço");
             printf("\n 3 - Categoria");
             printf("\n 0 - Retornar");
             printf("\n\nEscolha: ");
@@ -315,7 +315,7 @@
             if (opc == '0') break;
 
             if (opc < '1' || opc > '3') {
-                printf("\nINVALIDO!!!\n");
+                printf("\nINVÁLIDO!!!\n");
                 pause();
                 continue;
             }
@@ -351,7 +351,7 @@
         }
         
         if ((!anterior && strcmp(atual->CPF, cpf)) || !atual) {
-            printf("\nCliente not Encontrado... \n");
+            printf("\nhttp ERROR: 404 - Cliente NOT Found!!!\n");
             return;
         }
 
@@ -457,7 +457,7 @@
                 case '4':     AtualizaCliente(lista);          break;
                 case '5':       RemoveCliente(lista); pause(); break;
                 case '0':                                      break;
-                default : printf("\n INVALIDO!!!\n"); pause(); break;
+                default : printf("\n INVÁLIDO!!!\n"); pause(); break;
             }
 
         } while (opc != '0');
