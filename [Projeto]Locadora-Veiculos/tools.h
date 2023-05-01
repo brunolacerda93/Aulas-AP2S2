@@ -91,7 +91,7 @@
     // Pausa e espera um input
     //  
     void pause() {
-        printf("\nPressione qualquer tecla para continuar... ");
+        printf("\nPressione <enter> para continuar... ");
         getchar();
     }
     

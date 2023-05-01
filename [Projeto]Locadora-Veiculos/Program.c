@@ -1,4 +1,5 @@
 #include "Entidades/Relatorios/Relatorios.c"
+#include <locale.h>
 
 void PreencheClientes(ListaClientes* lista) {
     InsereClienteNaLista(lista, CriaClienteArgs("45612378966", "Stulla Sigurdasson",
@@ -28,7 +29,7 @@ void PreencheLocacoes(ListaLocacoes* lista) {
 }
 
 int LogOff(ListaClientes * listaClientes, ListaVeiculos* listaVeiculos, ListaLocacoes* listaLocacoes) {
-    printf("\nDeseja salvar as alteracoes?");
+    printf("\nDeseja salvar as alterações?");
     printf("\nDigite qualquer tecla para voltar");
     printf("\n   1 = SIM  ||  0 = NAO");
     printf("\n--> ");
@@ -50,12 +51,12 @@ void Menu(ListaClientes * listaClientes, ListaVeiculos* listaVeiculos, ListaLoca
     do { // hast
         cleanScreen();
 
-        printf("===============================\n");
-        printf("      Locacoes Louca-Acoes!\n\n");
+        printf("================================\n");
+        printf("      Locações Louca-Ações!\n\n");
         printf("  1 - Clientes\n");
-        printf("  2 - Veiculos\n");
-        printf("  3 - Locacoes\n");
-        printf("  4 - Relatorios\n");
+        printf("  2 - Veículos\n");
+        printf("  3 - Locações\n");
+        printf("  4 - Relatórios\n");
         printf("  0 - Retornar\n");
         printf("\nEscolha: ");
         opc = getchar(); clearBuffer();
@@ -66,13 +67,15 @@ void Menu(ListaClientes * listaClientes, ListaVeiculos* listaVeiculos, ListaLoca
             case '3': MenuLocacoes(listaClientes, listaVeiculos, listaLocacoes);          break;
             case '4': MenuRelatorios(listaLocacoes);                                      break;
             case '0': opc = LogOff(listaClientes, listaVeiculos, listaLocacoes); pause(); break;
-            default : printf("\n INVALIDO!!!\n"); pause();                                break;
+            default : printf("\n INVÁLIDO!!!\n"); pause();                                break;
         }
 
     } while(opc != '0');
 }
 
 int main(int argc, char const *argv[]) {
+    setlocale(LC_ALL, ".utf8");
+
     ListaClientes* listaClientes = ReadClientes();
     ListaVeiculos* listaVeiculos = ReadVeiculos();
     ListaLocacoes* listaLocacoes = ReadLocacoes();

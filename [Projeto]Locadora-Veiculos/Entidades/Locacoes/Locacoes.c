@@ -367,7 +367,8 @@
                 free(filtrada);
                 return;
             }
-            else if (isUpdateDelete == 2 && filtrada) {
+
+            if (isUpdateDelete == 2 && filtrada) {
                 RemoveLocacao(listaLocacoes, filtrada, listaClientes, listaVeiculos);
                 free(filtrada);
                 return;
@@ -618,19 +619,19 @@
     //
     // Retorna 1 se as Datas da Locação não conflitam com as Datas que já existem na Lista de Locações
     //
-    int ValidaDataRange(ListaLocacoes* listaLocacoes, Locacao* locacao) {
+    int ValidaDataRange(ListaLocacoes* listaLocacoes, Locacao* locacao_pendente) {
         Locacao* aux = listaLocacoes->locacao;
         Locacao* temp;
         ListaLocacoes* lista;
 
         while (aux) {
-            if (!strcmp(locacao->CPF, aux->CPF)) {
-                lista = ListaLocacaoPorCPF(listaLocacoes, locacao->CPF);
+            if (!strcmp(locacao_pendente->CPF, aux->CPF)) {
+                lista = ListaLocacaoPorCPF(listaLocacoes, locacao_pendente->CPF);
                 temp = lista->locacao;
 
                 while (temp) {
-                    if (DataRangeInRange( &locacao->DataDevolucao,
-                                          &locacao->DataLocacao,
+                    if (DataRangeInRange( &locacao_pendente->DataDevolucao,
+                                          &locacao_pendente->DataLocacao,
                                           &temp->DataDevolucao,
                                           &temp->DataLocacao) != -1) { return 0; }
                     temp = temp->proximo;
@@ -638,13 +639,13 @@
                 free(lista);
             }
 
-            if (!strcmp(locacao->Placa, aux->Placa)) {
-                lista = ListaLocacaoPorPlaca(listaLocacoes, locacao->Placa);
+            if (!strcmp(locacao_pendente->Placa, aux->Placa)) {
+                lista = ListaLocacaoPorPlaca(listaLocacoes, locacao_pendente->Placa);
                 temp = lista->locacao;
 
                 while (temp) {
-                    if (DataRangeInRange( &locacao->DataDevolucao,
-                                          &locacao->DataLocacao,
+                    if (DataRangeInRange( &locacao_pendente->DataDevolucao,
+                                          &locacao_pendente->DataLocacao,
                                           &temp->DataDevolucao,
                                           &temp->DataLocacao) != -1) { return 0; }
                     temp = temp->proximo;
