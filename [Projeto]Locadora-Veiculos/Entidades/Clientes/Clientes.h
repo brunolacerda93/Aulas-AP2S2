@@ -48,14 +48,14 @@
 
     // Métodos Úteis
 
-    int      SizeString    (int);
-    int      CPFInput      (string);
-    int      NomeInput     (string);
-    int      EnderecoInput (string);
-    int      CategoriaInput(string);
-    void     ExibeCliente  (Cliente*);
-    Cliente* ClientePorCPF (ListaClientes*, string);
-    Cliente* ClonaCliente  (Cliente*);
+        int      SizeString    (int);
+        int      CPFInput      (string);
+        int      NomeInput     (string);
+        int      EnderecoInput (string);
+        int      CategoriaInput(string);
+        void     ExibeCliente  (Cliente*);
+        Cliente* ClientePorCPF (ListaClientes*, string);
+        Cliente* ClonaCliente  (Cliente*);
 
     // CRUD
 
@@ -69,7 +69,7 @@
 
     // Arquivos
 
-        void PersistenciaClientes(ListaClientes *lista);
+        void PersistenciaClientes(ListaClientes*);
         ListaClientes* ReadClientes();
 
     // SubMenu

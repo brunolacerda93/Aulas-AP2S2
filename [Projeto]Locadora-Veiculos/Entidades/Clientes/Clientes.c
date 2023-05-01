@@ -30,10 +30,10 @@
         if (!aux)
             return NULL;
 
-        strcpy_s(aux->CPF, CPF_LEN, cpf);
-        strcpy_s(aux->Nome, NOME_LEN, nome);
-        strcpy_s(aux->Endereco, ENDERECO_LEN, endereco);
-        strcpy_s(aux->Categoria, CATEGORIA_LEN, categoria);
+        strcpy(aux->CPF, cpf);
+        strcpy(aux->Nome, nome);
+        strcpy(aux->Endereco, endereco);
+        strcpy(aux->Categoria, categoria);
         
         aux->proximo = NULL;
         return aux;
@@ -323,9 +323,9 @@
             string str = String(SizeString(opc));
 
             switch (opc) {
-                case '1': if (!NomeInput(str))      strcpy_s(aux->Nome,      NOME_LEN,      str); break;
-                case '2': if (!EnderecoInput(str))  strcpy_s(aux->Endereco,  ENDERECO_LEN,  str); break;
-                case '3': if (!CategoriaInput(str)) strcpy_s(aux->Categoria, CATEGORIA_LEN, str); break;
+                case '1': if (!NomeInput(str))      strcpy(aux->Nome,      str); break;
+                case '2': if (!EnderecoInput(str))  strcpy(aux->Endereco,  str); break;
+                case '3': if (!CategoriaInput(str)) strcpy(aux->Categoria, str); break;
                 default : break;
             }
 
@@ -389,7 +389,7 @@
         FILE* file;
         Cliente* aux = lista->cliente;
 
-        fopen_s(&file, CLIENTES, "wb");
+        file = fopen(CLIENTES, "wb");
 
         if (!file) {
             fprint_err(CLIENTES);
@@ -412,7 +412,7 @@
         Cliente cliente;
         ListaClientes* lista = CriaListaClientes();
 
-        fopen_s(&file, CLIENTES, "rb");
+        file = fopen(CLIENTES, "rb");
         if (!file) {
             fprint_err(CLIENTES);
             return lista;

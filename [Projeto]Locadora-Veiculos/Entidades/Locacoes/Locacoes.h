@@ -86,7 +86,7 @@
 
     // Arquivos
 
-        void           PersistenciaLocacoes(ListaLocacoes *lista);
+        void           PersistenciaLocacoes(ListaLocacoes*);
         ListaLocacoes* ReadLocacoes();
 
     // SubMenu

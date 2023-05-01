@@ -65,7 +65,7 @@
 
     // Arquivos
 
-        void            PersistenciaVeiculos(ListaVeiculos *lista);
+        void            PersistenciaVeiculos(ListaVeiculos*);
         ListaVeiculos*  ReadVeiculos();
 
     // Submenu

@@ -31,9 +31,9 @@
         if (!aux)
             return NULL;
 
-        strcpy_s(aux->Placa, PLACA_LEN, placa);
-        strcpy_s(aux->Montadora, MONTADORA_LEN, montadora);
-        strcpy_s(aux->Modelo, MODELO_LEN, modelo);
+        strcpy(aux->Placa, placa);
+        strcpy(aux->Montadora, montadora);
+        strcpy(aux->Modelo, modelo);
         aux->Ano = ano;
         aux->ValorDiaria = diaria;
 
@@ -335,7 +335,7 @@
         FILE* file;
         Veiculo* aux = lista->veiculo;
 
-        fopen_s(&file, VEICULOS, "wb");
+        file = fopen(VEICULOS, "wb");
 
         if (!file) {
             fprint_err(VEICULOS);
@@ -358,7 +358,7 @@
         Veiculo veiculo;
         ListaVeiculos* lista = CriaListaVeiculos();
 
-        fopen_s(&file, VEICULOS, "rb");
+        file = fopen(VEICULOS, "rb");
         if (!file) {
             fprint_err(VEICULOS);
             return lista;

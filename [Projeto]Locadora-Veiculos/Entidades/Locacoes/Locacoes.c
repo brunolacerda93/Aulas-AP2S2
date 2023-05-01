@@ -18,12 +18,12 @@
         if (!aux)
             return NULL;
         
-        strcpy_s(aux->CPF, CPF_LEN, cpf);
-        strcpy_s(aux->Placa, PLACA_LEN, placa);
+        strcpy(aux->CPF, cpf);
+        strcpy(aux->Placa, placa);
         aux->DataLocacao    = *dataLocacao;
         aux->DataDevolucao  = *dataDevolucao;
         aux->ValorTotal     = valor;
-        strcpy_s(aux->Chave, CHAVE_LEN, GeraChave(aux));
+        strcpy(aux->Chave, GeraChave(aux));
 
         aux->proximo = NULL;
 
@@ -72,7 +72,7 @@
             return NULL;
         
         aux->indice = indice;
-        strcpy_s(aux->chave, CHAVE_LEN, locacao->Chave);
+        strcpy(aux->chave, locacao->Chave);
         aux->proximo = NULL;
 
         return aux;
@@ -102,10 +102,10 @@
     string GeraChave(const Locacao* locacao) {
         string result = String(CHAVE_LEN);
 
-        strcpy_s(result, CHAVE_LEN, locacao->CPF);
-        strcat_s(result, CHAVE_LEN, locacao->Placa);
-        strcat_s(result, CHAVE_LEN, FormataData(&locacao->DataLocacao));
-        strcat_s(result, CHAVE_LEN, FormataData(&locacao->DataDevolucao));
+        strcpy(result, locacao->CPF);
+        strcat(result, locacao->Placa);
+        strcat(result, FormataData(&locacao->DataLocacao));
+        strcat(result, FormataData(&locacao->DataDevolucao));
 
         return result;
     }
@@ -671,7 +671,7 @@
         FILE* file;
         Locacao* aux = lista->locacao;
 
-        fopen_s(&file,LOCACOES, "wb");
+        file = fopen(LOCACOES, "wb");
 
         if (!file) {
             fprint_err(LOCACOES);
@@ -694,7 +694,7 @@
         Locacao locacao;
         ListaLocacoes* lista = CriaListaLocacoes();
 
-        fopen_s(&file, LOCACOES, "rb");
+        file = fopen(LOCACOES, "rb");
         if (!file) {
             fprint_err(LOCACOES);
             return lista;
