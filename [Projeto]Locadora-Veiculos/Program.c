@@ -79,9 +79,9 @@ int main(int argc, char const *argv[]) {
     ListaVeiculos* listaVeiculos = ReadVeiculos();
     ListaLocacoes* listaLocacoes = ReadLocacoes();
 
-//    PreencheClientes(listaClientes);
-//    PreencheVeiculos(listaVeiculos);
-//    PreencheLocacoes(listaLocacoes);
+    if (!listaClientes->cliente) PreencheClientes(listaClientes);
+    if (!listaVeiculos->veiculo) PreencheVeiculos(listaVeiculos);
+    if (!listaLocacoes->locacao) PreencheLocacoes(listaLocacoes);
 
     Menu(listaClientes, listaVeiculos, listaLocacoes);
     printf("\nlistaLocacoes->locacao->Chave: %s\n\n", listaLocacoes->locacao->Chave);
