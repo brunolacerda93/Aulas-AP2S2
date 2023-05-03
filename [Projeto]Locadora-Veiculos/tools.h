@@ -44,6 +44,12 @@
     //
     #define FERROR "Erro ao abrir "
 
+    //
+    // MACRO para retornar o maior número
+    //---------------------------------------
+    //
+    #define max(a, b)  (((a) >= (b)) ? (a) : (b))
+
 //-------------------------------------------------------------------------------------------------------------//
 
     // FUNÇÕES E MÉTODOS
@@ -51,12 +57,12 @@
     //
     // Define o padrão UTF8 para os caracteres do terminal
     //
-    void Locale() { setlocale(LC_ALL, ".65001"); }
+    void Locale() { setlocale(LC_ALL, ".UTF8"); }
 
     //
     // Limpa o buffer de entrada
     //
-    void clearBuffer() { while(getchar() != '\n'); }
+    void clearBuffer() { while(getchar() != '\n') {} }
 
     //
     // Pausa e espera um input
@@ -67,11 +73,6 @@
     // Limpa a tela do console
     //
     void cleanScreen() { printf("\e[1;1H\e[2J"); }
-
-    //
-    // Retorna o maior de dois inteiros
-    //
-    int maxInt(const int a, const int b) { return a >= b ? a : b; }
 
     //
     // Retorna um ponteiro para uma string vazia do tamanho passado como argumento
