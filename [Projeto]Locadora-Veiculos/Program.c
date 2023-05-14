@@ -72,19 +72,6 @@ void Menu(ListaClientes* listaClientes, ListaVeiculos* listaVeiculos, ListaLocac
     } while(opc != '0');
 }
 
-void FritaLista(ListaClientes* fritavel) {
-    Cliente* aux = fritavel->cliente;
-    Cliente* temp;
-
-    while(aux) {
-        temp = aux;
-        aux = aux->proximo;
-        free(temp);
-    }
-
-    free(fritavel);
-}
-
 int main(int argc, char const *argv[]) {
     Locale();
 
@@ -99,7 +86,9 @@ int main(int argc, char const *argv[]) {
     Menu(listaClientes, listaVeiculos, listaLocacoes);
     printf("\nlistaLocacoes->locacao->Chave: %s\n\n", listaLocacoes->locacao->Chave);
 
-    FritaLista(listaClientes);
+    FreeClientes(listaClientes);
+    FreeVeiculos(listaVeiculos);
+    FreeLocacoes(listaLocacoes);
 
     return 0;
 }

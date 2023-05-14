@@ -111,10 +111,10 @@
 
         temp = FormataData(&locacao->DataLocacao);
         strcat(result, temp);
+        free(temp);
 
         temp = FormataData(&locacao->DataDevolucao);
         strcat(result, temp);
-
         free(temp);
 
         return result;
@@ -761,4 +761,20 @@
             }
 
         } while (opc != '0');
+    }
+
+    //
+    // Apaga completamente uma Lista de Locações
+    //
+    void FreeLocacoes(ListaLocacoes* lista) {
+        Locacao* aux = lista->locacao;
+        Locacao* temp;
+
+        while(aux) {
+            temp = aux;
+            aux = aux->proximo;
+            free(temp);
+        }
+
+        free(lista);
     }

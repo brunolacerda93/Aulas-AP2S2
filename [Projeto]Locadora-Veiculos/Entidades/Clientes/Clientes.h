@@ -30,7 +30,7 @@
     } Cliente;
 
 
-    typedef struct {
+    typedef struct ListaClientes {
         Cliente* cliente;
         size_t   tamanho;
     } ListaClientes;
@@ -75,5 +75,6 @@
     // SubMenu
     
         void MenuClientes(ListaClientes*);
+        void FreeClientes(ListaClientes*);
 
 #endif

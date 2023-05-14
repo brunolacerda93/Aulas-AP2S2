@@ -462,3 +462,19 @@
 
         } while (opc != '0');
     }
+
+    //
+    // Apaga completamente uma Lista de Clientes
+    //
+    void FreeClientes(ListaClientes* lista) {
+        Cliente* aux = lista->cliente;
+        Cliente* temp;
+
+        while(aux) {
+            temp = aux;
+            aux = aux->proximo;
+            free(temp);
+        }
+
+        free(lista);
+    }

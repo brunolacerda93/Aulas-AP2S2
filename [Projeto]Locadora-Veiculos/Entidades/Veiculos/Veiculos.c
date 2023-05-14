@@ -408,3 +408,19 @@
 
         } while (opc != '0');
     }
+
+    //
+    // Apaga completamente uma Lista de Veículos
+    //
+    void FreeVeiculos(ListaVeiculos * lista) {
+        Veiculo* aux = lista->veiculo;
+        Veiculo* temp;
+
+        while(aux) {
+            temp = aux;
+            aux = aux->proximo;
+            free(temp);
+        }
+
+        free(lista);
+    }
