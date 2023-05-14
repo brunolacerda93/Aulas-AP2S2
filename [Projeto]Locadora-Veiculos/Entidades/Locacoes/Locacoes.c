@@ -388,7 +388,7 @@
             }
 
             pause();
-            free(filtrada);
+            FreeLocacoes(filtrada);
 
         } while (1);
     }
@@ -442,8 +442,13 @@
             break;
 
         } while(1);
-        
-        return CriaLocacaoArgs(cpf, placa, dataLocacao, dataDevolucao, valor*DiferencaEmDias(dataDevolucao, dataLocacao));
+
+        Locacao* loc = CriaLocacaoArgs(cpf, placa, dataLocacao, dataDevolucao, valor*DiferencaEmDias(dataDevolucao, dataLocacao));
+
+        free(dataLocacao);
+        free(dataDevolucao);
+
+        return loc;
     }
 
     //
@@ -515,7 +520,7 @@
         
         DicionarioLocacoes* dicionario = MapListaParaDicionario(filtrada);
         Locacao* locacao = LocacaoPorIndice(dicionario, lista, loc);
-        free(dicionario);
+        FreeDicionario(dicionario);
 
         int opc;
         do { // hast
@@ -565,7 +570,7 @@
         
         DicionarioLocacoes* dicionario = MapListaParaDicionario(filtrada);
         Locacao* locacao = LocacaoPorIndice(dicionario, listaLocacoes, loc);
-        free(dicionario);
+        FreeDicionario(dicionario);
 
         if (!ValidaLocacao(locacao, listaClientes, listaVeiculos)) return;
 
@@ -777,4 +782,20 @@
         }
 
         free(lista);
+    }
+
+    //
+    // Apaga completamente um Dicionário de Locações
+    //
+    void FreeDicionario(DicionarioLocacoes* dic) {
+        Termo* aux = dic->termo;
+        Termo* temp;
+
+        while(aux) {
+            temp = aux;
+            aux = aux->proximo;
+            free(temp);
+        }
+
+        free(dic);
     }

@@ -91,7 +91,8 @@
 
     // SubMenu
     
-        void MenuLocacoes(ListaClientes*, ListaVeiculos*, ListaLocacoes*);
-        void FreeLocacoes(ListaLocacoes*);
+        void MenuLocacoes   (ListaClientes*, ListaVeiculos*, ListaLocacoes*);
+        void FreeLocacoes   (ListaLocacoes*);
+        void FreeDicionario (DicionarioLocacoes*);
 
 #endif

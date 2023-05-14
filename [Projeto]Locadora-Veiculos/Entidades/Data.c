@@ -154,6 +154,8 @@
         DateTime* data;
 
         do { // hast
+            if (data) free(data);
+
             printf("\nDigite a Data: ");
             data = NovaData();
 
