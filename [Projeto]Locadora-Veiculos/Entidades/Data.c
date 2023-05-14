@@ -11,7 +11,7 @@
                            string mes,
                            string ano) {
                             
-        DateTime* aux = (DateTime *) malloc(sizeof(DateTime));
+        DateTime* aux = (DateTime *) calloc(1, sizeof(DateTime));
 
         if (!aux)
             return NULL;

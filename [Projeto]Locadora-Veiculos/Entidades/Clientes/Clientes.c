@@ -8,7 +8,7 @@
     // Construtor da struct Cliente
     //
     Cliente* CriaCliente() {
-        Cliente* aux = (Cliente *) malloc(sizeof(Cliente));
+        Cliente* aux = (Cliente *) calloc(1, sizeof(Cliente));
 
         if (!aux)
             return NULL;
@@ -25,7 +25,7 @@
                              string endereco,
                              string categoria) {
 
-        Cliente* aux = (Cliente *) malloc(sizeof(Cliente));
+        Cliente* aux = (Cliente *) calloc(1, sizeof(Cliente));
 
         if (!aux)
             return NULL;
@@ -43,7 +43,7 @@
     // Construtor da struct ListaClientes
     //
     ListaClientes* CriaListaClientes() {
-        ListaClientes* aux = (ListaClientes *) malloc(sizeof(ListaClientes));
+        ListaClientes* aux = (ListaClientes *) calloc(1, sizeof(ListaClientes));
 
         if (!aux)
             return NULL;
@@ -58,7 +58,7 @@
     // Construtor da struct ListaClientes com Argumentos
     //
     ListaClientes* CriaListaClientesArgs(Cliente* cliente) {
-        ListaClientes* aux = (ListaClientes *) malloc(sizeof(ListaClientes));
+        ListaClientes* aux = (ListaClientes *) calloc(1, sizeof(ListaClientes));
 
         if (!aux)
             return NULL;

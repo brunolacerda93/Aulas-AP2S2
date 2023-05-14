@@ -13,7 +13,7 @@
                              DateTime* dataDevolucao,
                              const double valor) {
 
-        Locacao* aux = (Locacao *) malloc(sizeof(Locacao));
+        Locacao* aux = (Locacao *) calloc(1, sizeof(Locacao));
 
         if (!aux)
             return NULL;
@@ -30,8 +30,6 @@
 
         aux->proximo = NULL;
 
-        //if (!aux->DataLocacao || !aux->DataDevolucao) return NULL;
-
         return aux;
     }
 
@@ -39,7 +37,7 @@
     // Construtor da struct ListaLocacoes
     //
     ListaLocacoes* CriaListaLocacoes() {
-        ListaLocacoes* aux = (ListaLocacoes *) malloc(sizeof(ListaLocacoes));
+        ListaLocacoes* aux = (ListaLocacoes *) calloc(1, sizeof(ListaLocacoes));
 
         if (!aux)
             return NULL;
@@ -54,7 +52,7 @@
     // Construtor da struct ListaLocacoes com Argumentos
     //
     ListaLocacoes* CriaListaLocacoesArgs(Locacao* locacao) {
-        ListaLocacoes* aux = (ListaLocacoes *) malloc(sizeof(ListaLocacoes));
+        ListaLocacoes* aux = (ListaLocacoes *) calloc(1, sizeof(ListaLocacoes));
 
         if (!aux)
             return NULL;
@@ -69,7 +67,7 @@
     // Construtor da struct Termo (do Dicionário)
     //
     Termo* CriaTermoArgs(const Locacao* locacao, const int indice) {
-        Termo* aux = (Termo *) malloc(sizeof(Termo));
+        Termo* aux = (Termo *) calloc(1, sizeof(Termo));
 
         if (!aux)
             return NULL;
@@ -85,7 +83,7 @@
     // Construtor da struct DicionarioLocacoes
     //
     DicionarioLocacoes* CriaDicionarioLocacoes() {
-        DicionarioLocacoes* aux = (DicionarioLocacoes *) malloc(sizeof(DicionarioLocacoes));
+        DicionarioLocacoes* aux = (DicionarioLocacoes *) calloc(1, sizeof(DicionarioLocacoes));
 
         if (!aux)
             return NULL;
@@ -237,9 +235,7 @@
     // Retorna uma cópia profunda de uma Locação
     //
     Locacao* ClonaLocacao(Locacao* locacao) {
-        Locacao* temp = CriaLocacaoArgs(locacao->CPF, locacao->Placa, &locacao->DataLocacao, &locacao->DataDevolucao, locacao->ValorTotal);
-        temp->proximo = NULL;
-        return temp;
+        return CriaLocacaoArgs(locacao->CPF, locacao->Placa, &locacao->DataLocacao, &locacao->DataDevolucao, locacao->ValorTotal);
     }
 
     //
