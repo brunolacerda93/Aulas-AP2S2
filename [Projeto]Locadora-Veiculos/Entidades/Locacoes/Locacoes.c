@@ -23,7 +23,10 @@
         aux->DataLocacao    = *dataLocacao;
         aux->DataDevolucao  = *dataDevolucao;
         aux->ValorTotal     = valor;
-        strcpy(aux->Chave, GeraChave(aux));
+
+        string temp = GeraChave(aux);
+        strcpy(aux->Chave, temp);
+        free(temp);
 
         aux->proximo = NULL;
 
@@ -245,6 +248,7 @@
 
             if (!filtrada->locacao) {
                 printf("\nhttp ERROR: 404 - CPF NOT Found!!!\n");
+                free(filtrada);
                 return NULL;
             }
 
@@ -260,6 +264,7 @@
 
             if (!filtrada->locacao) {
                 printf("\nhttp ERROR: 404 - Placa NOT Found!!!\n");
+                free(filtrada);
                 return NULL;
             }
 
@@ -277,6 +282,7 @@
 
             if(!filtrada->locacao) {
                 printf("\nhttp ERROR: 404 - Locacao NOT Found!!!\n");
+                free(filtrada);
                 return NULL;
             }
 
@@ -419,6 +425,8 @@
             dataDevolucao = CriaDataValida();
 
             if (!ValidaDataLocacao(dataDevolucao, dataLocacao)) {
+                free(dataLocacao);
+                free(dataDevolucao);
                 pause(); continue;
             }
 
