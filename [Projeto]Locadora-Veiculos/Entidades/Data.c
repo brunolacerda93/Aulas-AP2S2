@@ -151,7 +151,7 @@
     // Loop até o usuário inserir uma data válida
     //
     DateTime* CriaDataValida() {
-        DateTime* data;
+        DateTime* data = NULL;
 
         do { // hast
             if (data) free(data);
