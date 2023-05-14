@@ -13,7 +13,7 @@
                              DateTime* dataDevolucao,
                              const double valor) {
 
-        Locacao* aux = (Locacao *) malloc(sizeof(Locacao));
+        Locacao* aux = (Locacao *) calloc(1, sizeof(Locacao));
 
         if (!aux)
             return NULL;
@@ -23,11 +23,12 @@
         aux->DataLocacao    = *dataLocacao;
         aux->DataDevolucao  = *dataDevolucao;
         aux->ValorTotal     = valor;
-        strcpy(aux->Chave, GeraChave(aux));
+
+        string temp = GeraChave(aux);
+        strcpy(aux->Chave, temp);
+        free(temp);
 
         aux->proximo = NULL;
-
-        //if (!aux->DataLocacao || !aux->DataDevolucao) return NULL;
 
         return aux;
     }
@@ -36,7 +37,7 @@
     // Construtor da struct ListaLocacoes
     //
     ListaLocacoes* CriaListaLocacoes() {
-        ListaLocacoes* aux = (ListaLocacoes *) malloc(sizeof(ListaLocacoes));
+        ListaLocacoes* aux = (ListaLocacoes *) calloc(1, sizeof(ListaLocacoes));
 
         if (!aux)
             return NULL;
@@ -51,7 +52,7 @@
     // Construtor da struct ListaLocacoes com Argumentos
     //
     ListaLocacoes* CriaListaLocacoesArgs(Locacao* locacao) {
-        ListaLocacoes* aux = (ListaLocacoes *) malloc(sizeof(ListaLocacoes));
+        ListaLocacoes* aux = (ListaLocacoes *) calloc(1, sizeof(ListaLocacoes));
 
         if (!aux)
             return NULL;
@@ -66,7 +67,7 @@
     // Construtor da struct Termo (do Dicionário)
     //
     Termo* CriaTermoArgs(const Locacao* locacao, const int indice) {
-        Termo* aux = (Termo *) malloc(sizeof(Termo));
+        Termo* aux = (Termo *) calloc(1, sizeof(Termo));
 
         if (!aux)
             return NULL;
@@ -82,7 +83,7 @@
     // Construtor da struct DicionarioLocacoes
     //
     DicionarioLocacoes* CriaDicionarioLocacoes() {
-        DicionarioLocacoes* aux = (DicionarioLocacoes *) malloc(sizeof(DicionarioLocacoes));
+        DicionarioLocacoes* aux = (DicionarioLocacoes *) calloc(1, sizeof(DicionarioLocacoes));
 
         if (!aux)
             return NULL;
@@ -101,11 +102,18 @@
     //
     string GeraChave(const Locacao* locacao) {
         string result = String(CHAVE_LEN);
+        string temp;
 
         strcpy(result, locacao->CPF);
         strcat(result, locacao->Placa);
-        strcat(result, FormataData(&locacao->DataLocacao));
-        strcat(result, FormataData(&locacao->DataDevolucao));
+
+        temp = FormataData(&locacao->DataLocacao);
+        strcat(result, temp);
+        free(temp);
+
+        temp = FormataData(&locacao->DataDevolucao);
+        strcat(result, temp);
+        free(temp);
 
         return result;
     }
@@ -227,9 +235,7 @@
     // Retorna uma cópia profunda de uma Locação
     //
     Locacao* ClonaLocacao(Locacao* locacao) {
-        Locacao* temp = CriaLocacaoArgs(locacao->CPF, locacao->Placa, &locacao->DataLocacao, &locacao->DataDevolucao, locacao->ValorTotal);
-        temp->proximo = NULL;
-        return temp;
+        return CriaLocacaoArgs(locacao->CPF, locacao->Placa, &locacao->DataLocacao, &locacao->DataDevolucao, locacao->ValorTotal);
     }
 
     //
@@ -245,6 +251,7 @@
 
             if (!filtrada->locacao) {
                 printf("\nhttp ERROR: 404 - CPF NOT Found!!!\n");
+                free(filtrada);
                 return NULL;
             }
 
@@ -260,6 +267,7 @@
 
             if (!filtrada->locacao) {
                 printf("\nhttp ERROR: 404 - Placa NOT Found!!!\n");
+                free(filtrada);
                 return NULL;
             }
 
@@ -277,6 +285,7 @@
 
             if(!filtrada->locacao) {
                 printf("\nhttp ERROR: 404 - Locacao NOT Found!!!\n");
+                free(filtrada);
                 return NULL;
             }
 
@@ -375,7 +384,7 @@
             }
 
             pause();
-            free(filtrada);
+            FreeLocacoes(filtrada);
 
         } while (1);
     }
@@ -419,6 +428,8 @@
             dataDevolucao = CriaDataValida();
 
             if (!ValidaDataLocacao(dataDevolucao, dataLocacao)) {
+                free(dataLocacao);
+                free(dataDevolucao);
                 pause(); continue;
             }
 
@@ -427,8 +438,13 @@
             break;
 
         } while(1);
-        
-        return CriaLocacaoArgs(cpf, placa, dataLocacao, dataDevolucao, valor*DiferencaEmDias(dataDevolucao, dataLocacao));
+
+        Locacao* loc = CriaLocacaoArgs(cpf, placa, dataLocacao, dataDevolucao, valor*DiferencaEmDias(dataDevolucao, dataLocacao));
+
+        free(dataLocacao);
+        free(dataDevolucao);
+
+        return loc;
     }
 
     //
@@ -500,7 +516,7 @@
         
         DicionarioLocacoes* dicionario = MapListaParaDicionario(filtrada);
         Locacao* locacao = LocacaoPorIndice(dicionario, lista, loc);
-        free(dicionario);
+        FreeDicionario(dicionario);
 
         int opc;
         do { // hast
@@ -550,7 +566,7 @@
         
         DicionarioLocacoes* dicionario = MapListaParaDicionario(filtrada);
         Locacao* locacao = LocacaoPorIndice(dicionario, listaLocacoes, loc);
-        free(dicionario);
+        FreeDicionario(dicionario);
 
         if (!ValidaLocacao(locacao, listaClientes, listaVeiculos)) return;
 
@@ -746,4 +762,36 @@
             }
 
         } while (opc != '0');
+    }
+
+    //
+    // Apaga completamente uma Lista de Locações
+    //
+    void FreeLocacoes(ListaLocacoes* lista) {
+        Locacao* aux = lista->locacao;
+        Locacao* temp;
+
+        while(aux) {
+            temp = aux;
+            aux = aux->proximo;
+            free(temp);
+        }
+
+        free(lista);
+    }
+
+    //
+    // Apaga completamente um Dicionário de Locações
+    //
+    void FreeDicionario(DicionarioLocacoes* dic) {
+        Termo* aux = dic->termo;
+        Termo* temp;
+
+        while(aux) {
+            temp = aux;
+            aux = aux->proximo;
+            free(temp);
+        }
+
+        free(dic);
     }

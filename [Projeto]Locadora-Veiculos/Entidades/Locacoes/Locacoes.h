@@ -30,7 +30,7 @@
         struct Locacao* proximo;
     } Locacao;
 
-    typedef struct {
+    typedef struct ListaLocacoes {
         Locacao* locacao;
         size_t   tamanho;
     } ListaLocacoes;
@@ -41,7 +41,7 @@
         struct Termo* proximo;
     } Termo;
 
-    typedef struct {
+    typedef struct DicionarioLocacoes {
         Termo* termo;
     } DicionarioLocacoes;
 
@@ -91,6 +91,8 @@
 
     // SubMenu
     
-        void MenuLocacoes(ListaClientes*, ListaVeiculos*, ListaLocacoes*);
+        void MenuLocacoes   (ListaClientes*, ListaVeiculos*, ListaLocacoes*);
+        void FreeLocacoes   (ListaLocacoes*);
+        void FreeDicionario (DicionarioLocacoes*);
 
 #endif

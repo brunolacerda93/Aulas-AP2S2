@@ -30,7 +30,7 @@
     } Veiculo;
 
 
-    typedef struct {
+    typedef struct ListaVeiculos {
         Veiculo* veiculo;
         size_t   tamanho;
     } ListaVeiculos;
@@ -71,5 +71,6 @@
     // Submenu
     
         void MenuVeiculos(ListaVeiculos*);
+        void FreeVeiculos(ListaVeiculos*);
 
 #endif

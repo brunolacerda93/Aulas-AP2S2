@@ -8,7 +8,7 @@
     // Construtor da struct Veiculo
     //
     Veiculo* CriaVeiculo() {
-        Veiculo* aux = (Veiculo *) malloc(sizeof(Veiculo));
+        Veiculo* aux = (Veiculo *) calloc(1, sizeof(Veiculo));
 
         if (!aux)
             return NULL;
@@ -26,7 +26,7 @@
                              const int ano,
                              const double diaria) {
 
-        Veiculo* aux = (Veiculo *) malloc(sizeof(Veiculo));
+        Veiculo* aux = (Veiculo *) calloc(1, sizeof(Veiculo));
 
         if (!aux)
             return NULL;
@@ -45,7 +45,7 @@
     // Construtor da struct ListaVeiculos
     //
     ListaVeiculos* CriaListaVeiculos() {
-        ListaVeiculos* aux = (ListaVeiculos *) malloc(sizeof(ListaVeiculos));
+        ListaVeiculos* aux = (ListaVeiculos *) calloc(1, sizeof(ListaVeiculos));
 
         if (!aux)
             return NULL;
@@ -60,7 +60,7 @@
     // Construtor da struct ListaVeiculos com Argumentos
     //
     ListaVeiculos* CriaListaVeiculosArgs(Veiculo* veiculo) {
-        ListaVeiculos* aux = (ListaVeiculos *) malloc(sizeof(ListaVeiculos));
+        ListaVeiculos* aux = (ListaVeiculos *) calloc(1, sizeof(ListaVeiculos));
 
         if (!aux)
             return NULL;
@@ -126,9 +126,7 @@
     // Retorna uma cópia profunda de um Veiculo
     //
     Veiculo* ClonaVeiculo(Veiculo* veiculo) {
-        Veiculo* temp = CriaVeiculoArgs(veiculo->Placa, veiculo->Montadora, veiculo->Modelo, veiculo->Ano, veiculo->ValorDiaria);
-        temp->proximo = NULL;
-        return temp;
+        return CriaVeiculoArgs(veiculo->Placa, veiculo->Montadora, veiculo->Modelo, veiculo->Ano, veiculo->ValorDiaria);
     }
 
 //-------------------------------------------------------------------------------------------------------------//
@@ -407,4 +405,20 @@
             }
 
         } while (opc != '0');
+    }
+
+    //
+    // Apaga completamente uma Lista de Veículos
+    //
+    void FreeVeiculos(ListaVeiculos * lista) {
+        Veiculo* aux = lista->veiculo;
+        Veiculo* temp;
+
+        while(aux) {
+            temp = aux;
+            aux = aux->proximo;
+            free(temp);
+        }
+
+        free(lista);
     }

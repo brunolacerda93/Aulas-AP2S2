@@ -8,7 +8,7 @@
     // Construtor da struct Cliente
     //
     Cliente* CriaCliente() {
-        Cliente* aux = (Cliente *) malloc(sizeof(Cliente));
+        Cliente* aux = (Cliente *) calloc(1, sizeof(Cliente));
 
         if (!aux)
             return NULL;
@@ -25,7 +25,7 @@
                              string endereco,
                              string categoria) {
 
-        Cliente* aux = (Cliente *) malloc(sizeof(Cliente));
+        Cliente* aux = (Cliente *) calloc(1, sizeof(Cliente));
 
         if (!aux)
             return NULL;
@@ -43,7 +43,7 @@
     // Construtor da struct ListaClientes
     //
     ListaClientes* CriaListaClientes() {
-        ListaClientes* aux = (ListaClientes *) malloc(sizeof(ListaClientes));
+        ListaClientes* aux = (ListaClientes *) calloc(1, sizeof(ListaClientes));
 
         if (!aux)
             return NULL;
@@ -58,7 +58,7 @@
     // Construtor da struct ListaClientes com Argumentos
     //
     ListaClientes* CriaListaClientesArgs(Cliente* cliente) {
-        ListaClientes* aux = (ListaClientes *) malloc(sizeof(ListaClientes));
+        ListaClientes* aux = (ListaClientes *) calloc(1, sizeof(ListaClientes));
 
         if (!aux)
             return NULL;
@@ -172,9 +172,7 @@
     // Retorna uma cópia profunda de um Cliente
     //
     Cliente* ClonaCliente(Cliente* cliente) {
-        Cliente* temp = CriaClienteArgs(cliente->CPF, cliente->Nome, cliente->Endereco, cliente->Categoria);
-        temp->proximo = NULL;
-        return temp;
+        return CriaClienteArgs(cliente->CPF, cliente->Nome, cliente->Endereco, cliente->Categoria);
     }
 
     //
@@ -461,4 +459,20 @@
             }
 
         } while (opc != '0');
+    }
+
+    //
+    // Apaga completamente uma Lista de Clientes
+    //
+    void FreeClientes(ListaClientes* lista) {
+        Cliente* aux = lista->cliente;
+        Cliente* temp;
+
+        while(aux) {
+            temp = aux;
+            aux = aux->proximo;
+            free(temp);
+        }
+
+        free(lista);
     }

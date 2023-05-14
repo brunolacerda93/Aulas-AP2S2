@@ -20,7 +20,7 @@
         }
 
         ExibeListaLocacoes(filtrada);
-        free(filtrada);
+        FreeLocacoes(filtrada);
     }
 
     //
@@ -44,7 +44,7 @@
 
         free(dataInicial);
         free(dataFinal);
-        free(filtrada);
+        FreeLocacoes(filtrada);
     }
 
 //-------------------------------------------------------------------------------------------------------------//

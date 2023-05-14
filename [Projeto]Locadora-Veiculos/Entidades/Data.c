@@ -11,7 +11,7 @@
                            string mes,
                            string ano) {
                             
-        DateTime* aux = (DateTime *) malloc(sizeof(DateTime));
+        DateTime* aux = (DateTime *) calloc(1, sizeof(DateTime));
 
         if (!aux)
             return NULL;
@@ -56,7 +56,7 @@
     // Formata um DateTime
     //
     string FormataData(const DateTime* data) {
-        string novaData = (string) malloc(100);
+        string novaData = String(100);
 
         strftime(novaData, 100, "%a%d%b%Y", data);
         novaData[strcspn(novaData, "\n")] = 0;
@@ -151,9 +151,11 @@
     // Loop até o usuário inserir uma data válida
     //
     DateTime* CriaDataValida() {
-        DateTime* data;
+        DateTime* data = NULL;
 
         do { // hast
+            if (data) free(data);
+
             printf("\nDigite a Data: ");
             data = NovaData();
 

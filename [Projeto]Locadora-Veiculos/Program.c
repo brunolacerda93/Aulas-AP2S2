@@ -27,7 +27,7 @@ void PreencheLocacoes(ListaLocacoes* lista) {
                                                 68.49*DiferencaEmDias(data2, data1)));
 }
 
-int LogOff(ListaClientes * listaClientes, ListaVeiculos* listaVeiculos, ListaLocacoes* listaLocacoes) {
+int LogOff(ListaClientes* listaClientes, ListaVeiculos* listaVeiculos, ListaLocacoes* listaLocacoes) {
     printf("\nDeseja salvar as alterações?");
     printf("\nDigite qualquer tecla para voltar");
     printf("\n   1 = SIM  ||  0 = NAO");
@@ -44,7 +44,7 @@ int LogOff(ListaClientes * listaClientes, ListaVeiculos* listaVeiculos, ListaLoc
     return opc;
 }
 
-void Menu(ListaClientes * listaClientes, ListaVeiculos* listaVeiculos, ListaLocacoes* listaLocacoes) {
+void Menu(ListaClientes* listaClientes, ListaVeiculos* listaVeiculos, ListaLocacoes* listaLocacoes) {
     int opc;
 
     do { // hast
@@ -85,6 +85,10 @@ int main(int argc, char const *argv[]) {
 
     Menu(listaClientes, listaVeiculos, listaLocacoes);
     printf("\nlistaLocacoes->locacao->Chave: %s\n\n", listaLocacoes->locacao->Chave);
+
+    FreeClientes(listaClientes);
+    FreeVeiculos(listaVeiculos);
+    FreeLocacoes(listaLocacoes);
 
     return 0;
 }
