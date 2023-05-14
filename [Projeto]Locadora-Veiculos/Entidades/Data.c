@@ -56,7 +56,7 @@
     // Formata um DateTime
     //
     string FormataData(const DateTime* data) {
-        string novaData = (string) malloc(100);
+        string novaData = String(100);
 
         strftime(novaData, 100, "%a%d%b%Y", data);
         novaData[strcspn(novaData, "\n")] = 0;

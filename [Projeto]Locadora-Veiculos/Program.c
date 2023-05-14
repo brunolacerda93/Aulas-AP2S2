@@ -27,7 +27,7 @@ void PreencheLocacoes(ListaLocacoes* lista) {
                                                 68.49*DiferencaEmDias(data2, data1)));
 }
 
-int LogOff(ListaClientes * listaClientes, ListaVeiculos* listaVeiculos, ListaLocacoes* listaLocacoes) {
+int LogOff(ListaClientes* listaClientes, ListaVeiculos* listaVeiculos, ListaLocacoes* listaLocacoes) {
     printf("\nDeseja salvar as alterações?");
     printf("\nDigite qualquer tecla para voltar");
     printf("\n   1 = SIM  ||  0 = NAO");
@@ -44,7 +44,7 @@ int LogOff(ListaClientes * listaClientes, ListaVeiculos* listaVeiculos, ListaLoc
     return opc;
 }
 
-void Menu(ListaClientes * listaClientes, ListaVeiculos* listaVeiculos, ListaLocacoes* listaLocacoes) {
+void Menu(ListaClientes* listaClientes, ListaVeiculos* listaVeiculos, ListaLocacoes* listaLocacoes) {
     int opc;
 
     do { // hast
@@ -72,6 +72,19 @@ void Menu(ListaClientes * listaClientes, ListaVeiculos* listaVeiculos, ListaLoca
     } while(opc != '0');
 }
 
+void FritaLista(ListaClientes* fritavel) {
+    Cliente* aux = fritavel->cliente;
+    Cliente* temp;
+
+    while(aux) {
+        temp = aux;
+        aux = aux->proximo;
+        free(temp);
+    }
+
+    free(fritavel);
+}
+
 int main(int argc, char const *argv[]) {
     Locale();
 
@@ -85,6 +98,8 @@ int main(int argc, char const *argv[]) {
 
     Menu(listaClientes, listaVeiculos, listaLocacoes);
     printf("\nlistaLocacoes->locacao->Chave: %s\n\n", listaLocacoes->locacao->Chave);
+
+    FritaLista(listaClientes);
 
     return 0;
 }

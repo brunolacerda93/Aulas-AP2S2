@@ -104,11 +104,18 @@
     //
     string GeraChave(const Locacao* locacao) {
         string result = String(CHAVE_LEN);
+        string temp;
 
         strcpy(result, locacao->CPF);
         strcat(result, locacao->Placa);
-        strcat(result, FormataData(&locacao->DataLocacao));
-        strcat(result, FormataData(&locacao->DataDevolucao));
+
+        temp = FormataData(&locacao->DataLocacao);
+        strcat(result, temp);
+
+        temp = FormataData(&locacao->DataDevolucao);
+        strcat(result, temp);
+
+        free(temp);
 
         return result;
     }
