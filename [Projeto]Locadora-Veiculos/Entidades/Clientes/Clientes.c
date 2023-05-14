@@ -172,9 +172,7 @@
     // Retorna uma cópia profunda de um Cliente
     //
     Cliente* ClonaCliente(Cliente* cliente) {
-        Cliente* temp = CriaClienteArgs(cliente->CPF, cliente->Nome, cliente->Endereco, cliente->Categoria);
-        temp->proximo = NULL;
-        return temp;
+        return CriaClienteArgs(cliente->CPF, cliente->Nome, cliente->Endereco, cliente->Categoria);
     }
 
     //
