@@ -251,7 +251,7 @@
 
             if (!filtrada->locacao) {
                 printf("\nhttp ERROR: 404 - CPF NOT Found!!!\n");
-                FreeLocacoes(filtrada);
+                free(filtrada);
                 return NULL;
             }
 
@@ -267,7 +267,7 @@
 
             if (!filtrada->locacao) {
                 printf("\nhttp ERROR: 404 - Placa NOT Found!!!\n");
-                FreeLocacoes(filtrada);
+                free(filtrada);
                 return NULL;
             }
 
@@ -285,7 +285,7 @@
 
             if(!filtrada->locacao) {
                 printf("\nhttp ERROR: 404 - Locacao NOT Found!!!\n");
-                FreeLocacoes(filtrada);
+                free(filtrada);
                 return NULL;
             }
 
@@ -652,7 +652,7 @@
                                           &temp->DataLocacao) != -1) { return 0; }
                     temp = temp->proximo;
                 }
-                free(lista);
+                FreeLocacoes(lista);
             }
 
             if (!strcmp(locacao_pendente->Placa, aux->Placa)) {
@@ -666,7 +666,7 @@
                                           &temp->DataLocacao) != -1) { return 0; }
                     temp = temp->proximo;
                 }
-                free(lista);
+                FreeLocacoes(lista);
             }
 
             aux = aux->proximo;

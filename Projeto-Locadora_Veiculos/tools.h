@@ -45,7 +45,7 @@
     #define FERROR "Erro ao abrir "
 
     //
-    // MACRO para retornar o maior número
+    // MACRO para retornar o maior valor
     //---------------------------------------
     //
     #define max(a, b)  (((a) >= (b)) ? (a) : (b))
@@ -80,13 +80,13 @@
     string String(const size_t size) { return (string) calloc(size, sizeof(char)); }
 
     //
-    // Troca dois inteiros por endereço
+    // Troca o conteúdo de dois ponteiros
     //
-    void swap(int *n1, int *n2) {
-        int temp;
-        temp = *n1;
-        *n1 = *n2;
-        *n2 = temp;
+    void swap(var n1, var n2) {
+        var temp;
+        temp = n1;
+        n1 = n2;
+        n2 = temp;
     }
 
     //
@@ -142,12 +142,12 @@
         size_t i = 0;
 
         while (cpf[i] != '\0') {
-            printf("%c", cpf[i]);
+            putchar(cpf[i]);
 
             switch(i++) {
                 case 2:
-                case 5: printf("."); break;
-                case 8: printf("/"); break;
+                case 5: putchar('.'); break;
+                case 8: putchar('/'); break;
             }
         }
     }
@@ -159,12 +159,8 @@
         size_t i = 0;
 
         while (placa[i] != '\0') {
-            printf("%c", placa[i]);
-
-            if (i == 2)
-                printf("-");
-
-            i++;
+            if (i == 2) putchar('-');
+            putchar(placa[i++]);
         }
     }
 
