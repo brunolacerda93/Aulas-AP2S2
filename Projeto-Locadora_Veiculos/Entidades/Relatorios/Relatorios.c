@@ -35,15 +35,16 @@
 
         ListaLocacoes* filtrada = ListaLocacaoPorData(lista, dataFinal, dataInicial);
 
+        free(dataInicial);
+        free(dataFinal);
+
         if(!filtrada->locacao) {
             puts("\nhttp ERROR: 404 - Locacao NOT Found!!!");
+            free(filtrada);
             return;
         }
 
         ExibeListaLocacoes(filtrada);
-
-        free(dataInicial);
-        free(dataFinal);
         FreeLocacoes(filtrada);
     }
 
