@@ -369,14 +369,14 @@
             if (opc == '0') return;
 
             ListaLocacoes* filtrada = ListaLocacoesPorIndice(listaLocacoes, opc);
-
-            if (!filtrada) return;
-
             ExibeListaLocacoes(filtrada);
 
             if (isUpdateDelete == 1 && filtrada) {
                 AtualizaLocacao(listaLocacoes, filtrada);
-                FreeLocacoes(filtrada);
+                if (filtrada->locacao)
+                    FreeLocacoes(filtrada);
+                else
+                    free(filtrada);
                 return;
             }
 
