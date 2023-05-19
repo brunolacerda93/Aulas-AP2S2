@@ -417,10 +417,10 @@
         }
 
         fread(&cliente, sizeof(Cliente), 1, file);
-        do {
+        while (!feof(file)) {
             InsereClienteNaLista(lista, ClonaCliente(&cliente));
             fread(&cliente, sizeof(Cliente), 1, file);
-        } while (!feof(file));
+        }
 
         fclose(file);
         return lista;

@@ -363,10 +363,10 @@
         }
 
         fread(&veiculo, sizeof(Veiculo), 1, file);
-        do {
+        while (!feof(file)) {
             InsereVeiculoNaLista(lista, ClonaVeiculo(&veiculo));
             fread(&veiculo, sizeof(Veiculo), 1, file);
-        } while (!feof(file));
+        }
 
         fclose(file);
         return lista;

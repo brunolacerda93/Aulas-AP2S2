@@ -251,7 +251,7 @@
 
             if (!filtrada->locacao) {
                 printf("\nhttp ERROR: 404 - CPF NOT Found!!!\n");
-                free(filtrada);
+                FreeLocacoes(filtrada);
                 return NULL;
             }
 
@@ -267,7 +267,7 @@
 
             if (!filtrada->locacao) {
                 printf("\nhttp ERROR: 404 - Placa NOT Found!!!\n");
-                free(filtrada);
+                FreeLocacoes(filtrada);
                 return NULL;
             }
 
@@ -285,7 +285,7 @@
 
             if(!filtrada->locacao) {
                 printf("\nhttp ERROR: 404 - Locacao NOT Found!!!\n");
-                free(filtrada);
+                FreeLocacoes(filtrada);
                 return NULL;
             }
 
@@ -373,13 +373,13 @@
 
             if (isUpdateDelete == 1 && filtrada) {
                 AtualizaLocacao(listaLocacoes, filtrada);
-                free(filtrada);
+                FreeLocacoes(filtrada);
                 return;
             }
 
             if (isUpdateDelete == 2 && filtrada) {
                 RemoveLocacao(listaLocacoes, filtrada, listaClientes, listaVeiculos);
-                free(filtrada);
+                FreeLocacoes(filtrada);
                 return;
             }
 
@@ -718,10 +718,10 @@
         }
 
         fread(&locacao, sizeof(Locacao), 1, file);
-        do {
+        while (!feof(file)) {
             InsereLocacaoNaLista(lista, ClonaLocacao(&locacao));
             fread(&locacao, sizeof(Locacao), 1, file);
-        } while (!feof(file));
+        }
 
         fclose(file);
         return lista;
