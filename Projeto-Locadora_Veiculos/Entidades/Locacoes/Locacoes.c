@@ -370,6 +370,8 @@
 
             ListaLocacoes* filtrada = ListaLocacoesPorIndice(listaLocacoes, opc);
 
+            if (filtrada == NULL) return;
+
             ExibeListaLocacoes(filtrada);
 
             if (isUpdateDelete == 1 && filtrada) {
@@ -385,9 +387,6 @@
             }
 
             pause();
-
-            if (!filtrada) return;
-
             FreeLocacoes(filtrada);
 
         } while (1);
