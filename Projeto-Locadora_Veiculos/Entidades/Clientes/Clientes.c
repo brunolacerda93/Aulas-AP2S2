@@ -148,11 +148,11 @@
     // Formata e exibe um Cliente
     //
     void ExibeCliente(Cliente* client) {
-        printf("\nNome      : %s", client->Nome);
-        printf("\nCPF       : ");  PrintCPF(client->CPF);
-        printf("\nEndereço  : %s", client->Endereco);
-        printf("\nCategoria : %s", client->Categoria);
-        printf("\n====================================================\n");
+        printf("\n Nome      : %s", client->Nome);
+        printf("\n CPF       : ");  PrintCPF(client->CPF);
+        printf("\n Endereço  : %s", client->Endereco);
+        printf("\n Categoria : %s", client->Categoria);
+        puts("\n============================================");
     }
 
     //
@@ -203,7 +203,7 @@
         Cliente* aux = ClientePorCPF(lista, cpf);
 
         if (!aux) {
-            printf("\nhttp ERROR: 404 - Cliente NOT Found!!!\n");
+            puts("\nhttp ERROR: 404 - Cliente NOT Found!!!");
             return;
         }
         
@@ -217,7 +217,7 @@
         Cliente* cliente = lista->cliente;
         while (cliente) {
             ExibeCliente(cliente);
-            printf("\n");
+            putchar('\n');
             cliente = cliente->proximo;
         }
     }
@@ -236,7 +236,7 @@
         if (CPFInput(cpf)) return NULL;
 
         if (ClientePorCPF(lista, cpf)) {
-            printf("\nO CPF informado já se encontra cadastrado no sistema!!!\n");
+            puts("\nO CPF informado já se encontra cadastrado no sistema!!!");
             return NULL;
         }
 
@@ -292,7 +292,7 @@
         Cliente* aux = ClientePorCPF(lista, cpf);
 
         if (!aux) {
-            printf("\nhttp ERROR: 404 - Cliente NOT Found!!!\n");
+            puts("\nhttp ERROR: 404 - Cliente NOT Found!!!");
             pause();
             return;
         }
@@ -302,18 +302,18 @@
             cleanScreen();
             ExibeCliente(aux);
 
-            printf("\nQual informação deseja alterar?\n");
-            printf("\n 1 - Nome");
-            printf("\n 2 - Endereço");
-            printf("\n 3 - Categoria");
-            printf("\n 0 - Retornar");
-            printf("\n\nEscolha: ");
+            puts("Qual informação deseja alterar?\n");
+            puts(" 1 - Nome");
+            puts(" 2 - Endereço");
+            puts(" 3 - Categoria");
+            puts(" 0 - Retornar");
+            printf("\nEscolha: ");
             opc = getchar(); clearBuffer();
 
             if (opc == '0') break;
 
             if (opc < '1' || opc > '3') {
-                printf("\nINVÁLIDO!!!\n");
+                puts("\nINVÁLIDO!!!");
                 pause();
                 continue;
             }
@@ -349,7 +349,7 @@
         }
         
         if ((!anterior && strcmp(atual->CPF, cpf)) || !atual) {
-            printf("\nhttp ERROR: 404 - Cliente NOT Found!!!\n");
+            puts("\nhttp ERROR: 404 - Cliente NOT Found!!!");
             return;
         }
 
@@ -371,7 +371,7 @@
         }
 
         lista->tamanho--;
-        printf("\nRemovido!\n");
+        puts("\n\t Removido!");
     }
 
 //-------------------------------------------------------------------------------------------------------------//
@@ -437,15 +437,15 @@
         do { // hast
             cleanScreen();
             
-            printf("===============================\n");
-            printf("      CLIENTES\n\n");
-            printf("  1 - Cadastrar\n");
-            printf("  2 - Exibir Um\n");
-            printf("  3 - Exibir Todos\n");
-            printf("  4 - Atualizar\n");
-            printf("  5 - Remover\n");
-            printf("  0 - Retornar\n");
-            printf("\nEscolha: ");
+            puts("===============================");
+            puts("      CLIENTES\n");
+            puts("  1 - Cadastrar");
+            puts("  2 - Exibir Um");
+            puts("  3 - Exibir Todos");
+            puts("  4 - Atualizar");
+            puts("  5 - Remover");
+            puts("  0 - Retornar\n");
+            printf("Escolha: ");
             opc = getchar(); clearBuffer();
 
             switch (opc) {
@@ -455,7 +455,7 @@
                 case '4':     AtualizaCliente(lista);          break;
                 case '5':       RemoveCliente(lista); pause(); break;
                 case '0':                                      break;
-                default : printf("\n INVÁLIDO!!!\n"); pause(); break;
+                default : puts("\n INVÁLIDO!!!"); pause(); break;
             }
 
         } while (opc != '0');

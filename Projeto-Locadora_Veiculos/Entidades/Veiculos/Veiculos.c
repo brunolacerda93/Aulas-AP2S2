@@ -101,12 +101,12 @@
     // Formata e Exibe um Veiculo
     //
     void ExibeVeiculo(Veiculo* veiculo) {
-        printf("\nPlaca       : "); PrintPlaca(veiculo->Placa);
-        printf("\nMontadora   : %s",  veiculo->Montadora);
-        printf("\nModelo      : %s",  veiculo->Modelo);
-        printf("\nAno         : %4d", veiculo->Ano);
-        printf("\nDiária (R$) : %.2lf", veiculo->ValorDiaria);
-        printf("\n====================================================\n");
+        printf("\n Placa       : "); PrintPlaca(veiculo->Placa);
+        printf("\n Montadora   : %s",  veiculo->Montadora);
+        printf("\n Modelo      : %s",  veiculo->Modelo);
+        printf("\n Ano         : %4d", veiculo->Ano);
+        printf("\n Diária (R$) : %.2lf", veiculo->ValorDiaria);
+        puts("\n=============================");
     }
 
     //
@@ -144,7 +144,7 @@
         Veiculo* aux = VeiculoPorPlaca(lista, placa);
 
         if (!aux) {
-            printf("\nhttp ERROR: 404 - Veículo NOT Found!!!\n");
+            puts("\nhttp ERROR: 404 - Veículo NOT Found!!!");
             return;
         }
 
@@ -178,7 +178,7 @@
         if (PlacaInput(placa)) return NULL;
 
         if (VeiculoPorPlaca(lista, placa)) {
-            printf("\nA Placa informada já se encontra cadastrada no sistema!!!\n");
+            puts("\nA Placa informada já se encontra cadastrada no sistema!!!");
             return NULL;
         }
 
@@ -242,7 +242,7 @@
         Veiculo* aux = VeiculoPorPlaca(lista, placa);
 
         if (!aux) {
-            printf("\nhttp ERROR: 404 - Veículo NOT Found!!!\n");
+            puts("\nhttp ERROR: 404 - Veículo NOT Found!!!");
             pause();
             return;
         }
@@ -252,17 +252,17 @@
             cleanScreen();
             ExibeVeiculo(aux);
 
-            printf("\nQual informação deseja alterar?\n");
-            printf("\n 1 - Ano");
-            printf("\n 2 - Diária (R$)");
-            printf("\n 0 - Retornar");
-            printf("\n\nEscolha: ");
+            puts("\nQual informação deseja alterar?\n");
+            puts(" 1 - Ano");
+            puts(" 2 - Diária (R$)");
+            puts(" 0 - Retornar");
+            printf("\nEscolha: ");
             opc = getchar(); clearBuffer();
 
             if (opc == '0') break;
 
             if (opc < '1' || opc > '2') {
-                printf("\nINVÁLIDO!!!\n");
+                puts("\nINVÁLIDO!!!");
                 pause();
                 continue;
             }
@@ -295,7 +295,7 @@
         }
 
         if ((!anterior && strcmp(atual->Placa, placa)) || !atual) {
-            printf("\nhttp ERROR: 404 - Veículo NOT Found!!!\n");
+            puts("\nhttp ERROR: 404 - Veículo NOT Found!!!");
             return;
         }
 
@@ -317,7 +317,7 @@
         }
 
         lista->tamanho--;
-        printf("\nRemovido!\n");
+        puts("\n\t Removido!");
     }
 
 //-------------------------------------------------------------------------------------------------------------//
@@ -383,14 +383,14 @@
         do { // hast
             cleanScreen();
             
-            printf("===============================\n");
-            printf("      VEÍCULOS\n\n");
-            printf("  1 - Cadastrar\n");
-            printf("  2 - Exibir Um\n");
-            printf("  3 - Exibir Todos\n");
-            printf("  4 - Atualizar\n");
-            printf("  5 - Remover\n");
-            printf("  0 - Retornar\n");
+            puts("===============================");
+            puts("      VEÍCULOS\n");
+            puts("  1 - Cadastrar");
+            puts("  2 - Exibir Um");
+            puts("  3 - Exibir Todos");
+            puts("  4 - Atualizar");
+            puts("  5 - Remover");
+            puts("  0 - Retornar");
             printf("\nEscolha: ");
             opc = getchar(); clearBuffer();
 
@@ -401,7 +401,7 @@
                 case '4':      AtualizaVeiculo(lista);          break;
                 case '5':        RemoveVeiculo(lista); pause(); break;
                 case '0':                                       break;
-                default :  printf("\n INVALIDO!!!\n"); pause(); break;
+                default :      puts("\n INVALIDO!!!"); pause(); break;
             }
 
         } while (opc != '0');

@@ -67,12 +67,12 @@
     //
     // Pausa e espera um input
     //
-    void pause() { printf("\nPressione <enter> para continuar... "); getchar(); }
+    void pause() { fputs("\nPressione <enter> para continuar... ", stdout); getchar(); }
 
     //
     // Limpa a tela do console
     //
-    void cleanScreen() { printf("\e[1;1H\e[2J"); }
+    void cleanScreen() { puts("\e[1;1H\e[2J"); }
 
     //
     // Retorna um ponteiro para uma string vazia do tamanho passado como argumento
@@ -80,7 +80,7 @@
     string String(const size_t size) { return (string) calloc(size, sizeof(char)); }
 
     //
-    // Troca o conteúdo de dois ponteiros
+    // Troca o conteúdo de dois ponteiros genéricos entre si
     //
     void swap_void(var n1, var n2, size_t size) {
         char temp[size];

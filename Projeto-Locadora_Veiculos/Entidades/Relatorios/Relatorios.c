@@ -15,7 +15,7 @@
         ListaLocacoes* filtrada = ListaLocacaoPorPlaca(lista, placa);
 
         if (!filtrada->locacao) {
-            printf("\nhttp ERROR: 404 - Placa NOT Found!!!\n");
+            puts("\nhttp ERROR: 404 - Placa NOT Found!!!");
             return;
         }
 
@@ -36,7 +36,7 @@
         ListaLocacoes* filtrada = ListaLocacaoPorData(lista, dataFinal, dataInicial);
 
         if(!filtrada->locacao) {
-            printf("\nhttp ERROR: 404 - Locacao NOT Found!!!\n");
+            puts("\nhttp ERROR: 404 - Locacao NOT Found!!!");
             return;
         }
 
@@ -58,11 +58,11 @@
         do { // hast
             cleanScreen();
 
-            printf("===============================\n");
-            printf("      RELATÓRIOS\n\n");
-            printf("  1 - Locações por Placa\n");
-            printf("  2 - Locações por Data\n");
-            printf("  0 - Retornar\n");
+            puts("===============================");
+            puts("      RELATÓRIOS\n");
+            puts("  1 - Locações por Placa");
+            puts("  2 - Locações por Data");
+            puts("  0 - Retornar");
             printf("\nEscolha: ");
             opc = getchar(); clearBuffer();
 
@@ -70,7 +70,7 @@
                 case '1': ExibeLocacoesPorPlaca(lista); break;
                 case '2':  ExibeLocacoesPorData(lista); break;
                 case '0': return;
-                default : printf("\n INVÁLIDO!!!\n");   break;
+                default : puts("\n INVÁLIDO!!!");   break;
             }
 
             pause();

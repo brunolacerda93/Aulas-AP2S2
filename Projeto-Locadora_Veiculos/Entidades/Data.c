@@ -44,9 +44,8 @@
         char novaData[100];
 
         strftime(novaData, 100, "%a %d %b %Y", data);
-        novaData[strcspn(novaData, "\n")] = 0;
 
-        printf("%s", novaData);
+        fputs(novaData, stdout);
     }
 
     //
@@ -157,7 +156,7 @@
             data = NovaData();
 
             if (!data)
-                printf("\nData Invalida!!!\n");
+                puts("\nData Invalida!!!");
             
         } while(!data);
 

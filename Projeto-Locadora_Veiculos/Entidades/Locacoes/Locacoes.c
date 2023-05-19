@@ -122,12 +122,12 @@
     // Formata e Exibe uma Locação
     //
     void ExibeLocacao(Locacao* locacao) {
-        printf("\nCPF              : "); PrintCPF(locacao->CPF);
-        printf("\nPlaca            : "); PrintPlaca(locacao->Placa);
-        printf("\nData Locação     : "); ExibeData(&locacao->DataLocacao);
-        printf("\nData Devolução   : "); ExibeData(&locacao->DataDevolucao);
-        printf("\nValor Total (R$) : %.2lf", locacao->ValorTotal);
-        printf("\n====================================================\n");
+        printf("\n CPF              : "); PrintCPF(locacao->CPF);
+        printf("\n Placa            : "); PrintPlaca(locacao->Placa);
+        printf("\n Data Locação     : "); ExibeData(&locacao->DataLocacao);
+        printf("\n Data Devolução   : "); ExibeData(&locacao->DataDevolucao);
+        printf("\n Valor Total (R$) : %.2lf", locacao->ValorTotal);
+        puts("\n=======================================");
     }
 
     //
@@ -139,7 +139,7 @@
         Locacao* aux = lista->locacao;
         int i = 1;
         while (aux) {
-            printf("\n     LOCACAO %02d", i++);
+            printf("\n      LOCACAO %02d", i++);
             ExibeLocacao(aux);
             aux = aux->proximo;
         }
@@ -250,7 +250,7 @@
             ListaLocacoes* filtrada = ListaLocacaoPorCPF(lista, cpf);
 
             if (!filtrada->locacao) {
-                printf("\nhttp ERROR: 404 - CPF NOT Found!!!\n");
+                puts("\nhttp ERROR: 404 - CPF NOT Found!!!");
                 free(filtrada);
                 return NULL;
             }
@@ -266,7 +266,7 @@
             ListaLocacoes* filtrada = ListaLocacaoPorPlaca(lista, placa);
 
             if (!filtrada->locacao) {
-                printf("\nhttp ERROR: 404 - Placa NOT Found!!!\n");
+                puts("\nhttp ERROR: 404 - Placa NOT Found!!!");
                 free(filtrada);
                 return NULL;
             }
@@ -358,12 +358,12 @@
         do { // hast
             cleanScreen();
 
-            printf("\nSelecione o Indexador:");
-            printf("\n CPF   [c/C]");
-            printf("\n Placa [p/P]");
-            printf("\n Data  [d/D]");
-            printf("\n 0 - Retorna");
-            printf("\n--> ");
+            puts("\nSelecione o Indexador:");
+            puts(" CPF   [c/C]");
+            puts(" Placa [p/P]");
+            puts(" Data  [d/D]");
+            puts(" 0 - Retorna");
+            printf(" >> ");
 
             opc = getchar(); clearBuffer();
             if (opc == '0') return;
@@ -403,12 +403,12 @@
 
         do { // hast
             cleanScreen();
-            printf("\nDigite 0 para cancelar!");
+            puts("Digite 0 para cancelar!");
 
             if (CPFInput(cpf)) return NULL;
 
             if (!ClientePorCPF(listaClientes, cpf)) {
-                printf("\nhttp ERROR: 404 - CPF NOT Found!!!\n"); pause();
+                puts("\nhttp ERROR: 404 - CPF NOT Found!!!"); pause();
                 continue;
             }
 
@@ -417,7 +417,7 @@
             const Veiculo* veiculo = VeiculoPorPlaca(listaVeiculos, placa);
 
             if (!veiculo) {
-                printf("\nhttp ERROR: 404 - Placa NOT Found!!!\n"); pause();
+                puts("\nhttp ERROR: 404 - Placa NOT Found!!!"); pause();
                 continue;
             }
 
@@ -482,13 +482,13 @@
         Locacao* novaLocacao = NovaLocacao(listaClientes, listaVeiculos);
 
         if (novaLocacao && LocacaoPorChave(listaLocacoes, novaLocacao->Chave)) {
-            printf("\nERRO: Existe uma Locação com as mesmas informações no sistema...\n");
+            puts("\nERRO: Existe uma Locação com as mesmas informações no sistema...");
             free(novaLocacao);
             return;
         }
 
         if (novaLocacao && !ValidaDataRange(listaLocacoes, novaLocacao)) {
-            printf("\nERRO: Datas informadas conflitam com registros anteriores!!!\n");
+            puts("\nERRO: Datas informadas conflitam com registros anteriores!!!");
             free(novaLocacao);
             return;
         }
@@ -510,7 +510,7 @@
                 return;
 
             if (loc > filtrada->tamanho)
-                printf("\nINVÁLIDO!!!\n");
+                puts("\nINVÁLIDO!!!");
             
         } while (loc > filtrada->tamanho);
         
@@ -523,16 +523,16 @@
             cleanScreen();
             ExibeLocacao(locacao);
 
-            printf("\nQual informação deseja alterar?\n");
-            printf("\n 1 - Valor Diária");
-            printf("\n 0 - Retornar");
-            printf("\n\nEscolha: ");
+            puts("\nQual informação deseja alterar?\n");
+            puts(" 1 - Valor Diária");
+            puts(" 0 - Retornar");
+            printf("\nEscolha: ");
             opc = getchar(); clearBuffer();
 
             if (opc == '0') break;
 
             if (opc != '1') {
-                printf("\nINVÁLIDO!!!\n");
+                puts("\nINVÁLIDO!!!");
                 pause();
                 continue;
             }
@@ -560,7 +560,7 @@
                 return;
 
             if (loc > filtrada->tamanho)
-                printf("\nINVÁLIDO!!!\n");
+                puts("\nINVÁLIDO!!!");
             
         } while (loc > filtrada->tamanho);
         
@@ -595,7 +595,7 @@
         }
 
         listaLocacoes->tamanho--;
-        printf("\nRemovido!\n");
+        puts("\n\t Removido!");
     }
 
     //
@@ -603,12 +603,12 @@
     //
     int ValidaLocacao(Locacao* locacao, ListaClientes* listaClientes, ListaVeiculos* listaVeiculos) {
         if (ClientePorCPF(listaClientes, locacao->CPF)) {
-            printf("\nERRO: Cliente possui cadastro ativo no sistema!\n");
+            puts("\nERRO: Cliente possui cadastro ativo no sistema!");
             return 0;
         }
 
         if (VeiculoPorPlaca(listaVeiculos, locacao->Placa)) {
-            printf("\nERRO: Veiculo possui cadastro ativo no sistema!\n");
+            puts("\nERRO: Veiculo possui cadastro ativo no sistema!");
             return 0;
         }
 
@@ -620,12 +620,12 @@
     //
     int ValidaDataLocacao(DateTime* dataDevolucao, DateTime* dataLocacao) {
         if (!dataLocacao || !dataDevolucao) {
-            printf("\nhttp ERROR 202: Falha ao criar Data...\n");
+            puts("\nhttp ERROR 202: Falha ao criar Data...");
             return 0;
         }
 
         if (difftime(mktime(dataDevolucao), mktime(dataLocacao)) <= 0) {
-            printf("\nA Data de Devolucao deve ser maior do que a Data de Locacao!!!\n");
+            puts("\nA Data de Devolucao deve ser maior do que a Data de Locacao!!!");
             return 0;
         }
 
@@ -740,14 +740,14 @@
         do { // hast
             cleanScreen();
             
-            printf("===============================\n");
-            printf("      LOCAÇÕES\n\n");
-            printf("  1 - Cadastrar\n");
-            printf("  2 - Exibir por Indexador\n");
-            printf("  3 - Exibir Todas\n");
-            printf("  4 - Atualizar\n");
-            printf("  5 - Remover\n");
-            printf("  0 - Retornar\n");
+            puts("===============================");
+            puts("      LOCAÇÕES\n");
+            puts("  1 - Cadastrar");
+            puts("  2 - Exibir por Indexador");
+            puts("  3 - Exibir Todas");
+            puts("  4 - Atualizar");
+            puts("  5 - Remover");
+            puts("  0 - Retornar");
             printf("\nEscolha: ");
             opc = getchar(); clearBuffer();
 
@@ -758,7 +758,7 @@
                 case '4':   TelaLocacaoIndex(listaLocacoes, listaClientes, listaVeiculos, 1); pause(); break;
                 case '5':   TelaLocacaoIndex(listaLocacoes, listaClientes, listaVeiculos, 2); pause(); break;
                 case '0':                                                                              break;
-                default : printf("\n INVALIDO!!!\n"); pause();                                         break;
+                default : puts("\n INVALIDO!!!"); pause();                                         break;
             }
 
         } while (opc != '0');
