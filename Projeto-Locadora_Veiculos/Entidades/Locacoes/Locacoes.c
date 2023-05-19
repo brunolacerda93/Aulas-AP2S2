@@ -386,8 +386,9 @@
 
             pause();
 
-            if (filtrada)
-                FreeLocacoes(filtrada);
+            if (!filtrada) return;
+
+            FreeLocacoes(filtrada);
 
         } while (1);
     }
