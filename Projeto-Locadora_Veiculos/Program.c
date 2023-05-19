@@ -21,10 +21,14 @@ void PreencheLocacoes(ListaLocacoes* lista) {
     InsereLocacaoNaLista(lista, CriaLocacaoArgs("12345678911", "CDF9369", data1, data2,
                                                 73.58*DiferencaEmDias(data2, data1)));
     
+    free(data1); free(data2);
+    
     data1 = CriaDateTime("23", "05", "2022");
     data2 = CriaDateTime("14", "07", "2022");
     InsereLocacaoNaLista(lista, CriaLocacaoArgs("12345678911", "CUF0F00", data1, data2,
                                                 68.49*DiferencaEmDias(data2, data1)));
+    
+    free(data1); free(data2);
 }
 
 int LogOff(ListaClientes* listaClientes, ListaVeiculos* listaVeiculos, ListaLocacoes* listaLocacoes) {
