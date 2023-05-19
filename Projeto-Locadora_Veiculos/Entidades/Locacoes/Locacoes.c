@@ -283,14 +283,14 @@
 
             ListaLocacoes* filtrada = ListaLocacaoPorData(lista, dataFinal, dataInicial);
 
+            free(dataInicial);
+            free(dataFinal);
+
             if(!filtrada->locacao) {
                 printf("\nhttp ERROR: 404 - Locacao NOT Found!!!\n");
                 free(filtrada);
                 return NULL;
             }
-
-            free(dataInicial);
-            free(dataFinal);
 
             return filtrada;
         }
