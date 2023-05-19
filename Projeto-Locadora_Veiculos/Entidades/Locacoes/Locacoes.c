@@ -373,7 +373,10 @@
 
             if (isUpdateDelete == 1 && filtrada) {
                 AtualizaLocacao(listaLocacoes, filtrada);
-                FreeLocacoes(filtrada);
+                if (filtrada->locacao)
+                    FreeLocacoes(filtrada);
+                else
+                    free(filtrada);
                 return;
             }
 
