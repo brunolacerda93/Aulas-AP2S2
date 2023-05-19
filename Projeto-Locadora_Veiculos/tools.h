@@ -159,7 +159,7 @@
         size_t i = 0;
 
         while (placa[i] != '\0') {
-            if (i == 2) putchar('-');
+            if (i == 3) putchar('-');
             putchar(placa[i++]);
         }
     }
