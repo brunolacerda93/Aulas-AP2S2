@@ -3,4 +3,4 @@ all: Program.c tools.h
 	./Program.out
 
 Val: Program.c tools.h
-	valgrind --leak-check=full --track-origin=yes ./Program.out
+	valgrind --leak-check=full --track-origins=yes ./Program.out
