@@ -82,11 +82,21 @@
     //
     // Troca o conteúdo de dois ponteiros
     //
-    void swap(var n1, var n2) {
-        var temp;
-        temp = n1;
-        n1 = n2;
-        n2 = temp;
+    void swap_void(var n1, var n2, size_t size) {
+        char temp[size];
+        memcpy(temp, n1, size);
+        memcpy(n1,   n2, size);
+        memcpy(n2, temp, size);
+    }
+
+    //
+    // Troca dois inteiros por endereço
+    //
+    void swap(int* n1, int* n2) {
+        int temp;
+        temp = *n1;
+        *n1  = *n2;
+        *n2  = temp;
     }
 
     //
