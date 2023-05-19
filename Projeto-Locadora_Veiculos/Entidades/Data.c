@@ -18,20 +18,17 @@
 
         int _ano = strtol(ano, NULL, 10)-1900;
         int _mes = strtol(mes, NULL, 10)-1;
+        int _dia = strtol(dia, NULL, 10);
 
-        aux->tm_sec  = 0;
-        aux->tm_min  = 0;
-        aux->tm_hour = 0;
-        aux->tm_wday = 0;
-        aux->tm_mday = strtol(dia, NULL, 10);
-        aux->tm_mon  = _mes;
-        aux->tm_year = _ano;
-        aux->tm_yday = 0;
-
-        if (Bissexto(_ano))
-            aux->tm_isdst = 1;
-        else
-            aux->tm_isdst = 0;
+        aux->tm_sec   = 0;
+        aux->tm_min   = 0;
+        aux->tm_hour  = 0;
+        aux->tm_wday  = 0;
+        aux->tm_mday  = _dia;
+        aux->tm_mon   = _mes;
+        aux->tm_year  = _ano;
+        aux->tm_yday  = 0;
+        aux->tm_isdst = 0;
 
         return aux;
     }
@@ -53,7 +50,7 @@
     }
 
     //
-    // Formata um DateTime
+    // Formata um DateTime %a%d%b%Y ex: Fri04/Sep/2020
     //
     string FormataData(const DateTime* data) {
         string novaData = String(100);
