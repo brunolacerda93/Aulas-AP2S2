@@ -370,7 +370,7 @@
 
             ListaLocacoes* filtrada = ListaLocacoesPorIndice(listaLocacoes, opc);
 
-            if (filtrada == NULL) return;
+            if (!filtrada) return;
 
             ExibeListaLocacoes(filtrada);
 
