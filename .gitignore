@@ -61,3 +61,5 @@ Trabalho-Beliza.c
 Projeto-Locadora_Veiculos/CLIENTES
 Projeto-Locadora_Veiculos/LOCACOES
 Projeto-Locadora_Veiculos/VEICULOS
+*.i
+*.s
