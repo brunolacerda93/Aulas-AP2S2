@@ -768,6 +768,8 @@
     // Apaga completamente uma Lista de Locações
     //
     void FreeLocacoes(ListaLocacoes* lista) {
+        if (!lista) return;
+
         Locacao* aux = lista->locacao;
         Locacao* temp;
 
